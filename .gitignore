@@ -18,6 +18,7 @@
 .node-local/
 .brew/
 .git-local/
+.gh-local/
 
 # misc
 .DS_Store
