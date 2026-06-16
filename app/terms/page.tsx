@@ -26,7 +26,7 @@ export default function TermsPage() {
         </p>
         <h2>1. About NMCCOY</h2>
         <p>
-          NMCCOY is operated by Nichole McCoy, Arizona, USA. These Terms govern
+          NMCCOY is operated by Nichole McCoy, New York, USA. These Terms govern
           your use of nmccoy.com and purchases made through it.
         </p>
         <h2>2. Limited editions</h2>
@@ -46,7 +46,7 @@ export default function TermsPage() {
         </p>
         <h2>5. Governing law</h2>
         <p>
-          Governed by the laws of Arizona, USA. Disputes in Maricopa County courts.
+          Governed by the laws of New York, USA. Disputes in New York County courts.
         </p>
       </div>
       <Footer />
