@@ -131,6 +131,37 @@ Restart the dev server after saving.
 
 Submit the contact form at `/contact`. In Supabase, open **Table Editor** → `contact_submissions` to confirm the row appears.
 
+## Coming soon mode
+
+Keep the full site hidden while you finalize. Public visitors see a minimal landing page with Klaviyo email capture; the rest of the site is blocked.
+
+### Enable in Vercel (or `.env.local`)
+
+```bash
+COMING_SOON=true
+EARLY_ACCESS_SECRET=choose-a-long-random-string
+```
+
+Redeploy after saving.
+
+### Public experience
+
+Visitors to `www.nmccoynyc.com` see the Coming Soon page only. All other routes redirect to `/`.
+
+### Preview the full site
+
+Share this link with your team (replace the secret):
+
+```
+https://www.nmccoynyc.com/early-access?key=YOUR_SECRET
+```
+
+Opening that link sets a 30-day cookie and unlocks the full site. You can also use `?key=` on any URL.
+
+### Launch
+
+Set `COMING_SOON=false` in Vercel and redeploy to open the site publicly.
+
 ## Push to GitHub
 
 ```bash

@@ -26,7 +26,7 @@ function EarlyAccessGate() {
           <h1>By invitation</h1>
           <p>
             This page is reserved for invited guests. If you received a private
-            link, please open it directly to enter.
+            link, open it directly to enter the full site.
           </p>
         </FadeIn>
       </section>

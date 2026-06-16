@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Marcellus, Gowun_Batang, Jost } from "next/font/google";
+import { cookies } from "next/headers";
 import { Nav } from "@/components/Nav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { hasSiteAccess, isComingSoonEnabled } from "@/lib/coming-soon";
+import { EARLY_ACCESS_COOKIE } from "@/lib/preview-access";
 import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -25,12 +28,16 @@ const jost = Jost({
 
 export const metadata: Metadata = defaultMetadata;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nmccoy.com";
+  const cookieStore = await cookies();
+  const showNav =
+    !isComingSoonEnabled() ||
+    hasSiteAccess(cookieStore.get(EARLY_ACCESS_COOKIE)?.value);
 
   return (
     <html
@@ -52,7 +59,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <Nav />
+        {showNav ? <Nav /> : null}
         <main>{children}</main>
       </body>
     </html>

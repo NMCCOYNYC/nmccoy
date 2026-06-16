@@ -4,7 +4,7 @@ import { useState } from "react";
 import { analyticsEvents } from "@/lib/analytics";
 
 type EmailCaptureProps = {
-  variant?: "default" | "footer";
+  variant?: "default" | "footer" | "coming-soon";
   source?: string;
 };
 
@@ -44,7 +44,11 @@ export function EmailCapture({
       }
 
       setStatus("success");
-      setMessage("Thank you — you're on the list.");
+      setMessage(
+        variant === "coming-soon"
+          ? "Thank you — we'll be in touch."
+          : "Thank you — you're on the list."
+      );
       analyticsEvents.newsletterSignup(source);
       form.reset();
     } catch (error) {
@@ -58,7 +62,49 @@ export function EmailCapture({
   }
 
   const sectionClass =
-    variant === "footer" ? "email-capture email-capture--footer" : "email-capture";
+    variant === "footer"
+      ? "email-capture email-capture--footer"
+      : variant === "coming-soon"
+        ? "email-capture email-capture--coming-soon"
+        : "email-capture";
+
+  if (variant === "coming-soon") {
+    return (
+      <div className={sectionClass}>
+        <form className="email-form email-form--coming-soon" onSubmit={handleSubmit}>
+          <label htmlFor="email-coming-soon" className="sr-only">
+            Email address
+          </label>
+          <input
+            id="email-coming-soon"
+            name="email"
+            type="email"
+            placeholder="Email Address"
+            autoComplete="email"
+            required
+            disabled={status === "loading"}
+          />
+          <button type="submit" disabled={status === "loading"}>
+            {status === "loading"
+              ? "Joining…"
+              : status === "success"
+                ? "Joined"
+                : "Join the Collection List"}
+          </button>
+        </form>
+        {message ? (
+          <p
+            className={`email-capture__message${
+              status === "error" ? " email-capture__message--error" : ""
+            }`}
+            role={status === "error" ? "alert" : "status"}
+          >
+            {message}
+          </p>
+        ) : null}
+      </div>
+    );
+  }
 
   return (
     <section className={sectionClass} aria-labelledby="email-capture-title">
