@@ -7,8 +7,8 @@ export type Scarf = {
   desc1: string;
   desc2: string;
   painting: string;
-  shopifyDepositUrl?: string;
-  shopifyFullUrl?: string;
+  shopifyVariantId?: string;
+  shopifyCheckoutUrl?: string;
 };
 
 export const scarves: Scarf[] = [
@@ -20,11 +20,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#D4B896 0%,#A07840 35%,#8C603A 60%,#38271E 100%)",
     desc1:
-      "Heat shimmer and bone-dry earth. The horizon dissolves into light the way the desert does at midday.",
+      "A reflection on freedom, instinct, and the fleeting nature of memory. Wild Mirage explores the spaces between what was seen and what was felt, where recollections soften and reality gives way to imagination. Celestial stars drift through the composition as quiet reminders to trust one's own path, while the spirit of the horse speaks to movement, independence, and the pursuit of something just beyond reach.",
     desc2:
-      "Painted in original ink by Nichole McCoy in her Arizona studio, then translated to 100% Italian silk twill.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Wild Mirage began as a study of the Sonoran Desert in high summer — ink applied wet-into-wet to capture the blurring of the horizon.",
+      "Wild Mirage explores memory, instinct, and the spaces between what was seen and what was felt.",
   },
   {
     slug: "sacred-light",
@@ -34,11 +34,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
     desc1:
-      "Golden hour at altitude. The moment before the canyon walls go dark and everything is briefly sacred.",
+      "An homage to wisdom, heritage, and our connection to the landscapes that shape us. Sacred Light reflects the quiet strength that is carried across generations—the stories, traditions, and perspectives that continue to illuminate our path forward. Radiant forms and warm tones evoke a sense of reverence, reminding us that light often comes from within.",
     desc2:
-      "An original ink painting capturing the quality of late afternoon light in the Arizona canyon lands.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Painted over two sessions at dusk, capturing the way warm light rakes across sandstone at near-horizontal angles.",
+      "Sacred Light reflects the quiet strength carried across generations and the landscapes that shape us.",
   },
   {
     slug: "dusty-bloom",
@@ -48,11 +48,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#D4B0A0 0%,#99372C 40%,#796D61 100%)",
     desc1:
-      "Desert botanical — the way a flower holds color in a place that should be inhospitable to it.",
+      "A reflection on transformation and the unexpected ways beauty reveals itself. Emerging from an unlikely landscape, Dusty Bloom honors the strength required to flourish despite adversity. Delicate yet resilient, it serves as a reminder that growth often begins beneath the surface, long before it can be seen.",
     desc2:
-      "Inspired by the saguaro and palo verde specimens of the Sonoran Desert.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Dusty Bloom explores how flowering plants produce intense pigments as a survival adaptation — color as armor.",
+      "Dusty Bloom honors the strength required to flourish despite adversity.",
   },
   {
     slug: "hazy-mesa",
@@ -62,11 +62,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#B5A090 0%,#796D61 40%,#38271E 100%)",
     desc1:
-      "The mesa at dusk, layered in atmospheric haze. Distance made visible. Depth made paintable.",
+      "A study in resilience and perspective. Inspired by the enduring presence of the agave, Hazy Mesa reflects the beauty that emerges through patience, adaptation, and time. Layered forms unfold gradually, revealing new details with every glance—much like the landscapes and experiences that shape us over a lifetime.",
     desc2:
-      "The ink layering technique mimics the atmospheric perspective of desert distances.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Painted in a single long session, wet-on-wet, allowing ink to blend at the horizon the way desert air actually does.",
+      "Hazy Mesa reflects beauty that emerges through patience, adaptation, and time.",
   },
   {
     slug: "sundance",
@@ -76,11 +76,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#F0C87A 0%,#C4843A 40%,#8C603A 100%)",
     desc1:
-      "The arc of a day distilled. Saguaro silhouettes against fire. Arizona as it exists only between 6 and 7 PM.",
+      "A celebration of unity, hope, and shared journeys. Two birds move together toward the sun, carrying a single bloom between them as a symbol of trust, connection, and renewal. Inspired by the belief that even after life's most difficult seasons, the sun will rise again, Sundance is a reminder of the beauty found in moving forward together.",
     desc2:
-      "A study in silhouette and saturated warm light — the specific visual event of an Arizona sunset.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Painted from direct observation over four consecutive evenings, building color through layered ink washes.",
+      "Sundance celebrates unity, hope, and the beauty found in moving forward together.",
   },
   {
     slug: "indigo-dream",
@@ -90,11 +90,11 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#7FBDBA 0%,#3A6B8A 40%,#1A2B3E 100%)",
     desc1:
-      "The desert after dark. An indigo sky with nothing between you and the Milky Way but dry air and altitude.",
+      "A meditation on connection, intuition, and possibility. Moving in quiet rhythm across a desert landscape, the horses of Indigo Dream evoke a sense of harmony between the seen and unseen. Deep shades of indigo invite reflection, while the composition explores the moments when imagination feels as tangible as memory.",
     desc2:
-      "A departure into cool blues that the desert only reveals after midnight.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Painted at night with artificial light — an experiment in working against the usual desert palette.",
+      "Indigo Dream explores harmony between the seen and unseen, where imagination feels as tangible as memory.",
   },
 ];
 

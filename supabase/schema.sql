@@ -1,15 +1,9 @@
 -- NMCCOY Supabase schema (Phase 2)
 -- Run in Supabase SQL editor when ready
 
-create type site_mode as enum ('preorder', 'launch');
-
 create table site_settings (
   id int primary key default 1 check (id = 1),
-  mode site_mode not null default 'preorder',
   launch_date date not null default '2026-08-04',
-  preorder_start date,
-  refund_deadline date not null default '2026-07-01',
-  deposit_cents int not null default 15000,
   full_price_cents int not null default 30000,
   marquee_text text,
   updated_at timestamptz default now()
@@ -28,8 +22,7 @@ create table products (
   gradient_css text,
   edition_size int not null default 40,
   inventory_remaining int not null default 40,
-  shopify_deposit_variant_id text,
-  shopify_full_variant_id text,
+  shopify_variant_id text,
   sort_order int not null default 0,
   published boolean not null default true,
   created_at timestamptz default now(),

@@ -11,7 +11,13 @@ function slidesPerView(width: number) {
   return 3;
 }
 
-export function ScarfCarousel({ scarves }: { scarves: Scarf[] }) {
+export function ScarfCarousel({
+  scarves,
+  variant = "default",
+}: {
+  scarves: Scarf[];
+  variant?: "default" | "home";
+}) {
   const [pos, setPos] = useState(0);
   const [spv, setSpv] = useState(3);
 
@@ -32,8 +38,13 @@ export function ScarfCarousel({ scarves }: { scarves: Scarf[] }) {
     setPos((p) => Math.max(0, Math.min(maxPos, p + dir)));
   };
 
+  const sectionClass =
+    variant === "home"
+      ? "carousel-section carousel-section--home"
+      : "carousel-section";
+
   return (
-    <section className="carousel-section" style={{ background: "var(--bone)" }}>
+    <section className={sectionClass}>
       <div className="carousel-wrap">
         <div
           className="carousel-track"
@@ -58,7 +69,7 @@ export function ScarfCarousel({ scarves }: { scarves: Scarf[] }) {
                 <p className="carousel-slide__meta">
                   Silk Twill · 90×90cm · Limited Edition
                 </p>
-                <span className="carousel-slide__cta">Secure Your Piece</span>
+                <span className="carousel-slide__cta">View Piece</span>
               </div>
             </Link>
           ))}

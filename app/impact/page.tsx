@@ -1,92 +1,120 @@
 import { Footer } from "@/components/Footer";
+import { FadeIn } from "@/components/FadeIn";
+import { GradientFill } from "@/components/GradientFill";
+import { RevealParallax } from "@/components/RevealParallax";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
+import { pageMetadata } from "@/lib/seo";
 
-const partners = [
-  {
-    name: "Arizona Land Trust",
-    description:
-      "Permanent conservation of Arizona desert land. Over 400,000 acres protected since 1986.",
-    color: "var(--aloe)",
-  },
-  {
-    name: "Desert Botanical Garden Foundation",
-    description: "Preservation and study of Sonoran Desert flora.",
-    color: "var(--clay)",
-  },
-  {
-    name: "Sky Island Alliance",
-    description:
-      "Conservation of the sky island ecosystems of the US-Mexico border region.",
-    color: "var(--turq)",
-  },
-];
+export const metadata = pageMetadata({
+  title: "Impact",
+  description:
+    "NMCCOY gives back to the communities and landscapes that inspire each collection. Learn about our impact with Desert Illusions.",
+  path: "/impact",
+});
 
 export default function ImpactPage() {
   return (
     <>
       <PageHeroDark
         eyebrow="Impact"
-        title={
-          <>
-            Objects with
-            <br />
-            obligation
-          </>
-        }
-        description="If a landscape is worth painting, it is worth protecting."
+        title="Impact"
+        description="Every collection should leave something meaningful behind."
         style={{
           background: "linear-gradient(160deg,#74701E 0%,#38271E 100%)",
         }}
       />
 
-      <div className="impact-nums">
-        <div className="impact-num">
-          <div className="impact-num__n">10%</div>
-          <div className="impact-num__label">Of every sale donated</div>
-        </div>
-        <div className="impact-num">
-          <div className="impact-num__n">AZ</div>
-          <div className="impact-num__label">Desert conservation focus</div>
-        </div>
-        <div className="impact-num">
-          <div className="impact-num__n">240</div>
-          <div className="impact-num__label">Max scarves this collection</div>
-        </div>
-      </div>
+      <FadeIn variant="fade">
+        <section className="editorial-block">
+          <div className="editorial-block__inner editorial-block__inner--narrow">
+            <p className="editorial-block__lead editorial-block__lead--center">
+              Every NMCCOY collection begins with a place, a story, and a
+              perspective. The landscapes, communities, and cultural traditions that
+              inspire the work are an essential part of each collection&apos;s journey.
+            </p>
+          </div>
+        </section>
+      </FadeIn>
 
-      <div className="editorial-body">
-        <h2>Why this matters</h2>
-        <p>
-          The Sonoran and Chihuahuan deserts are two of the most biodiverse arid
-          ecosystems on Earth — and under sustained pressure. NMCCOY&apos;s paintings
-          are made in this landscape. 10% of every sale goes toward organizations
-          doing the work of preservation.
-        </p>
-      </div>
-
-      <section className="partner-band">
-        <div className="partner-band__inner">
-          <p className="eyebrow">Partners</p>
-          <h2>Organizations we support</h2>
-          {partners.map((partner) => (
-            <div className="partner-card" key={partner.name}>
-              <div className="partner-icon">
-                <div
-                  className="partner-dot"
-                  style={{ background: partner.color }}
-                />
-              </div>
-              <div>
-                <h3>{partner.name}</h3>
-                <p>{partner.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="story-band">
+        <FadeIn variant="reveal" className="story-band__text">
+          <p className="eyebrow">Desert Illusions</p>
+          <h2 className="story-band__title">
+            Giving Back
+            <br />
+            to the Southwest
+          </h2>
+          <p className="story-band__body">
+            For Desert Illusions, our focus is on supporting initiatives that
+            preserve and celebrate the spirit of the American Southwest through
+            arts education, cultural preservation, and conservation efforts.
+          </p>
+          <p className="story-band__body">
+            This includes organizations dedicated to empowering Native youth through
+            creative expression, preserving Indigenous artistic traditions, and
+            protecting the desert landscapes that continue to inspire generations
+            of artists.
+          </p>
+        </FadeIn>
+        <RevealParallax className="story-band__img">
+          <GradientFill
+            gradient="linear-gradient(160deg,#74701E 0%,#8C603A 40%,#38271E 100%)"
+            className="story-band__img-fill"
+            aria-hidden={true}
+          />
+        </RevealParallax>
       </section>
 
-      <CtaSection eyebrow="Every scarf funds the landscape it depicts" />
+      <FadeIn variant="reveal">
+        <section className="impact-pillars">
+          <div className="impact-pillars__inner">
+            <div className="impact-pillar">
+              <p className="impact-pillar__label">01</p>
+              <h3 className="impact-pillar__title">Arts Education</h3>
+              <p className="impact-pillar__body">
+                Supporting creative programs that empower young artists and keep
+                cultural expression alive across the Southwest.
+              </p>
+            </div>
+            <div className="impact-pillar">
+              <p className="impact-pillar__label">02</p>
+              <h3 className="impact-pillar__title">Cultural Preservation</h3>
+              <p className="impact-pillar__body">
+                Honoring Indigenous artistic traditions and the communities whose
+                stories and craft continue to shape the region.
+              </p>
+            </div>
+            <div className="impact-pillar">
+              <p className="impact-pillar__label">03</p>
+              <h3 className="impact-pillar__title">Conservation</h3>
+              <p className="impact-pillar__body">
+                Protecting the desert landscapes that inspire each collection and
+                the ecosystems that sustain them.
+              </p>
+            </div>
+          </div>
+        </section>
+      </FadeIn>
+
+      <FadeIn variant="fade">
+        <section className="editorial-block editorial-block--quote">
+          <div className="editorial-block__inner editorial-block__inner--narrow">
+            <p className="editorial-pullquote">
+              As NMCCOY grows, a portion of proceeds from each collection will
+              support organizations connected to the places and communities that
+              helped shape its story.
+            </p>
+            <p className="editorial-block__body editorial-block__body--center">
+              While the organizations we support may evolve from collection to
+              collection, our intention remains the same: to give back to the
+              people, places, and stories that inspire the work.
+            </p>
+          </div>
+        </section>
+      </FadeIn>
+
+      <CtaSection eyebrow="Collection No. 1" />
       <Footer />
     </>
   );

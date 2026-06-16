@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import type { Scarf } from "@/lib/products";
-import { isPreorderMode, siteSettings } from "@/lib/site-settings";
+import { isCheckoutConfigured } from "@/lib/shopify/checkout";
+import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
+import { FadeIn } from "@/components/FadeIn";
 import { ProductGallery } from "@/components/ProductGallery";
 import { Accordion } from "@/components/Accordion";
-import { ReserveModal } from "@/components/ReserveModal";
+import { ShopifyCheckoutButton } from "@/components/ShopifyCheckoutButton";
 
 export function ProductPageClient({ scarf }: { scarf: Scarf }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const preorder = isPreorderMode();
+  const checkoutConfigured = isCheckoutConfigured(scarf);
 
   return (
     <>
       <div className="product-wrap">
         <div className="product-gallery">
-          <ProductGallery gradient={scarf.gradient} />
+          <ProductGallery gradient={scarf.gradient} scarfName={scarf.name} />
         </div>
-        <div className="product-info">
+        <FadeIn variant="reveal" className="product-info">
           <Link href="/collection" className="product-bc">
             ← Collection
           </Link>
@@ -27,47 +27,25 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
           <h1 className="product-title">{scarf.name}</h1>
           <p className="product-price">${siteSettings.fullPrice} USD</p>
           <p className="product-edition">
-            Limited Edition · {siteSettings.editionSize} Pieces ·{" "}
-            {preorder ? "Pre-order Open" : "Now Available"}
+            Limited Edition · Final Sale
           </p>
           <div className="product-divider" />
           <p className="product-desc">{scarf.desc1}</p>
           <p className="product-desc">{scarf.desc2}</p>
           <div className="product-cta">
-            {preorder ? (
-              <>
-                <button
-                  type="button"
-                  className="btn btn--dark"
-                  style={{ textAlign: "center", width: "100%", padding: "1.1rem" }}
-                  onClick={() => setModalOpen(true)}
-                >
-                  Reserve — ${siteSettings.depositAmount} Deposit
-                </button>
-                <Link
-                  href="/collection"
-                  className="btn btn--outline"
-                  style={{ textAlign: "center", width: "100%", padding: "1.1rem" }}
-                >
-                  View Full Collection
-                </Link>
-                <p className="deposit-note">
-                  50% deposit · Balance due at ship · Refundable until{" "}
-                  {siteSettings.refundDeadline.split(" ")[0]}
-                </p>
-              </>
-            ) : (
-              <button
-                type="button"
-                className="btn btn--dark"
-                style={{ textAlign: "center", width: "100%", padding: "1.1rem" }}
-                disabled={!scarf.shopifyFullUrl}
-              >
-                {scarf.shopifyFullUrl
-                  ? `Purchase — $${siteSettings.fullPrice}`
-                  : `Shop coming soon — $${siteSettings.fullPrice}`}
-              </button>
-            )}
+            <ShopifyCheckoutButton
+              slug={scarf.slug}
+              label={`Collect — $${siteSettings.fullPrice}`}
+              disabled={!checkoutConfigured}
+              disabledLabel={`Not yet available — $${siteSettings.fullPrice}`}
+            />
+            <Link
+              href="/collection"
+              className="btn btn--outline"
+              style={{ textAlign: "center", width: "100%", padding: "1.1rem" }}
+            >
+              View the Collection
+            </Link>
           </div>
           <Accordion
             items={[
@@ -83,20 +61,17 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
               },
               {
                 title: "Shipping",
-                content: `Ships ${siteSettings.launchDate}. Complimentary tracked shipping within the US. International available.`,
+                content: `Ships ${siteSettings.launchDate}. Complimentary tracked shipping within the US. International available. See Shipping & Returns for delivery and policy details.`,
               },
               { title: "About the Painting", content: scarf.painting },
             ]}
           />
-        </div>
+          <p className="product-policy-note">
+            <Link href="/shipping">Shipping & Returns</Link>
+          </p>
+        </FadeIn>
       </div>
       <Footer />
-      <ReserveModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        scarfName={scarf.name}
-        checkoutUrl={scarf.shopifyDepositUrl}
-      />
     </>
   );
 }

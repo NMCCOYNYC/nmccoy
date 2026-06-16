@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Logo } from "@/components/Brand";
+import { FooterLogo } from "@/components/Brand";
+import { EmailCapture } from "@/components/EmailCapture";
 
 export function Footer() {
   return (
@@ -7,14 +8,14 @@ export function Footer() {
       <div className="footer__inner">
         <div>
           <div className="footer__logo">
-            <Logo light />
+            <FooterLogo />
           </div>
           <p className="footer__tagline">
             Art-led luxury objects.
             <br />
-            Made in Arizona,
+            Designed in New York,
             <br />
-            printed in Italy.
+            made in Italy.
           </p>
         </div>
         <div className="footer__col">
@@ -54,9 +55,10 @@ export function Footer() {
           </ul>
         </div>
       </div>
+      <EmailCapture variant="footer" source="footer" />
       <div className="footer__bottom">
         <span>© 2026 NMCCOY. All rights reserved.</span>
-        <span>Arizona, USA · Made in Italy</span>
+        <span>New York, USA · Made in Italy</span>
       </div>
     </footer>
   );

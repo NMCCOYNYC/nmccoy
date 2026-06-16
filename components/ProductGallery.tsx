@@ -4,7 +4,13 @@ import { useState } from "react";
 import { getScarfThumbGradients } from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
 
-export function ProductGallery({ gradient }: { gradient: string }) {
+export function ProductGallery({
+  gradient,
+  scarfName,
+}: {
+  gradient: string;
+  scarfName: string;
+}) {
   const thumbs = getScarfThumbGradients(gradient);
   const [active, setActive] = useState(0);
 
@@ -15,6 +21,7 @@ export function ProductGallery({ gradient }: { gradient: string }) {
           gradient={thumbs[active]}
           className="product-main-fill"
           style={{ position: "absolute", inset: 0 }}
+          aria-label={`${scarfName} silk scarf — view ${active + 1}`}
         />
       </div>
       <div className="product-thumbs">

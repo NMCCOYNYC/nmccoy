@@ -7,7 +7,7 @@ Art-led luxury ecommerce site for [NMCCOY](https://github.com/NMCCOYNYC). Built 
 - **Next.js 15** (App Router) — customer-facing site
 - **Vercel** — deployment (Phase 2)
 - **Supabase** — CMS, admin auth, inventory (Phase 2)
-- **Shopify** — checkout & payments (Phase 2)
+- **Shopify** — checkout & payments via Storefront API
 
 ## Pages
 
@@ -26,12 +26,7 @@ Art-led luxury ecommerce site for [NMCCOY](https://github.com/NMCCOYNYC). Built 
 
 ## Site modes
 
-Set in `.env.local`:
-
-```bash
-NEXT_PUBLIC_SITE_MODE=preorder   # Reserve + $150 deposit UI
-NEXT_PUBLIC_SITE_MODE=launch     # Full $300 purchase UI
-```
+Removed — the site is purchase-only at $300 per scarf.
 
 ## Getting started
 
@@ -59,6 +54,45 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## Shopify setup
+
+Your store: [admin.shopify.com/store/r10eg8-1u](https://admin.shopify.com/store/r10eg8-1u)
+
+### 1. Create a Headless sales channel
+
+1. In Shopify admin, go to **Sales channels** → **Headless**
+2. Create a storefront (or use an existing one)
+3. Copy the **Storefront API access token**
+
+### 2. Add env vars
+
+In `.env.local`:
+
+```bash
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=r10eg8-1u.myshopify.com
+SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_token_here
+```
+
+Restart the dev server after changing env vars.
+
+### 3. Create products in Shopify
+
+For each scarf, create a product with handle matching the site slug (e.g. `wild-mirage`) at **$300**.
+
+### 4. Wire variant IDs in `lib/products.ts`
+
+Copy each variant ID from Shopify admin and add to the matching scarf:
+
+```typescript
+{
+  slug: "wild-mirage",
+  // ...
+  shopifyVariantId: "12345678901234",
+}
+```
+
+Alternatively, paste a direct checkout URL in `shopifyCheckoutUrl`.
 
 ## Push to GitHub
 
@@ -90,8 +124,9 @@ gh repo create NMCCOYNYC/nmccoy --public --source=. --push
 - [ ] Supabase project + run `supabase/schema.sql`
 - [ ] Connect admin auth at `/admin`
 - [ ] Upload real scarf photography
-- [ ] Shopify store + deposit/full product variants
-- [ ] Wire checkout URLs in `lib/products.ts`
+- [x] Shopify store connected (`r10eg8-1u.myshopify.com`)
+- [ ] Create 6 scarf products in Shopify ($300 each)
+- [ ] Add Shopify variant IDs to `lib/products.ts`
 
 ## Design
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getNavCtaLabel } from "@/lib/site-settings";
 
@@ -7,13 +8,34 @@ type LogoProps = {
 };
 
 export function Logo({ light = false, className = "" }: LogoProps) {
+  const src = light
+    ? "/logos/nmccoy-wordmark-ivory.png"
+    : "/logos/nmccoy-wordmark-brown.png";
+
   return (
-    <Link
-      href="/"
-      className={`logo-wordmark ${light ? "logo-wordmark--light" : ""} ${className}`}
-      aria-label="NMCCOY home"
-    >
-      NMCCOY
+    <Link href="/" className={`logo-link ${className}`} aria-label="NMCCOY home">
+      <Image
+        src={src}
+        alt="NMCCOY"
+        width={182}
+        height={24}
+        className="logo-image"
+        priority
+      />
+    </Link>
+  );
+}
+
+export function FooterLogo({ className = "" }: { className?: string }) {
+  return (
+    <Link href="/" className={`logo-link ${className}`} aria-label="NMCCOY home">
+      <Image
+        src="/logos/nm-monogram-ivory.png"
+        alt="NMCCOY monogram"
+        width={60}
+        height={30}
+        className="logo-image logo-image--monogram"
+      />
     </Link>
   );
 }

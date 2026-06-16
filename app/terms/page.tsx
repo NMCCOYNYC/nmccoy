@@ -1,5 +1,12 @@
 import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Terms & Conditions",
+  description: "NMCCOY terms and conditions for purchases on nmccoy.com.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
@@ -27,10 +34,10 @@ export default function TermsPage() {
           Edition sizes are final. Once sold out, no additional units will be
           produced.
         </p>
-        <h2>3. Pre-orders</h2>
+        <h2>3. Purchases</h2>
         <p>
-          50% deposit required. Remainder charged at shipping. Deposits refundable
-          until {siteSettings.refundDeadline}. Scarves ship {siteSettings.launchDate}.
+          Full payment is collected at checkout. Scarves ship{" "}
+          {siteSettings.launchDate}. All sales are subject to availability.
         </p>
         <h2>4. Intellectual property</h2>
         <p>

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { siteSettings, isPreorderMode } from "@/lib/site-settings";
+import { FadeIn } from "@/components/FadeIn";
+import { siteSettings } from "@/lib/site-settings";
 
 export function StatsBand() {
   const stats = [
@@ -27,26 +28,24 @@ export function StatsBand() {
 
 export function CtaSection({
   eyebrow,
-  title,
+  title = "Enter the World of Desert Illusions",
   href = "/collection",
   buttonLabel = "View Collection",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title?: string;
   href?: string;
   buttonLabel?: string;
 }) {
-  const defaultTitle = isPreorderMode()
-    ? `${siteSettings.collectionName} — pre-order open`
-    : `${siteSettings.collectionName} — now available`;
-
   return (
-    <div className="cta-section">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2>{title || defaultTitle}</h2>
-      <Link href={href} className="btn btn--dark">
-        {buttonLabel}
-      </Link>
-    </div>
+    <FadeIn variant="reveal">
+      <div className="cta-section cta-section--editorial">
+        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+        <h2>{title}</h2>
+        <Link href={href} className="btn btn--outline">
+          {buttonLabel}
+        </Link>
+      </div>
+    </FadeIn>
   );
 }

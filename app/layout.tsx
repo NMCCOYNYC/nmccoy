@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Marcellus, Gowun_Batang, Jost } from "next/font/google";
 import { Nav } from "@/components/Nav";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const marcellus = Marcellus({
@@ -21,23 +23,35 @@ const jost = Jost({
   variable: "--font-util",
 });
 
-export const metadata: Metadata = {
-  title: "NMCCOY — Desert Illusions",
-  description:
-    "NMCCOY is an art-led fashion house where hand-painted artworks are translated to limited-edition Italian silk scarves.",
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nmccoy.com";
+
   return (
     <html
       lang="en"
       className={`${marcellus.variable} ${gowunBatang.variable} ${jost.variable}`}
     >
       <body>
+        <GoogleAnalytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "NMCCOY",
+              url: siteUrl,
+              email: "hello@nmccoynyc.com",
+              sameAs: ["https://www.instagram.com/nmccoynyc"],
+            }),
+          }}
+        />
         <Nav />
         <main>{children}</main>
       </body>

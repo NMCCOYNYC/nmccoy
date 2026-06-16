@@ -1,14 +1,22 @@
 import { Footer } from "@/components/Footer";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Process",
+  description:
+    "From original ink painting to Italian silk — how NMCCOY artworks are preserved, translated, and produced.",
+  path: "/process",
+});
 
 const steps = [
   {
     num: "01",
     title: "Original ink painting",
     body: [
-      "Everything begins with Nichole at her studio in Arizona, with ink and cold-press watercolor paper. Each painting is a finished work — unrepeatable, complete.",
-      "The works range from 16×16 to 24×24 inches. None will be reproduced on silk more than 40 times.",
+      "Every NMCCOY collection begins with an original ink painting. Each work is first realized as a complete artwork before being translated into silk.",
+      "Painted by hand on cold-press watercolor paper, no two marks are ever exactly alike. The resulting artworks are produced in small, numbered editions and will never be reproduced again in the same form.",
     ],
     visual: "Studio photography",
     bg: "linear-gradient(160deg,#F5EFE6,#D4B896)",
@@ -17,16 +25,18 @@ const steps = [
     num: "02",
     title: "High-resolution archiving",
     body: [
-      "Each painting is professionally scanned at 1200 DPI — capturing paper texture, ink weight variation, and every decision that makes a painting feel alive.",
+      "Each painting is digitized at high resolution, capturing paper texture, ink weight, and the surface details of the original work.",
+      "This archive becomes the foundation for translation to silk — faithful to the painting, not reinterpreted.",
     ],
-    visual: "Scanning process",
+    visual: "Archiving process",
     bg: "linear-gradient(160deg,#E8E0D8,#C4B8A8)",
   },
   {
     num: "03",
     title: "Italian silk printing",
     body: [
-      "100% silk twill, woven in Italy. Reactive dye bonds to the silk fibers. Edges are hand-rolled by artisans in the same mill — the detail that separates luxury from everything else.",
+      "Printed on 100% silk twill in Italy, in small batches. Reactive dyes bond to the fibers while preserving depth and detail from the source artwork.",
+      "Edges are hand-rolled at the mill — a finishing detail that marks the difference between production and intention.",
     ],
     visual: "Italy",
     bg: "linear-gradient(160deg,#D4C4B0,#A08060)",
@@ -35,7 +45,8 @@ const steps = [
     num: "04",
     title: "Numbering & packaging",
     body: [
-      "Each scarf receives a handwritten edition number from Nichole. Every piece ships with a certificate of authenticity. Packaging is a single NMCCOY box with tissue.",
+      "Each piece is numbered by hand and accompanied by a certificate of authenticity.",
+      "Every scarf ships in a single NMCCOY box with tissue — prepared with the same care given to the work itself.",
     ],
     visual: "Packaging",
     bg: "linear-gradient(160deg,#EDEBE9,#D4C4B0)",
@@ -46,15 +57,10 @@ export default function ProcessPage() {
   return (
     <>
       <PageHeroDark
-        eyebrow="How it's made"
-        title={
-          <>
-            From ink
-            <br />
-            to silk
-          </>
-        }
-        description="The NMCCOY process begins in the desert and ends in Italy — with nothing automated, nothing compromised."
+        eyebrow="The Process"
+        title="From Painting to Silk."
+        subhead="Original artworks, translated into textile."
+        description="Each NMCCOY piece begins as a hand-painted work on paper. Through a careful process of preservation and production, the artwork is transformed into silk—retaining the nuances, textures, and imperfections that make it uniquely its own."
       />
 
       <div className="steps-wrap">
@@ -79,7 +85,7 @@ export default function ProcessPage() {
       </div>
 
       <div style={{ background: "var(--white)" }}>
-        <CtaSection eyebrow="See the results" />
+        <CtaSection eyebrow="The Collection" />
       </div>
       <Footer />
     </>

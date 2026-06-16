@@ -22,13 +22,12 @@ export default function AdminPage() {
         Coming in Phase 2
       </h1>
       <p style={{ color: "var(--taupe)", lineHeight: 1.8, marginBottom: "2rem" }}>
-        This hidden route will let you update products, images, copy, and toggle
-        between pre-order and launch mode once Supabase Auth is connected.
+        This hidden route will let you update products, images, and copy once
+        Supabase Auth is connected.
       </p>
       <ul style={{ color: "var(--taupe)", lineHeight: 2, marginBottom: "2rem" }}>
         <li>Edit the 6 scarf designs and inventory</li>
         <li>Upload product photography</li>
-        <li>Switch site mode: pre-order ↔ launch</li>
         <li>View email signups and contact messages</li>
       </ul>
       <Link href="/" className="btn btn--dark">
