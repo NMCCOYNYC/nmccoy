@@ -3,6 +3,8 @@ import {
   isKlaviyoConfigured,
   subscribeToKlaviyoList,
 } from "@/lib/klaviyo/subscribe";
+import { createSupabaseAdmin } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 type SubscribeRequest = {
   email?: string;
@@ -10,6 +12,26 @@ type SubscribeRequest = {
 };
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function saveEmailSignup(email: string, source: string) {
+  if (!isSupabaseConfigured()) {
+    return;
+  }
+
+  const supabase = createSupabaseAdmin();
+  if (!supabase) {
+    return;
+  }
+
+  const { error } = await supabase.from("email_signups").upsert(
+    { email, source },
+    { onConflict: "email", ignoreDuplicates: false }
+  );
+
+  if (error) {
+    console.error("[newsletter] Supabase insert failed:", error.message);
+  }
+}
 
 export async function POST(request: Request) {
   if (!isKlaviyoConfigured()) {
@@ -39,6 +61,7 @@ export async function POST(request: Request) {
 
   try {
     await subscribeToKlaviyoList({ email, source });
+    await saveEmailSignup(email, source);
     return NextResponse.json({ ok: true });
   } catch (error) {
     const message =

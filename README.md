@@ -94,6 +94,43 @@ Copy each variant ID from Shopify admin and add to the matching scarf:
 
 Alternatively, paste a direct checkout URL in `shopifyCheckoutUrl`.
 
+## Supabase setup
+
+Supabase stores contact form submissions and newsletter signups. Admin CMS auth is still Phase 2.
+
+### 1. Create a project
+
+1. Go to [supabase.com/dashboard](https://supabase.com/dashboard) → **New project**
+2. Name it (e.g. `nmccoy`) and choose a region close to your customers
+3. Save the database password somewhere secure
+
+### 2. Run the database schema
+
+1. In your project, open **SQL Editor** → **New query**
+2. Paste the contents of `supabase/schema.sql` from this repo
+3. Click **Run**
+
+This creates tables for `contact_submissions`, `email_signups`, products (future CMS), and row-level security policies.
+
+### 3. Copy API credentials
+
+1. Go to **Project Settings** (gear icon) → **API**
+2. Copy these into `.env.local` (never commit this file):
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
+```
+
+Use the **Project URL**, **anon public** key, and **service_role** key (keep service_role secret — server-only).
+
+Restart the dev server after saving.
+
+### 4. Verify
+
+Submit the contact form at `/contact`. In Supabase, open **Table Editor** → `contact_submissions` to confirm the row appears.
+
 ## Push to GitHub
 
 ```bash
@@ -121,7 +158,7 @@ gh repo create NMCCOYNYC/nmccoy --public --source=. --push
 
 ## Phase 2 checklist
 
-- [ ] Supabase project + run `supabase/schema.sql`
+- [ ] Supabase project + run `supabase/schema.sql` + env vars in `.env.local` / Vercel
 - [ ] Connect admin auth at `/admin`
 - [ ] Upload real scarf photography
 - [x] Shopify store connected (`r10eg8-1u.myshopify.com`)
