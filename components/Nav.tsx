@@ -38,18 +38,20 @@ export function Nav() {
   return (
     <>
       <nav className={`nav${scrolled ? " scrolled" : ""}`} id="mainNav">
-        <ul className="nav__left">
-          {leftLinks.map((link) => (
-            <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
-              {link.label}
-            </NavLink>
-          ))}
-        </ul>
+        <div className="nav__side nav__side--left">
+          <ul className="nav__links">
+            {leftLinks.map((link) => (
+              <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
+                {link.label}
+              </NavLink>
+            ))}
+          </ul>
+        </div>
         <div className="nav__logo">
           <Logo />
         </div>
-        <div className="nav__right">
-          <ul className="nav__left" style={{ marginRight: "2rem" }}>
+        <div className="nav__side nav__side--right">
+          <ul className="nav__links">
             {rightLinks.map((link) => (
               <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
                 {link.label}
@@ -62,7 +64,6 @@ export function Nav() {
             className="nav__hamburger"
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
-            style={{ marginLeft: "1rem" }}
           >
             <span />
             <span />
