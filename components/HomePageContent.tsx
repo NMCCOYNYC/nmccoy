@@ -25,16 +25,17 @@ export function HomePageContent() {
         />
         <div className="hero__overlay" />
         <div className="hero__content hero__content--left">
-          <p className="hero__kicker">Collection No. 1 — New York</p>
+          <p className="hero__kicker">Collection No. 1</p>
           <h1 className="hero__title">Desert Illusions</h1>
           <p className="hero__sub hero__sub--wide">
-            Shaped by heat, mirage, and shifting light, this first collection
-            reflects what appears, disappears, and lingers — original paintings
-            translated into silk.
+            Inspired by the shifting light of the American Southwest, Desert
+            Illusions explores the space between what is seen and what is
+            remembered. Six original artworks translated into limited-edition
+            Italian silk.
           </p>
           <div className="hero__actions">
             <Link href="/collection" className="btn--underline btn--underline-light">
-              Follow the Light
+              Discover the Collection
             </Link>
           </div>
         </div>
@@ -49,7 +50,8 @@ export function HomePageContent() {
             <p className="art-meant__body">
               NMCCOY is an art-led house rooted in the belief that the things we
               choose to keep should feel personal. Each collection begins with
-              original artwork and carries its story from painting to textile.
+              original artwork and carries its story from painting to textile,
+              creating pieces designed to be worn, lived with, and kept.
             </p>
           </div>
         </section>
@@ -60,20 +62,22 @@ export function HomePageContent() {
           <div className="collection-home__intro">
             <div className="coll-intro">
               <p className="eyebrow coll-intro__eyebrow">
-                Desert Illusions — Collection 1
+                Desert Illusions — Collection No. 1
               </p>
               <div className="coll-intro__left">
                 <h2 id="coll-intro-title" className="coll-intro__title">
                   A few pieces,
                   <br />
-                  caught in the light.
+                  caught in the
+                  <br />
+                  light.
                 </h2>
               </div>
               <div className="coll-intro__right">
                 <p className="coll-intro__body">
-                  Six original artworks from Desert Illusions, translated into
-                  limited-edition Italian silk. Produced in small, numbered
-                  editions and never reproduced again in the same form.
+                  Six original artworks translated into limited-edition Italian
+                  silk. Produced in small, numbered editions and never
+                  reproduced in the same form again.
                 </p>
               </div>
             </div>
@@ -81,6 +85,12 @@ export function HomePageContent() {
         </FadeIn>
 
         <ScarfCarousel scarves={scarves} variant="home" />
+
+        <FadeIn variant="fade" className="collection-home__cta">
+          <Link href="/collection" className="btn--underline">
+            View the Collection
+          </Link>
+        </FadeIn>
       </section>
 
       <section className="process-band">
@@ -99,14 +109,14 @@ export function HomePageContent() {
             to Silk.
           </h2>
           <p className="process-band__italic">
-            Brushstrokes become pattern. Texture becomes memory.
+            Brushstrokes become pattern. Light becomes memory.
             <br />
             Silk becomes a canvas meant to move with you.
           </p>
           <p className="process-band__body">
             Each NMCCOY piece begins not as a product, but as a moment. Painted
             by hand, guided by intuition, and shaped by time. What you keep is
-            not replicated — it is translated. From artwork to object. From hand
+            not replicated—it is translated. From artwork to object. From hand
             to heirloom.
           </p>
           <Link

@@ -9,6 +9,8 @@ export const siteSettings = {
   instagramUrl: "https://www.instagram.com/nmccoynyc",
   spotifyPlaylistUrl:
     process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_URL?.trim() || "",
+  soundVideoUrl:
+    process.env.NEXT_PUBLIC_SOUND_VIDEO_URL?.trim() || "/video/ink-bloom.mp4",
 };
 
 export function getNavCtaLabel() {

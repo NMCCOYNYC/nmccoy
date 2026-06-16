@@ -112,7 +112,7 @@ export function EmailCapture({
         Join the Collection List
       </h2>
       <p className="email-capture__copy">
-        Receive collection updates, studio notes, and early access to future
+        Receive collection updates, early access, and first notice of future
         releases.
       </p>
       <form className="email-form" onSubmit={handleSubmit}>
