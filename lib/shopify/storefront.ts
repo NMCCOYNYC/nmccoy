@@ -18,6 +18,7 @@ export async function storefrontFetch<T>(
 ): Promise<T> {
   const domain = getShopifyStoreDomain();
   const token = getShopifyStorefrontToken();
+  const usePrivateToken = token.startsWith("shpat_");
 
   if (!token) {
     throw new Error("Shopify Storefront API token is not configured.");
@@ -29,7 +30,9 @@ export async function storefrontFetch<T>(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": token,
+        ...(usePrivateToken
+          ? { "Shopify-Storefront-Private-Token": token }
+          : { "X-Shopify-Storefront-Access-Token": token }),
       },
       body: JSON.stringify({ query, variables }),
       cache: "no-store",
