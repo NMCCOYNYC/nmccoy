@@ -27,18 +27,18 @@ export const scarves: Scarf[] = [
       "Wild Mirage explores memory, instinct, and the spaces between what was seen and what was felt.",
   },
   {
-    slug: "sacred-light",
-    name: "Sacred Light",
+    slug: "remembered-light",
+    name: "Remembered Light",
     number: "02",
     numberLabel: "No. 02 of 06",
     gradient:
       "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
     desc1:
-      "An homage to wisdom, heritage, and our connection to the landscapes that shape us. Sacred Light reflects the quiet strength that is carried across generations—the stories, traditions, and perspectives that continue to illuminate our path forward. Radiant forms and warm tones evoke a sense of reverence, reminding us that light often comes from within.",
+      "A meditation on memory, light, and the landscapes that shape us. Remembered Light holds a presence I have carried since childhood — not fully understood, but deeply felt, rendered here in warm tones and radiant form. It is offered with care, and with an ongoing commitment to sharing it thoughtfully and respectfully.",
     desc2:
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Sacred Light reflects the quiet strength carried across generations and the landscapes that shape us.",
+      "Remembered Light is a meditation on memory, light, and the landscapes that shape us.",
   },
   {
     slug: "dusty-bloom",

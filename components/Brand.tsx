@@ -9,15 +9,15 @@ type LogoProps = {
 
 export function Logo({ light = false, className = "" }: LogoProps) {
   const src = light
-    ? "/logos/nmccoy-wordmark-ivory.png"
-    : "/logos/nmccoy-wordmark-brown.png";
+    ? "/logos/nmccoy-wordmark-ivory.svg"
+    : "/logos/nmccoy-wordmark-brown.svg";
 
   return (
     <Link href="/" className={`logo-link ${className}`} aria-label="NMCCOY home">
       <Image
         src={src}
         alt="NMCCOY"
-        width={182}
+        width={165}
         height={24}
         className="logo-image"
         priority
@@ -30,9 +30,9 @@ export function FooterLogo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" className={`logo-link ${className}`} aria-label="NMCCOY home">
       <Image
-        src="/logos/nm-monogram-ivory.png"
+        src="/logos/nm-monogram-ivory.svg"
         alt="NMCCOY monogram"
-        width={60}
+        width={77}
         height={30}
         className="logo-image logo-image--monogram"
       />

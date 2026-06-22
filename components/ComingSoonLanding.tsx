@@ -8,10 +8,10 @@ export function ComingSoonLanding() {
       <div className="coming-soon__texture" aria-hidden="true" />
       <div className="coming-soon__inner">
         <Image
-          src="/logos/nmccoy-wordmark-brown.png"
+          src="/logos/nmccoy-wordmark-brown.svg"
           alt="NMCCOY"
           width={220}
-          height={29}
+          height={32}
           className="coming-soon__logo"
           priority
         />
