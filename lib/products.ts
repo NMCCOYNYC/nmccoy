@@ -27,18 +27,18 @@ export const scarves: Scarf[] = [
       "Wild Mirage explores memory, instinct, and the spaces between what was seen and what was felt.",
   },
   {
-    slug: "remembered-light",
-    name: "Remembered Light",
+    slug: "carried-light",
+    name: "Carried Light",
     number: "02",
     numberLabel: "No. 02 of 06",
     gradient:
       "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
     desc1:
-      "A meditation on memory, light, and the landscapes that shape us. Remembered Light holds a presence I have carried since childhood — not fully understood, but deeply felt, rendered here in warm tones and radiant form. It is offered with care, and with an ongoing commitment to sharing it thoughtfully and respectfully.",
+      "Rooted in the landscapes of Arizona where the founder grew up, Carried Light was painted in admiration of the artistry, craftsmanship, and cultural traditions of Native American communities whose influence continues to shape this land. A warmth and presence carried forward through time. Offered with care, and with an ongoing commitment to the communities that inspired it.",
     desc2:
-      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
+      "Original ink painting translated into 100% Italian silk twill. Limited edition.",
     painting:
-      "Remembered Light is a meditation on memory, light, and the landscapes that shape us.",
+      "Carried Light honors the artistry and cultural traditions of the Arizona landscapes that shaped the founder.",
   },
   {
     slug: "dusty-bloom",
