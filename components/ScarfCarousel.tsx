@@ -30,6 +30,9 @@ export function ScarfCarousel({
   const horizontal = useRef(false);
   const swiped = useRef(false);
 
+  // On mobile (single view) show a sliver of the next card to invite swiping
+  const basisFor = (view: number) => (view === 1 ? 82 : 100 / view);
+
   useEffect(() => {
     const update = () => {
       const view = slidesPerView(window.innerWidth);
@@ -37,7 +40,7 @@ export function ScarfCarousel({
       setPos(0);
       const width = wrapRef.current?.clientWidth ?? 0;
       // slides are square (1:1), so image height ≈ slide width
-      setImgH(width / view);
+      setImgH((width * basisFor(view)) / 100);
     };
     update();
     window.addEventListener("resize", update);
@@ -45,8 +48,11 @@ export function ScarfCarousel({
   }, []);
 
   const maxPos = Math.max(0, scarves.length - spv);
-  const slideW = 100 / spv;
+  const slideW = basisFor(spv);
   const slidePx = imgH;
+  // Clamp the track so the last slide aligns flush to the right edge
+  const maxTranslate = Math.max(0, scarves.length * slideW - 100);
+  const translatePct = Math.min(pos * slideW, maxTranslate);
 
   const move = (dir: number) => {
     setPos((p) => Math.max(0, Math.min(maxPos, p + dir)));
@@ -111,7 +117,7 @@ export function ScarfCarousel({
         <div
           className="carousel-track"
           style={{
-            transform: `translateX(calc(-${pos * slideW}% + ${dragX}px))`,
+            transform: `translateX(calc(-${translatePct}% + ${dragX}px))`,
             transition: dragging ? "none" : undefined,
           }}
         >

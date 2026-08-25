@@ -1369,7 +1369,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 @media (max-width: 600px) {
   .email-form { flex-direction: column; align-items: stretch; max-width: 100%; }
   .email-form button { width: 100%; }
-  .carousel-slide { min-width: calc(100% - 0); }
   .carousel-nav { display: none; }
   .scarves-grid { grid-template-columns: 1fr; }
   .values-grid { grid-template-columns: 1fr; }
