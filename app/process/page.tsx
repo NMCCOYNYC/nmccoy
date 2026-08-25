@@ -63,6 +63,8 @@ export default function ProcessPage() {
         title="From Painting to Silk."
         subhead="Original artworks, translated into textile."
         description="Each NMCCOY piece begins as a hand-painted work on paper. Through a careful process of preservation and production, the artwork is transformed into silk—retaining the nuances, textures, and imperfections that make it uniquely its own."
+        imageSrc="/process/from-painting-to-silk-hero.jpg"
+        imageAlt="From painting to silk"
       />
 
       <FeatureVideo

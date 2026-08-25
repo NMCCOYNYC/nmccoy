@@ -1062,6 +1062,28 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ══ EDITORIAL / INNER PAGES ══ */
 .page-hero-dark { padding: 9rem clamp(1.5rem,4vw,4rem) 5rem; background: var(--cacao); color: var(--bone); }
+.page-hero-dark--image {
+  position: relative;
+  overflow: hidden;
+  min-height: min(72vh, 720px);
+  display: flex;
+  align-items: flex-end;
+}
+.page-hero-dark__media {
+  object-fit: cover;
+  object-position: center right;
+}
+.page-hero-dark__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(30, 18, 12, 0.82) 0%,
+    rgba(30, 18, 12, 0.45) 46%,
+    rgba(30, 18, 12, 0.18) 100%
+  );
+}
+.page-hero-dark__content { position: relative; z-index: 1; }
 .page-hero-dark .eyebrow { color: rgba(237,235,233,0.35); margin-bottom: 1.2rem; }
 .page-hero-dark h1 { font-family: var(--font-display); font-size: clamp(3rem,6vw,6.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.025em; text-transform: uppercase; margin-bottom: 1.25rem; }
 .page-hero-dark__subhead {
