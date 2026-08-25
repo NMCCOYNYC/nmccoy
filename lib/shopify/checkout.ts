@@ -6,19 +6,28 @@ export function isCheckoutConfigured(scarf: Scarf) {
 }
 
 export async function createCheckoutUrl(slug: string) {
-  const scarf = getScarfBySlug(slug);
+  return createCheckoutFromItems([{ slug, quantity: 1 }]);
+}
 
-  if (!scarf) {
-    throw new Error("Product not found.");
+export async function createCheckoutFromItems(
+  items: Array<{ slug: string; quantity: number }>
+) {
+  const lines = items
+    .map((item) => {
+      const scarf = getScarfBySlug(item.slug);
+      if (!scarf?.shopifyVariantId) return null;
+      return {
+        variantId: scarf.shopifyVariantId,
+        quantity: Math.max(1, item.quantity),
+      };
+    })
+    .filter((line): line is { variantId: string; quantity: number } =>
+      Boolean(line)
+    );
+
+  if (!lines.length) {
+    throw new Error("Checkout is not configured for these pieces yet.");
   }
 
-  if (scarf.shopifyCheckoutUrl) {
-    return scarf.shopifyCheckoutUrl;
-  }
-
-  if (!scarf.shopifyVariantId) {
-    throw new Error("Checkout is not configured for this product yet.");
-  }
-
-  return createCartCheckout(scarf.shopifyVariantId);
+  return createCartCheckout(lines);
 }

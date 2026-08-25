@@ -17,6 +17,4 @@ export const siteSettings = {
     process.env.NEXT_PUBLIC_FEATURE_VIDEO_POSTER?.trim() || "",
 };
 
-export function getNavCtaLabel() {
-  return "Collection";
-}
+

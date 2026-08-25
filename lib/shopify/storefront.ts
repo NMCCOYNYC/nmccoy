@@ -63,7 +63,13 @@ type CartCreateResult = {
   };
 };
 
-export async function createCartCheckout(variantId: string) {
+export async function createCartCheckout(
+  lines: Array<{ variantId: string; quantity: number }>
+) {
+  if (!lines.length) {
+    throw new Error("Your cart is empty.");
+  }
+
   const data = await storefrontFetch<CartCreateResult>(
     `
       mutation cartCreate($input: CartInput!) {
@@ -80,7 +86,10 @@ export async function createCartCheckout(variantId: string) {
     `,
     {
       input: {
-        lines: [{ merchandiseId: toVariantGid(variantId), quantity: 1 }],
+        lines: lines.map((line) => ({
+          merchandiseId: toVariantGid(line.variantId),
+          quantity: line.quantity,
+        })),
       },
     }
   );

@@ -1,7 +1,6 @@
 import type { MouseEventHandler } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getNavCtaLabel } from "@/lib/site-settings";
 
 type LogoProps = {
   light?: boolean;
@@ -63,14 +62,5 @@ export function NavLink({
         {children}
       </Link>
     </li>
-  );
-}
-
-export function CollectionCta() {
-  const label = getNavCtaLabel();
-  return (
-    <Link href="/collection" className="nav__cta">
-      {label}
-    </Link>
   );
 }

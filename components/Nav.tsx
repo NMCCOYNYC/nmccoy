@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CollectionCta, Logo, NavLink } from "@/components/Brand";
+import { CartIcon } from "@/components/CartIcon";
+import { Logo, NavLink } from "@/components/Brand";
 
 const leftLinks = [
   { href: "/collection", label: "Collection" },
@@ -66,7 +67,7 @@ export function Nav() {
               </NavLink>
             ))}
           </ul>
-          <CollectionCta />
+          <CartIcon />
           <button
             type="button"
             className="nav__hamburger"
@@ -93,6 +94,9 @@ export function Nav() {
             {link.label}
           </Link>
         ))}
+        <Link href="/cart" onClick={() => setMobileOpen(false)}>
+          Cart
+        </Link>
       </div>
     </>
   );

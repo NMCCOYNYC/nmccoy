@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
-import { createCheckoutUrl } from "@/lib/shopify/checkout";
+import {
+  createCheckoutFromItems,
+  createCheckoutUrl,
+} from "@/lib/shopify/checkout";
 
 type CheckoutRequest = {
   slug?: string;
+  items?: Array<{ slug?: string; quantity?: number }>;
 };
 
 export async function POST(request: Request) {
@@ -14,17 +18,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { slug } = body;
-
-  if (!slug) {
-    return NextResponse.json(
-      { error: "Provide a product slug." },
-      { status: 400 }
-    );
-  }
+  const items = (body.items || [])
+    .filter((item) => typeof item.slug === "string" && item.slug)
+    .map((item) => ({
+      slug: item.slug as string,
+      quantity: Math.max(1, Number(item.quantity) || 1),
+    }));
 
   try {
-    const checkoutUrl = await createCheckoutUrl(slug);
+    const checkoutUrl = items.length
+      ? await createCheckoutFromItems(items)
+      : body.slug
+        ? await createCheckoutUrl(body.slug)
+        : null;
+
+    if (!checkoutUrl) {
+      return NextResponse.json(
+        { error: "Provide a product or cart items." },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json({ checkoutUrl });
   } catch (error) {
     const message =

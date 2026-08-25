@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
 import { ProductGallery } from "@/components/ProductGallery";
 import { Accordion } from "@/components/Accordion";
-import { ShopifyCheckoutButton } from "@/components/ShopifyCheckoutButton";
+import { AddToCartButton } from "@/components/AddToCartButton";
 
 export function ProductPageClient({ scarf }: { scarf: Scarf }) {
   const checkoutConfigured = isCheckoutConfigured(scarf);
@@ -38,9 +38,9 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
           <p className="product-desc">{scarf.desc1}</p>
           <p className="product-desc">{scarf.desc2}</p>
           <div className="product-cta">
-            <ShopifyCheckoutButton
+            <AddToCartButton
               slug={scarf.slug}
-              label={`Collect — $${siteSettings.fullPrice}`}
+              label={`Add to Cart — $${siteSettings.fullPrice}`}
               disabled={!checkoutConfigured}
               disabledLabel={`Not yet available — $${siteSettings.fullPrice}`}
             />

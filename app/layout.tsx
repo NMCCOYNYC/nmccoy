@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Marcellus, Gowun_Batang, Jost } from "next/font/google";
 import { cookies } from "next/headers";
+import { CartProvider } from "@/components/CartProvider";
 import { Nav } from "@/components/Nav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { hasSiteAccess, isComingSoonEnabled } from "@/lib/coming-soon";
@@ -59,8 +60,10 @@ export default async function RootLayout({
             }),
           }}
         />
-        {showNav ? <Nav /> : null}
-        <main>{children}</main>
+        <CartProvider>
+          {showNav ? <Nav /> : null}
+          <main>{children}</main>
+        </CartProvider>
       </body>
     </html>
   );
