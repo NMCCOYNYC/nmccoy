@@ -1,6 +1,8 @@
 import { Footer } from "@/components/Footer";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
+import { FeatureVideo } from "@/components/FeatureVideo";
+import { siteSettings } from "@/lib/site-settings";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -61,6 +63,14 @@ export default function ProcessPage() {
         title="From Painting to Silk."
         subhead="Original artworks, translated into textile."
         description="Each NMCCOY piece begins as a hand-painted work on paper. Through a careful process of preservation and production, the artwork is transformed into silk—retaining the nuances, textures, and imperfections that make it uniquely its own."
+      />
+
+      <FeatureVideo
+        eyebrow="The Film"
+        title="Watch the Process"
+        body="See how each painting becomes silk — from the studio to the mill."
+        videoUrl={siteSettings.featureVideoUrl}
+        posterUrl={siteSettings.featureVideoPoster}
       />
 
       <div className="steps-wrap">

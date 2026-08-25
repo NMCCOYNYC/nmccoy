@@ -1,8 +1,11 @@
 import Link from "next/link";
 
 import { scarves } from "@/lib/products";
+import { siteSettings } from "@/lib/site-settings";
 
 import { Footer } from "@/components/Footer";
+
+import { FeatureVideo } from "@/components/FeatureVideo";
 
 import { EmailCapture } from "@/components/EmailCapture";
 
@@ -55,6 +58,16 @@ export function HomePageContent() {
             </p>
           </div>
         </section>
+      </FadeIn>
+
+      <FadeIn variant="fade">
+        <FeatureVideo
+          eyebrow="The Film"
+          title="Desert Illusions, in Motion"
+          body="A short film following the collection from first brushstroke to finished silk."
+          videoUrl={siteSettings.featureVideoUrl}
+          posterUrl={siteSettings.featureVideoPoster}
+        />
       </FadeIn>
 
       <section className="collection-home" aria-labelledby="coll-intro-title">
