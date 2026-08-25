@@ -85,9 +85,6 @@ export function Nav() {
             {link.label}
           </Link>
         ))}
-        <Link href="/collection" onClick={() => setMobileOpen(false)}>
-          Collection
-        </Link>
       </div>
     </>
   );
