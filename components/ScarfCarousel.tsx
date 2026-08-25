@@ -94,7 +94,6 @@ export function ScarfCarousel({
                   <p className="carousel-slide__meta">
                     Silk Twill · 90×90cm · Limited Edition
                   </p>
-                  <span className="carousel-slide__cta">View Piece</span>
                 </div>
               </Link>
             );
