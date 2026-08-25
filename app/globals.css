@@ -1389,13 +1389,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 
 /* ══ FEATURE VIDEO (film section) ══ */
 .feature-video {
-  padding: clamp(1.6rem, 3.5vh, 2.8rem) clamp(1.5rem, 4vw, 4rem)
-    clamp(2.2rem, 4.5vh, 3.5rem);
+  padding: clamp(1.4rem, 3vh, 2.2rem) 0 0;
 }
 .feature-video--light { background: var(--bone); color: var(--cacao); }
 .feature-video--dark { background: var(--cacao); color: var(--bone); }
 .feature-video__inner {
-  max-width: var(--max);
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1411,20 +1410,23 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   line-height: 1.05;
   letter-spacing: -0.01em;
   margin-bottom: 0.55rem;
+  padding: 0 1.5rem;
 }
 .feature-video__body {
   font-family: var(--font-body);
   font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.7;
   max-width: 520px;
-  margin-bottom: clamp(1rem, 2.2vh, 1.6rem);
+  margin-bottom: clamp(1rem, 2vh, 1.4rem);
   color: var(--taupe);
+  padding: 0 1.5rem;
 }
 .feature-video--dark .feature-video__body { color: rgba(237,235,233,0.65); }
 .feature-video__frame {
   position: relative;
   aspect-ratio: 16 / 9;
-  width: min(100%, 52rem, calc(48vh * 16 / 9));
+  width: calc(100% - 1.5rem);
+  margin: 0 auto 0.75rem;
   background: linear-gradient(160deg,#3D2B1F 0%,#6B4C34 35%,#8C603A 60%,#2A1A10 100%);
   background-size: cover;
   background-position: center;
