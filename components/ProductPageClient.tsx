@@ -40,7 +40,7 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
           <div className="product-cta">
             <AddToCartButton
               slug={scarf.slug}
-              label={`Add to Cart — $${siteSettings.fullPrice}`}
+              label={`Collect — $${siteSettings.fullPrice}`}
               disabled={!checkoutConfigured}
               disabledLabel={`Not yet available — $${siteSettings.fullPrice}`}
             />
