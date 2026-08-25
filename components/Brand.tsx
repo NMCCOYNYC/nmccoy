@@ -1,3 +1,4 @@
+import type { MouseEventHandler } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getNavCtaLabel } from "@/lib/site-settings";
@@ -5,15 +6,22 @@ import { getNavCtaLabel } from "@/lib/site-settings";
 type LogoProps = {
   light?: boolean;
   className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
-export function Logo({ light = false, className = "" }: LogoProps) {
+export function Logo({ light = false, className = "", onClick }: LogoProps) {
   const src = light
     ? "/logos/nmccoy-wordmark-ivory.svg"
     : "/logos/nmccoy-wordmark-brown.svg";
 
   return (
-    <Link href="/" className={`logo-link ${className}`} aria-label="NMCCOY home">
+    <Link
+      href="/"
+      scroll
+      className={`logo-link ${className}`}
+      aria-label="NMCCOY home"
+      onClick={onClick}
+    >
       <Image
         src={src}
         alt="NMCCOY"

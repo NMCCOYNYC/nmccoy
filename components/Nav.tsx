@@ -48,7 +48,15 @@ export function Nav() {
           </ul>
         </div>
         <div className="nav__logo">
-          <Logo />
+          <Logo
+            onClick={(e) => {
+              setMobileOpen(false);
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+          />
         </div>
         <div className="nav__side nav__side--right">
           <ul className="nav__links">

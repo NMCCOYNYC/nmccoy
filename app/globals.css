@@ -93,6 +93,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   justify-content: center;
   min-height: var(--nav-item-height);
+  position: relative;
+  z-index: 2;
+}
+.nav__logo .logo-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--nav-item-height);
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
 }
 .nav__logo img { height: 24px; width: auto; }
 .nav__cta {
@@ -151,8 +160,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn--underline-light:hover { color: var(--bone); border-color: var(--bone); }
 
 /* ── LOGO ────────────────────────────────────────────────── */
-.logo-link { display: inline-flex; align-items: center; line-height: 0; }
-.logo-image { width: auto; height: 20px; object-fit: contain; }
+.logo-link { display: inline-flex; align-items: center; line-height: 0; cursor: pointer; }
+.logo-image { width: auto; height: 20px; object-fit: contain; pointer-events: none; }
 .logo-image--monogram { height: 28px; width: auto; }
 .nav__logo .logo-image { height: 22px; }
 .footer__logo .logo-image--monogram { height: 26px; }
