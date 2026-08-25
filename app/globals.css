@@ -971,8 +971,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .product-wrap { padding-top: 70px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
 .product-gallery { position: sticky; top: 70px; display: flex; flex-direction: column; overflow: hidden; }
 .product-main { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; cursor: zoom-in; background: var(--bone); }
-.product-main-fill { position: absolute; inset: 0; transition: transform 0.5s; }
-.product-main:hover .product-main-fill { transform: scale(1.04); }
+.product-main.is-zoomed { cursor: zoom-out; }
+.product-main-fill { position: absolute; inset: 0; }
 .product-thumbs { display: flex; height: 80px; border-top: 1px solid rgba(56,39,30,0.08); background: var(--bone); }
 .product-thumb { flex: 1; cursor: pointer; border-right: 1px solid rgba(56,39,30,0.06); transition: opacity 0.2s; position: relative; overflow: hidden; }
 .product-thumb.active { outline: 2px solid var(--clay); outline-offset: -2px; }
