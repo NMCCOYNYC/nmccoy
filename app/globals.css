@@ -455,7 +455,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ══ PROCESS BAND (image + text, like screenshot 3) ══ */
 .process-band {
   display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 85vh;
+  min-height: max(100vh, 62.5vw);
 }
 .process-band__img {
   position: relative; overflow: hidden;
@@ -464,6 +464,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .process-band__img-fill {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center 70%;
   position: absolute; inset: 0;
 }
 .process-band__text {
@@ -994,7 +995,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   min-height: 60vmin;
 }
-.reveal-parallax.process-band__img { min-height: 50vh; }
+.reveal-parallax.process-band__img { min-height: 0; }
 .reveal-parallax.story-band__img .story-band__img-fill,
 .reveal-parallax.process-band__img .process-band__img-fill {
   position: absolute;
@@ -1353,8 +1354,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .coll-intro__right { max-width: none; margin-left: 0; padding-bottom: 0; }
   .hero__content--left { padding-left: clamp(1.5rem,4vw,4rem); padding-right: clamp(1.5rem,4vw,4rem); }
   .carousel-slide { min-width: calc(50% - 0.5px); }
-  .process-band { grid-template-columns: 1fr; }
-  .process-band__img { min-height: 50vw; }
+  .process-band { grid-template-columns: 1fr; min-height: 0; }
+  .process-band__img { min-height: 0; aspect-ratio: 4 / 5; }
   .story-band { grid-template-columns: 1fr; }
   .story-band--reverse { direction: ltr; }
   .story-band__img { min-height: 50vw; order: -1; }
