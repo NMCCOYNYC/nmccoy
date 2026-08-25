@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
@@ -21,7 +22,7 @@ const steps = [
       "Painted by hand on cold-press watercolor paper, no two marks are ever exactly alike. The resulting artworks are produced in small, numbered editions and will never be reproduced again in the same form.",
     ],
     visual: "Studio photography",
-    bg: "linear-gradient(160deg,#F5EFE6,#D4B896)",
+    image: "/process/step-01-studio.jpg",
   },
   {
     num: "02",
@@ -31,7 +32,7 @@ const steps = [
       "This archive becomes the foundation for translation to silk — faithful to the painting, not reinterpreted.",
     ],
     visual: "Archiving process",
-    bg: "linear-gradient(160deg,#E8E0D8,#C4B8A8)",
+    image: "/process/step-02-archiving.jpg",
   },
   {
     num: "03",
@@ -41,7 +42,7 @@ const steps = [
       "Edges are hand-rolled at the mill — a finishing detail that marks the difference between production and intention.",
     ],
     visual: "Italy",
-    bg: "linear-gradient(160deg,#D4C4B0,#A08060)",
+    image: "/process/step-03-italy.jpg",
   },
   {
     num: "04",
@@ -51,7 +52,7 @@ const steps = [
       "Every scarf ships in a single NMCCOY box with tissue — prepared with the same care given to the work itself.",
     ],
     visual: "Packaging",
-    bg: "linear-gradient(160deg,#EDEBE9,#D4C4B0)",
+    image: "/process/step-04-packaging.jpg",
   },
 ];
 
@@ -89,8 +90,15 @@ export default function ProcessPage() {
                 ))}
               </div>
             </div>
-            <div className="step__visual" style={{ background: step.bg }}>
-              {step.visual}
+            <div className="step__visual">
+              <Image
+                src={step.image}
+                alt={step.visual}
+                fill
+                className="step__visual-img"
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 960px) 100vw, 50vw"
+              />
             </div>
           </div>
         ))}
