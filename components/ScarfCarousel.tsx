@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Scarf } from "@/lib/products";
@@ -22,11 +22,17 @@ export function ScarfCarousel({
 }) {
   const [pos, setPos] = useState(0);
   const [spv, setSpv] = useState(3);
+  const [imgH, setImgH] = useState(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const update = () => {
-      setSpv(slidesPerView(window.innerWidth));
+      const view = slidesPerView(window.innerWidth);
+      setSpv(view);
       setPos(0);
+      const width = wrapRef.current?.clientWidth ?? 0;
+      // slides are square (1:1), so image height ≈ slide width
+      setImgH(width / view);
     };
     update();
     window.addEventListener("resize", update);
@@ -45,9 +51,13 @@ export function ScarfCarousel({
       ? "carousel-section carousel-section--home"
       : "carousel-section";
 
+  const arrowStyle = imgH
+    ? { top: `${imgH / 2}px` }
+    : undefined;
+
   return (
     <section className={sectionClass}>
-      <div className="carousel-wrap">
+      <div className="carousel-wrap" ref={wrapRef}>
         <div
           className="carousel-track"
           style={{ transform: `translateX(-${pos * slideW}%)` }}
@@ -55,42 +65,64 @@ export function ScarfCarousel({
           {scarves.map((scarf) => {
             const image = getPrimaryImage(scarf);
             return (
-            <Link
-              key={scarf.slug}
-              href={`/scarves/${scarf.slug}`}
-              className="carousel-slide"
-              style={{ minWidth: `calc(${slideW}% - 1px)` }}
-            >
-              <div className="carousel-slide__img">
-                {image ? (
-                  <Image
-                    src={image}
-                    alt={`${scarf.name} silk scarf`}
-                    fill
-                    className="carousel-slide__img-fill"
-                    style={{ objectFit: "cover" }}
-                    sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-                  />
-                ) : (
-                  <GradientFill
-                    gradient={scarf.gradient}
-                    className="carousel-slide__img-fill"
-                  />
-                )}
-              </div>
-              <div className="carousel-slide__body">
-                <p className="carousel-slide__no">No. {scarf.number}</p>
-                <h3 className="carousel-slide__name">{scarf.name}</h3>
-                <p className="carousel-slide__meta">
-                  Silk Twill · 90×90cm · Limited Edition
-                </p>
-                <span className="carousel-slide__cta">View Piece</span>
-              </div>
-            </Link>
+              <Link
+                key={scarf.slug}
+                href={`/scarves/${scarf.slug}`}
+                className="carousel-slide"
+                style={{ minWidth: `calc(${slideW}% - 1px)` }}
+              >
+                <div className="carousel-slide__img">
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={`${scarf.name} silk scarf`}
+                      fill
+                      className="carousel-slide__img-fill"
+                      style={{ objectFit: "cover" }}
+                      sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <GradientFill
+                      gradient={scarf.gradient}
+                      className="carousel-slide__img-fill"
+                    />
+                  )}
+                </div>
+                <div className="carousel-slide__body">
+                  <p className="carousel-slide__no">No. {scarf.number}</p>
+                  <h3 className="carousel-slide__name">{scarf.name}</h3>
+                  <p className="carousel-slide__meta">
+                    Silk Twill · 90×90cm · Limited Edition
+                  </p>
+                  <span className="carousel-slide__cta">View Piece</span>
+                </div>
+              </Link>
             );
           })}
         </div>
+
+        <button
+          type="button"
+          className="carousel-nav carousel-nav--prev"
+          style={arrowStyle}
+          disabled={pos === 0}
+          onClick={() => move(-1)}
+          aria-label="Previous scarves"
+        >
+          <span aria-hidden="true">←</span>
+        </button>
+        <button
+          type="button"
+          className="carousel-nav carousel-nav--next"
+          style={arrowStyle}
+          disabled={pos >= maxPos}
+          onClick={() => move(1)}
+          aria-label="Next scarves"
+        >
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
+
       <div className="carousel-controls">
         <div className="carousel-dots">
           {Array.from({ length: maxPos + 1 }, (_, i) => (
@@ -104,24 +136,6 @@ export function ScarfCarousel({
               aria-label={`Go to slide ${i + 1}`}
             />
           ))}
-        </div>
-        <div className="carousel-arrows">
-          <button
-            type="button"
-            className="carousel-arrow"
-            disabled={pos === 0}
-            onClick={() => move(-1)}
-          >
-            ← Prev
-          </button>
-          <button
-            type="button"
-            className="carousel-arrow"
-            disabled={pos >= maxPos}
-            onClick={() => move(1)}
-          >
-            Next →
-          </button>
         </div>
       </div>
     </section>

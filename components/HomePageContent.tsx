@@ -92,18 +92,18 @@ export function HomePageContent() {
                   silk. Produced in small, numbered editions and never
                   reproduced in the same form again.
                 </p>
+                <Link
+                  href="/collection"
+                  className="btn--underline coll-intro__cta"
+                >
+                  View the Collection
+                </Link>
               </div>
             </div>
           </div>
         </FadeIn>
 
         <ScarfCarousel scarves={scarves} variant="home" />
-
-        <FadeIn variant="fade" className="collection-home__cta">
-          <Link href="/collection" className="btn--underline">
-            View the Collection
-          </Link>
-        </FadeIn>
       </section>
 
       <section className="process-band">
