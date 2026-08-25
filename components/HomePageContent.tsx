@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { scarves } from "@/lib/products";
 import { siteSettings } from "@/lib/site-settings";
@@ -108,10 +109,13 @@ export function HomePageContent() {
 
       <section className="process-band">
         <RevealParallax className="process-band__img">
-          <GradientFill
-            gradient="linear-gradient(160deg,#8C603A 0%,#5C3A22 40%,#38271E 100%)"
+          <Image
+            src="/process/from-painting-to-silk.jpg"
+            alt="From painting to silk"
+            fill
             className="process-band__img-fill"
-            aria-hidden={true}
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 960px) 100vw, 50vw"
           />
         </RevealParallax>
         <FadeIn variant="reveal" className="process-band__text">
