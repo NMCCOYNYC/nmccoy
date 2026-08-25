@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FeatureVideoProps = {
   videoUrl?: string;
@@ -11,6 +11,23 @@ type FeatureVideoProps = {
   variant?: "light" | "dark";
 };
 
+type FullscreenVideo = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+};
+
+async function enterFullscreen(video: FullscreenVideo) {
+  try {
+    if (video.requestFullscreen) {
+      await video.requestFullscreen();
+      return;
+    }
+  } catch {
+    // Fall through to the iOS Safari path.
+  }
+
+  video.webkitEnterFullscreen?.();
+}
+
 export function FeatureVideo({
   videoUrl,
   posterUrl,
@@ -20,8 +37,17 @@ export function FeatureVideo({
   variant = "light",
 }: FeatureVideoProps) {
   const [playing, setPlaying] = useState(false);
+  const videoRef = useRef<FullscreenVideo | null>(null);
 
   const showPoster = Boolean(posterUrl) && !playing;
+
+  useEffect(() => {
+    if (!playing) return;
+    const video = videoRef.current;
+    if (!video) return;
+    void video.play();
+    void enterFullscreen(video);
+  }, [playing]);
 
   return (
     <section
@@ -41,6 +67,7 @@ export function FeatureVideo({
         >
           {videoUrl && playing ? (
             <video
+              ref={videoRef}
               className="feature-video__video"
               src={videoUrl}
               controls
@@ -53,7 +80,7 @@ export function FeatureVideo({
               type="button"
               className="feature-video__play-btn"
               onClick={() => setPlaying(true)}
-              aria-label={`Play ${title || "film"}`}
+              aria-label={`Play ${title || "film"} in fullscreen`}
             >
               <span className="feature-video__play" aria-hidden="true" />
             </button>
