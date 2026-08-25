@@ -55,11 +55,13 @@ export function FeatureVideo({
       aria-label={title || "Film"}
     >
       <div className="feature-video__inner">
-        {eyebrow ? (
-          <p className="eyebrow feature-video__eyebrow">{eyebrow}</p>
-        ) : null}
-        {title ? <h2 className="feature-video__title">{title}</h2> : null}
-        {body ? <p className="feature-video__body">{body}</p> : null}
+        <div className="feature-video__copy">
+          {eyebrow ? (
+            <p className="eyebrow feature-video__eyebrow">{eyebrow}</p>
+          ) : null}
+          {title ? <h2 className="feature-video__title">{title}</h2> : null}
+          {body ? <p className="feature-video__body">{body}</p> : null}
+        </div>
 
         <div
           className="feature-video__frame"
