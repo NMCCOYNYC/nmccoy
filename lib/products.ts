@@ -30,20 +30,20 @@ export const scarves: Scarf[] = [
     shopifyVariantId: "51256273141927",
   },
   {
-    slug: "carried-light",
-    name: "Carried Light",
+    slug: "hazy-mesa",
+    name: "Hazy Mesa",
     number: "02",
     numberLabel: "No. 02 of 06",
     gradient:
-      "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
+      "linear-gradient(160deg,#B5A090 0%,#796D61 40%,#38271E 100%)",
     desc1:
-      "Rooted in the landscapes of Arizona where the founder grew up, Carried Light was painted in admiration of the artistry, craftsmanship, and cultural traditions of Native American communities whose influence continues to shape this land. A warmth and presence carried forward through time. Offered with care, and with an ongoing commitment to the communities that inspired it.",
+      "A study in resilience and perspective. Inspired by the enduring presence of the agave, Hazy Mesa reflects the beauty that emerges through patience, adaptation, and time. Layered forms unfold gradually, revealing new details with every glance—much like the landscapes and experiences that shape us over a lifetime.",
     desc2:
-      "Original ink painting translated into 100% Italian silk twill. Limited edition.",
+      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
-      "Carried Light honors the artistry and cultural traditions of the Arizona landscapes that shaped the founder.",
-    images: ["/products/carried-light.jpg"],
-    shopifyVariantId: "51256253546663",
+      "Hazy Mesa reflects beauty that emerges through patience, adaptation, and time.",
+    images: ["/products/hazy-mesa.jpg"],
+    shopifyVariantId: "51256260624551",
   },
   {
     slug: "dusty-bloom",
@@ -62,20 +62,20 @@ export const scarves: Scarf[] = [
     shopifyVariantId: "51256261804199",
   },
   {
-    slug: "hazy-mesa",
-    name: "Hazy Mesa",
+    slug: "carried-light",
+    name: "Carried Light",
     number: "04",
     numberLabel: "No. 04 of 06",
     gradient:
-      "linear-gradient(160deg,#B5A090 0%,#796D61 40%,#38271E 100%)",
+      "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
     desc1:
-      "A study in resilience and perspective. Inspired by the enduring presence of the agave, Hazy Mesa reflects the beauty that emerges through patience, adaptation, and time. Layered forms unfold gradually, revealing new details with every glance—much like the landscapes and experiences that shape us over a lifetime.",
+      "Rooted in the landscapes of Arizona where the founder grew up, Carried Light was painted in admiration of the artistry, craftsmanship, and cultural traditions of Native American communities whose influence continues to shape this land. A warmth and presence carried forward through time. Offered with care, and with an ongoing commitment to the communities that inspired it.",
     desc2:
-      "Original ink painting translated to 100% Italian silk twill. Limited edition.",
+      "Original ink painting translated into 100% Italian silk twill. Limited edition.",
     painting:
-      "Hazy Mesa reflects beauty that emerges through patience, adaptation, and time.",
-    images: ["/products/hazy-mesa.jpg"],
-    shopifyVariantId: "51256260624551",
+      "Carried Light honors the artistry and cultural traditions of the Arizona landscapes that shaped the founder.",
+    images: ["/products/carried-light.jpg"],
+    shopifyVariantId: "51256253546663",
   },
   {
     slug: "sundance",
