@@ -67,8 +67,8 @@ export default function ProcessPage() {
 
       <FeatureVideo
         eyebrow="The Film"
-        title="Watch the Process"
-        body="See how each painting becomes silk — from the studio to the mill."
+        title="Where Desert Illusions Began"
+        body="Founder Nichole McCoy reflects on the Arizona landscape, memories of the American West, and the personal history that shaped the collection."
         videoUrl={siteSettings.featureVideoUrl}
         posterUrl={siteSettings.featureVideoPoster}
       />

@@ -65,7 +65,7 @@ export function HomePageContent() {
         <FeatureVideo
           eyebrow="The Film"
           title="Desert Illusions, in Motion"
-          body="A short film following the collection from first brushstroke to finished silk."
+          body="An intimate look at the memories, landscapes, and artistic roots behind the collection."
           videoUrl={siteSettings.featureVideoUrl}
           posterUrl={siteSettings.featureVideoPoster}
         />
