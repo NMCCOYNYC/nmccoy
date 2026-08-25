@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Scarf } from "@/lib/products";
+import { getPrimaryImage } from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
 
 function slidesPerView(width: number) {
@@ -50,7 +52,9 @@ export function ScarfCarousel({
           className="carousel-track"
           style={{ transform: `translateX(-${pos * slideW}%)` }}
         >
-          {scarves.map((scarf) => (
+          {scarves.map((scarf) => {
+            const image = getPrimaryImage(scarf);
+            return (
             <Link
               key={scarf.slug}
               href={`/scarves/${scarf.slug}`}
@@ -58,10 +62,21 @@ export function ScarfCarousel({
               style={{ minWidth: `calc(${slideW}% - 1px)` }}
             >
               <div className="carousel-slide__img">
-                <GradientFill
-                  gradient={scarf.gradient}
-                  className="carousel-slide__img-fill"
-                />
+                {image ? (
+                  <Image
+                    src={image}
+                    alt={`${scarf.name} silk scarf`}
+                    fill
+                    className="carousel-slide__img-fill"
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+                  />
+                ) : (
+                  <GradientFill
+                    gradient={scarf.gradient}
+                    className="carousel-slide__img-fill"
+                  />
+                )}
               </div>
               <div className="carousel-slide__body">
                 <p className="carousel-slide__no">No. {scarf.number}</p>
@@ -72,7 +87,8 @@ export function ScarfCarousel({
                 <span className="carousel-slide__cta">View Piece</span>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
       <div className="carousel-controls">

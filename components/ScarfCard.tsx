@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Scarf } from "@/lib/products";
+import { getPrimaryImage } from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
 import { FadeIn } from "@/components/FadeIn";
 
@@ -12,11 +14,27 @@ export function ScarfCard({
   scarf: Scarf;
   delay?: number;
 }) {
+  const image = getPrimaryImage(scarf);
+
   return (
     <FadeIn delay={delay}>
       <Link href={`/scarves/${scarf.slug}`} className="sc-card">
         <div className="sc-card__img">
-          <GradientFill gradient={scarf.gradient} className="sc-card__img-fill" />
+          {image ? (
+            <Image
+              src={image}
+              alt={`${scarf.name} silk scarf`}
+              fill
+              className="sc-card__img-fill"
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+            />
+          ) : (
+            <GradientFill
+              gradient={scarf.gradient}
+              className="sc-card__img-fill"
+            />
+          )}
         </div>
         <div className="sc-card__body">
           <p className="sc-card__no">No. {scarf.number}</p>

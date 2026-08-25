@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Scarf } from "@/lib/products";
+import { getScarfImages } from "@/lib/products";
 import { isCheckoutConfigured } from "@/lib/shopify/checkout";
 import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
@@ -17,7 +18,11 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
     <>
       <div className="product-wrap">
         <div className="product-gallery">
-          <ProductGallery gradient={scarf.gradient} scarfName={scarf.name} />
+          <ProductGallery
+            gradient={scarf.gradient}
+            scarfName={scarf.name}
+            images={getScarfImages(scarf)}
+          />
         </div>
         <FadeIn variant="reveal" className="product-info">
           <Link href="/collection" className="product-bc">

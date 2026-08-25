@@ -7,6 +7,7 @@ export type Scarf = {
   desc1: string;
   desc2: string;
   painting: string;
+  images?: string[];
   shopifyVariantId?: string;
   shopifyCheckoutUrl?: string;
 };
@@ -25,6 +26,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Wild Mirage explores memory, instinct, and the spaces between what was seen and what was felt.",
+    images: ["/products/wild-mirage.jpg"],
     shopifyVariantId: "51256273141927",
   },
   {
@@ -40,6 +42,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated into 100% Italian silk twill. Limited edition.",
     painting:
       "Carried Light honors the artistry and cultural traditions of the Arizona landscapes that shaped the founder.",
+    images: ["/products/carried-light.jpg"],
     shopifyVariantId: "51256253546663",
   },
   {
@@ -55,6 +58,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Dusty Bloom honors the strength required to flourish despite adversity.",
+    images: ["/products/dusty-bloom.jpg"],
     shopifyVariantId: "51256261804199",
   },
   {
@@ -70,6 +74,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Hazy Mesa reflects beauty that emerges through patience, adaptation, and time.",
+    images: ["/products/hazy-mesa.jpg"],
     shopifyVariantId: "51256260624551",
   },
   {
@@ -85,6 +90,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Sundance celebrates unity, hope, and the beauty found in moving forward together.",
+    images: ["/products/sundance.jpg"],
     shopifyVariantId: "51256277008551",
   },
   {
@@ -100,12 +106,21 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Indigo Dream explores harmony between the seen and unseen, where imagination feels as tangible as memory.",
+    images: ["/products/indigo-dream.jpg"],
     shopifyVariantId: "51256263508135",
   },
 ];
 
 export function getScarfBySlug(slug: string) {
   return scarves.find((s) => s.slug === slug);
+}
+
+export function getScarfImages(scarf: Scarf) {
+  return scarf.images?.filter(Boolean) ?? [];
+}
+
+export function getPrimaryImage(scarf: Scarf) {
+  return getScarfImages(scarf)[0];
 }
 
 export function getScarfThumbGradients(gradient: string) {
