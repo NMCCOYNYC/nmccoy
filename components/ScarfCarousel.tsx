@@ -23,7 +23,12 @@ export function ScarfCarousel({
   const [pos, setPos] = useState(0);
   const [spv, setSpv] = useState(3);
   const [imgH, setImgH] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const dragStart = useRef<{ x: number; y: number } | null>(null);
+  const horizontal = useRef(false);
+  const swiped = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -41,9 +46,48 @@ export function ScarfCarousel({
 
   const maxPos = Math.max(0, scarves.length - spv);
   const slideW = 100 / spv;
+  const slidePx = imgH;
 
   const move = (dir: number) => {
     setPos((p) => Math.max(0, Math.min(maxPos, p + dir)));
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    dragStart.current = { x: t.clientX, y: t.clientY };
+    horizontal.current = false;
+    swiped.current = false;
+    setDragging(true);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (!dragStart.current) return;
+    const t = e.touches[0];
+    const dx = t.clientX - dragStart.current.x;
+    const dy = t.clientY - dragStart.current.y;
+    if (!horizontal.current && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+      horizontal.current = true;
+    }
+    if (horizontal.current) {
+      // add resistance when dragging past the first/last slide
+      let d = dx;
+      if ((pos === 0 && d > 0) || (pos >= maxPos && d < 0)) {
+        d = d * 0.35;
+      }
+      setDragX(d);
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (!dragStart.current) return;
+    const threshold = Math.max(45, slidePx * 0.18);
+    if (horizontal.current && Math.abs(dragX) > threshold) {
+      move(dragX < 0 ? 1 : -1);
+      swiped.current = true;
+    }
+    dragStart.current = null;
+    setDragging(false);
+    setDragX(0);
   };
 
   const sectionClass =
@@ -57,10 +101,19 @@ export function ScarfCarousel({
 
   return (
     <section className={sectionClass}>
-      <div className="carousel-wrap" ref={wrapRef}>
+      <div
+        className="carousel-wrap"
+        ref={wrapRef}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div
           className="carousel-track"
-          style={{ transform: `translateX(-${pos * slideW}%)` }}
+          style={{
+            transform: `translateX(calc(-${pos * slideW}% + ${dragX}px))`,
+            transition: dragging ? "none" : undefined,
+          }}
         >
           {scarves.map((scarf) => {
             const image = getPrimaryImage(scarf);
@@ -70,6 +123,13 @@ export function ScarfCarousel({
                 href={`/scarves/${scarf.slug}`}
                 className="carousel-slide"
                 style={{ minWidth: `calc(${slideW}% - 1px)` }}
+                draggable={false}
+                onClick={(e) => {
+                  if (swiped.current) {
+                    e.preventDefault();
+                    swiped.current = false;
+                  }
+                }}
               >
                 <div className="carousel-slide__img">
                   {image ? (
