@@ -21,10 +21,22 @@ export function HomePageContent() {
     <>
       <section className="hero hero--editorial">
         <Image
-          src="/home/desert-illusions-hero.jpg"
+          src="/home/desert-illusions-hero-desktop.jpg"
           alt="Desert Illusions silk scarf"
           fill
-          className="hero__media"
+          className="hero__media hero__media--desktop"
+          style={{
+            objectFit: "cover",
+            objectPosition: "var(--hero-object-pos)",
+          }}
+          sizes="100vw"
+          priority
+        />
+        <Image
+          src="/home/desert-illusions-hero-mobile.jpg"
+          alt=""
+          fill
+          className="hero__media hero__media--mobile"
           style={{
             objectFit: "cover",
             objectPosition: "var(--hero-object-pos)",

@@ -188,7 +188,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   margin-top: var(--nav-height);
   min-height: 0;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 16 / 9;
   display: flex;
   flex-direction: column;
   align-items: var(--hero-content-justify);
@@ -205,6 +205,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   object-position: var(--hero-object-pos);
   z-index: 0;
 }
+.hero__media--mobile { display: none; }
 /* Gradient overlay — always sits above media */
 .hero__overlay {
   position: absolute; inset: 0; z-index: 1;
@@ -1529,6 +1530,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     min-height: calc(100svh - var(--nav-height));
     --hero-object-pos: center top;
   }
+  .hero__media--desktop { display: none; }
+  .hero__media--mobile { display: block; }
   .page-hero-dark--image {
     min-height: min(72vh, 720px);
     --page-hero-object-pos: 20% 50%;
