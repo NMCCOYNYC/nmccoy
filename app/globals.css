@@ -1068,7 +1068,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   overflow: hidden;
   min-height: 100svh;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  padding: 8rem clamp(1.5rem,4vw,4rem);
   --page-hero-object-pos: center right;
 }
 .page-hero-dark__media {
@@ -1085,7 +1086,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     rgba(30, 18, 12, 0.18) 100%
   );
 }
-.page-hero-dark__content { position: relative; z-index: 1; }
+.page-hero-dark__content {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
 .page-hero-dark .eyebrow { color: rgba(237,235,233,0.35); margin-bottom: 1.2rem; }
 .page-hero-dark h1 { font-family: var(--font-display); font-size: clamp(3rem,6vw,6.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.025em; text-transform: uppercase; margin-bottom: 1.25rem; }
 .page-hero-dark__subhead {
@@ -1515,6 +1520,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .hero__title { font-size: clamp(2.5rem,8vw,5rem); }
   .page-hero-dark--image {
     min-height: min(72vh, 720px);
+    align-items: flex-end;
+    padding: 9rem clamp(1.5rem,4vw,4rem) 5rem;
     --page-hero-object-pos: 20% 50%;
   }
   .process-band__img { --process-band-object-pos: 0% 50%; }
