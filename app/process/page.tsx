@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
 import { FeatureVideo } from "@/components/FeatureVideo";
+import { ProcessChapters, type ProcessStep } from "@/components/ProcessChapters";
 import { siteSettings } from "@/lib/site-settings";
 import { pageMetadata } from "@/lib/seo";
 
@@ -13,10 +13,11 @@ export const metadata = pageMetadata({
   path: "/process",
 });
 
-const steps = [
+const steps: ProcessStep[] = [
   {
     num: "01",
     title: "Original ink painting",
+    bleed: ["Original", "ink painting"],
     body: [
       "Every NMCCOY collection begins with an original ink painting. Each work is first realized as a complete artwork before being translated into silk.",
       "Painted by hand on cold-press watercolor paper, no two marks are ever exactly alike. The resulting artworks are produced in small, numbered editions and will never be reproduced again in the same form.",
@@ -27,6 +28,7 @@ const steps = [
   {
     num: "02",
     title: "High-resolution archiving",
+    bleed: ["High-resolution", "archiving"],
     body: [
       "Each painting is digitized at high resolution, capturing paper texture, ink weight, and the surface details of the original work.",
       "This archive becomes the foundation for translation to silk — faithful to the painting, not reinterpreted.",
@@ -37,6 +39,7 @@ const steps = [
   {
     num: "03",
     title: "Italian silk printing",
+    bleed: ["Italian silk", "printing"],
     body: [
       "Printed on 100% silk twill in Italy, in small batches. Reactive dyes bond to the fibers while preserving depth and detail from the source artwork.",
       "Edges are hand-rolled at the mill — a finishing detail that marks the difference between production and intention.",
@@ -47,6 +50,7 @@ const steps = [
   {
     num: "04",
     title: "Numbering & packaging",
+    bleed: ["Numbering &", "packaging"],
     body: [
       "Each piece is numbered by hand and accompanied by a certificate of authenticity.",
       "Every scarf ships in a single NMCCOY box with tissue — prepared with the same care given to the work itself.",
@@ -76,33 +80,7 @@ export default function ProcessPage() {
         posterUrl={siteSettings.featureVideoPoster}
       />
 
-      <div className="steps-wrap">
-        {steps.map((step) => (
-          <div className="step" key={step.num}>
-            <div className="step__num-col">
-              <span className="step__num">{step.num}</span>
-            </div>
-            <div className="step__text">
-              <h2 className="step__title">{step.title}</h2>
-              <div className="step__body">
-                {step.body.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-              </div>
-            </div>
-            <div className="step__visual">
-              <Image
-                src={step.image}
-                alt={step.visual}
-                fill
-                className="step__visual-img"
-                style={{ objectFit: "cover" }}
-                sizes="(max-width: 960px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+      <ProcessChapters steps={steps} />
 
       <div style={{ background: "var(--white)" }}>
         <CtaSection eyebrow="The Collection" />
