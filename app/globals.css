@@ -1517,11 +1517,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     min-height: min(72vh, 720px);
     --page-hero-object-pos: 20% 50%;
   }
-  .process-band__img { --process-band-object-pos: 0% 50%; }
-  .process-band__img-fill {
-    transform: scale(2.15);
-    transform-origin: left 52%;
-  }
   .collection-home__intro {
     padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 4rem)
       clamp(2rem, 5vw, 3rem);
