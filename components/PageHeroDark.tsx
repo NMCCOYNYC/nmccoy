@@ -29,7 +29,10 @@ export function PageHeroDark({
             alt={imageAlt || ""}
             fill
             className="page-hero-dark__media"
-            style={{ objectFit: "cover", objectPosition: "center right" }}
+            style={{
+              objectFit: "cover",
+              objectPosition: "var(--page-hero-object-pos)",
+            }}
             sizes="100vw"
             priority
           />

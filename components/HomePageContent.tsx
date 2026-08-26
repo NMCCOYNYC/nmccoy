@@ -114,7 +114,10 @@ export function HomePageContent() {
             alt="From painting to silk"
             fill
             className="process-band__img-fill"
-            style={{ objectFit: "cover", objectPosition: "center 70%" }}
+            style={{
+              objectFit: "cover",
+              objectPosition: "var(--process-band-object-pos)",
+            }}
             sizes="(max-width: 960px) 100vw, 50vw"
           />
         </RevealParallax>
