@@ -32,9 +32,9 @@ export function WorldSection() {
 
   return (
     <section className="world-section" aria-labelledby="world-title">
-      <p id="world-title" className="eyebrow world-section__eyebrow">
+      <h2 id="world-title" className="world-section__title">
         The World
-      </p>
+      </h2>
 
       <div className="world-section__split">
         <figure className="world-frame">

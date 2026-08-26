@@ -310,7 +310,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--bone);
 }
 .collection-home__intro {
-  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.5rem, 4vw, 4rem)
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 4rem)
     clamp(3rem, 6vw, 4.5rem);
 }
 .collection-home .coll-intro {
@@ -1540,7 +1540,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     --page-hero-object-pos: 20% 50%;
   }
   .collection-home__intro {
-    padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 4vw, 4rem)
+    padding: clamp(1.75rem, 5vw, 2.75rem) clamp(1.5rem, 4vw, 4rem)
       clamp(2rem, 5vw, 3rem);
   }
   .collection-home .coll-intro {
@@ -1745,14 +1745,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 /* ══ THE WORLD (homepage campaign split) ══ */
 .world-section {
   background: var(--bone);
-  padding: clamp(3.25rem, 6.5vw, 6rem) clamp(1.75rem, 10vw, 8rem)
-    clamp(4.5rem, 9vw, 8rem);
+  padding: clamp(2.75rem, 5.5vw, 5rem) clamp(1.75rem, 10vw, 8rem)
+    clamp(1.15rem, 2.4vw, 2rem);
 }
-.world-section__eyebrow {
-  display: block;
+.world-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   text-align: center;
-  margin: 0 0 clamp(1.6rem, 3.2vw, 2.6rem);
-  color: var(--taupe);
+  color: var(--cacao);
+  margin: 0 0 clamp(1.75rem, 3.5vw, 2.75rem);
 }
 .world-section__split {
   display: grid;
@@ -1817,8 +1821,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 @media (max-width: 960px) {
   .world-section {
-    padding: clamp(2.75rem, 8vw, 4.5rem) clamp(1.35rem, 5vw, 2rem)
-      clamp(3.5rem, 8vw, 5.5rem);
+    padding: clamp(2.25rem, 7vw, 3.5rem) clamp(1.35rem, 5vw, 2rem)
+      clamp(1rem, 3vw, 1.75rem);
   }
   .world-section__split {
     grid-template-columns: 1fr;
