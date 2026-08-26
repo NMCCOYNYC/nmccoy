@@ -1209,12 +1209,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.78fr) minmax(22rem, 1.35fr);
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 7.5rem 1.5rem 3rem;
+  gap: clamp(2rem, 5vw, 5.5rem);
+  width: 100%;
+  padding: 7.25rem clamp(2rem, 6vw, 6rem) 3rem;
+  text-align: left;
   opacity: var(--detail);
   transform: translateY(calc((1 - var(--detail)) * 28px));
   pointer-events: none;
@@ -1222,20 +1223,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .process-chapter[data-state="detail"] .process-chapter__detail {
   pointer-events: auto;
 }
+.process-chapter__copy {
+  max-width: 28rem;
+  justify-self: end;
+}
 .process-chapter__kicker {
   margin-bottom: 0.85rem;
   color: var(--clay);
 }
 .process-chapter__title {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  line-height: 1.1;
+  margin-bottom: 1.35rem;
 }
 .process-chapter__body {
-  max-width: 34rem;
+  max-width: none;
   color: var(--taupe);
   font-size: 14px;
   line-height: 1.85;
@@ -1243,11 +1249,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .process-chapter__body p + p { margin-top: 0.9rem; }
 .process-chapter__photo {
   position: relative;
-  width: min(22rem, 72vw, 48vh);
-  aspect-ratio: 3 / 2;
-  margin-top: 2rem;
+  width: 100%;
+  height: min(72vh, 42rem);
+  margin-top: 0;
   overflow: hidden;
   background: var(--bone);
+  justify-self: stretch;
 }
 .process-chapter__photo-img {
   object-fit: cover;
@@ -1571,8 +1578,23 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .email-capture--footer .email-form button { width: 100%; }
   .process-chapter { height: 200vh; }
   .process-chapter__index { top: 5.1rem; }
-  .process-chapter__detail { padding: 6.75rem 1.25rem 2.25rem; }
-  .process-chapter__photo { width: min(20rem, 78vw); }
+  .process-chapter__detail {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 1.75rem;
+    padding: 6.5rem 1.25rem 2.25rem;
+  }
+  .process-chapter__copy {
+    max-width: 34rem;
+    justify-self: center;
+  }
+  .process-chapter__photo {
+    width: min(40rem, 92vw);
+    height: auto;
+    aspect-ratio: 3 / 2;
+    justify-self: center;
+  }
 }
 @media (max-width: 600px) {
   .email-form { flex-direction: column; align-items: stretch; max-width: 100%; }

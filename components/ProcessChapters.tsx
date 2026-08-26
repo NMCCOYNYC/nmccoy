@@ -130,14 +130,16 @@ export function ProcessChapters({ steps }: { steps: ProcessStep[] }) {
             </p>
 
             <div className="process-chapter__detail">
-              <p className="eyebrow process-chapter__kicker">{step.num}</p>
-              <h2 id={`process-step-${step.num}`} className="process-chapter__title">
-                {step.title}
-              </h2>
-              <div className="process-chapter__body">
-                {step.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+              <div className="process-chapter__copy">
+                <p className="eyebrow process-chapter__kicker">{step.num}</p>
+                <h2 id={`process-step-${step.num}`} className="process-chapter__title">
+                  {step.title}
+                </h2>
+                <div className="process-chapter__body">
+                  {step.body.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
               <div className="process-chapter__photo">
                 <Image
@@ -145,7 +147,7 @@ export function ProcessChapters({ steps }: { steps: ProcessStep[] }) {
                   alt={step.visual}
                   fill
                   className="process-chapter__photo-img"
-                  sizes="(max-width: 700px) 78vw, 420px"
+                  sizes="(max-width: 960px) 92vw, 58vw"
                 />
               </div>
             </div>
