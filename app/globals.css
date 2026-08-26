@@ -1066,7 +1066,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .page-hero-dark--image {
   position: relative;
   overflow: hidden;
-  min-height: min(72vh, 720px);
+  min-height: 100svh;
   display: flex;
   align-items: flex-end;
   --page-hero-object-pos: center right;
@@ -1369,7 +1369,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .nav__hamburger { display: flex; }
   .nav__logo { justify-content: center; }
   .hero__title { font-size: clamp(2.5rem,8vw,5rem); }
-  .page-hero-dark--image { --page-hero-object-pos: 20% 50%; }
+  .page-hero-dark--image {
+    min-height: min(72vh, 720px);
+    --page-hero-object-pos: 20% 50%;
+  }
   .process-band__img { --process-band-object-pos: 0% 50%; }
   .process-band__img-fill {
     transform: scale(2.15);
