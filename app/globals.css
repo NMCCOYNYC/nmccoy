@@ -1369,7 +1369,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .nav__hamburger { display: flex; }
   .nav__logo { justify-content: center; }
   .hero__title { font-size: clamp(2.5rem,8vw,5rem); }
-  .page-hero-dark--image { --page-hero-object-pos: 0% 50%; }
+  .page-hero-dark--image { --page-hero-object-pos: 20% 50%; }
   .process-band__img { --process-band-object-pos: 0% 50%; }
   .process-band__img-fill {
     transform: scale(2.15);
