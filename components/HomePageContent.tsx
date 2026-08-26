@@ -16,16 +16,18 @@ import { RevealParallax } from "@/components/RevealParallax";
 
 import { ScarfCarousel } from "@/components/ScarfCarousel";
 
-import { GradientFill } from "@/components/GradientFill";
-
 export function HomePageContent() {
   return (
     <>
       <section className="hero hero--editorial">
-        <GradientFill
-          gradient="linear-gradient(160deg,#3D2B1F 0%,#6B4C34 30%,#8C603A 55%,#5C4A38 75%,#2A1A10 100%)"
+        <Image
+          src="/home/desert-illusions-hero.jpg"
+          alt="Desert Illusions silk scarf"
+          fill
           className="hero__media"
-          aria-hidden={true}
+          style={{ objectFit: "cover", objectPosition: "center" }}
+          sizes="100vw"
+          priority
         />
         <div className="hero__overlay" />
         <div className="hero__content hero__content--left">
