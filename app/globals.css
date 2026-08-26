@@ -1768,9 +1768,17 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .feature-video--collection .feature-video__frame {
   width: 100%;
   margin: 0;
+  cursor: default;
 }
 .feature-video--collection .feature-video__video {
   object-fit: cover;
+}
+.feature-video--collection .feature-video__placeholder {
+  background: transparent;
+}
+.feature-video--collection .feature-video__play,
+.feature-video--collection .feature-video__soon {
+  display: none;
 }
 
 /* ══ THE WORLD (homepage campaign split) ══ */

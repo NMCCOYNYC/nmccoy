@@ -26,8 +26,6 @@ export default function CollectionPage() {
       <FeatureVideo
         className="feature-video--collection"
         label="Desert Illusions"
-        videoUrl={siteSettings.featureVideoUrl}
-        posterUrl={siteSettings.featureVideoPoster}
       />
 
       <FadeIn variant="reveal" className="coll-hero">
