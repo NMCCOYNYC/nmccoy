@@ -25,6 +25,10 @@ export function HomePageContent() {
           alt="Desert Illusions silk scarf"
           fill
           className="hero__media"
+          style={{
+            objectFit: "cover",
+            objectPosition: "var(--hero-object-pos)",
+          }}
           sizes="100vw"
           priority
         />
