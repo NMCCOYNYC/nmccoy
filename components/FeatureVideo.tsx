@@ -10,6 +10,7 @@ type FeatureVideoProps = {
   body?: string;
   variant?: "light" | "dark";
   className?: string;
+  label?: string;
 };
 
 export function FeatureVideo({
@@ -20,6 +21,7 @@ export function FeatureVideo({
   body,
   variant = "light",
   className = "",
+  label,
 }: FeatureVideoProps) {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -32,19 +34,23 @@ export function FeatureVideo({
     void video.play();
   }, [playing]);
 
+  const showCopy = Boolean(eyebrow || title || body);
+
   return (
     <section
       className={`feature-video feature-video--${variant}${className ? ` ${className}` : ""}`}
-      aria-label={title || "Film"}
+      aria-label={title || label || "Film"}
     >
       <div className="feature-video__inner">
-        <div className="feature-video__copy">
-          {eyebrow ? (
-            <p className="eyebrow feature-video__eyebrow">{eyebrow}</p>
-          ) : null}
-          {title ? <h2 className="feature-video__title">{title}</h2> : null}
-          {body ? <p className="feature-video__body">{body}</p> : null}
-        </div>
+        {showCopy ? (
+          <div className="feature-video__copy">
+            {eyebrow ? (
+              <p className="eyebrow feature-video__eyebrow">{eyebrow}</p>
+            ) : null}
+            {title ? <h2 className="feature-video__title">{title}</h2> : null}
+            {body ? <p className="feature-video__body">{body}</p> : null}
+          </div>
+        ) : null}
 
         <div className="feature-video__frame">
           {videoUrl ? (
@@ -64,7 +70,7 @@ export function FeatureVideo({
                   type="button"
                   className="feature-video__play-btn"
                   onClick={() => setPlaying(true)}
-                  aria-label={`Play ${title || "film"}`}
+                  aria-label={`Play ${title || label || "film"}`}
                 >
                   <span className="feature-video__play" aria-hidden="true" />
                 </button>

@@ -984,10 +984,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .footer__bottom { max-width: var(--max); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(237,235,233,0.08); display: flex; justify-content: space-between; font-family: var(--font-util); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: rgba(237,235,233,0.25); }
 
 /* ══ COLLECTION PAGE ══ */
-.coll-hero { padding: 9rem clamp(1.5rem,4vw,4rem) 4rem; max-width: var(--max); margin: 0 auto; border-bottom: 1px solid rgba(56,39,30,0.1); }
-.coll-hero .eyebrow { margin-bottom: 1rem; }
-.coll-hero h1 { font-family: var(--font-display); font-size: clamp(3rem,6vw,6.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.03em; text-transform: uppercase; margin-bottom: 1.5rem; }
-.coll-hero p { color: var(--taupe); font-size: 14px; line-height: 1.85; max-width: 480px; }
+.coll-hero {
+  padding: clamp(3rem, 6.5vw, 5.25rem) clamp(1.5rem, 4vw, 4rem)
+    clamp(3.25rem, 6.5vw, 5.5rem);
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.coll-hero .eyebrow { margin-bottom: 1.1rem; }
+.coll-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.coll-hero p {
+  color: var(--taupe);
+  font-size: 14px;
+  line-height: 1.85;
+  max-width: 34rem;
+  margin: 0 auto;
+}
 .coll-meta { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(56,39,30,0.08); }
 .meta-label { font-family: var(--font-util); font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); margin-bottom: 0.3rem; }
 .meta-val { font-family: var(--font-display); font-size: 1.05rem; }
@@ -1740,6 +1760,17 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .feature-video--home .feature-video__frame {
     width: calc(100% - clamp(7rem, 22vw, 18rem));
   }
+}
+.feature-video--collection {
+  padding: 0;
+  margin-top: var(--nav-height);
+}
+.feature-video--collection .feature-video__frame {
+  width: 100%;
+  margin: 0;
+}
+.feature-video--collection .feature-video__video {
+  object-fit: cover;
 }
 
 /* ══ THE WORLD (homepage campaign split) ══ */
