@@ -11,23 +11,6 @@ type FeatureVideoProps = {
   variant?: "light" | "dark";
 };
 
-type FullscreenVideo = HTMLVideoElement & {
-  webkitEnterFullscreen?: () => void;
-};
-
-async function enterFullscreen(video: FullscreenVideo) {
-  try {
-    if (video.requestFullscreen) {
-      await video.requestFullscreen();
-      return;
-    }
-  } catch {
-    // Fall through to the iOS Safari path.
-  }
-
-  video.webkitEnterFullscreen?.();
-}
-
 export function FeatureVideo({
   videoUrl,
   posterUrl,
@@ -37,16 +20,14 @@ export function FeatureVideo({
   variant = "light",
 }: FeatureVideoProps) {
   const [playing, setPlaying] = useState(false);
-  const videoRef = useRef<FullscreenVideo | null>(null);
-
-  const showPoster = Boolean(posterUrl) && !playing;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     if (!playing) return;
     const video = videoRef.current;
     if (!video) return;
+    video.muted = false;
     void video.play();
-    void enterFullscreen(video);
   }, [playing]);
 
   return (
@@ -63,29 +44,30 @@ export function FeatureVideo({
           {body ? <p className="feature-video__body">{body}</p> : null}
         </div>
 
-        <div
-          className="feature-video__frame"
-          style={showPoster ? { backgroundImage: `url(${posterUrl})` } : undefined}
-        >
-          {videoUrl && playing ? (
-            <video
-              ref={videoRef}
-              className="feature-video__video"
-              src={videoUrl}
-              controls
-              autoPlay
-              playsInline
-              poster={posterUrl}
-            />
-          ) : videoUrl ? (
-            <button
-              type="button"
-              className="feature-video__play-btn"
-              onClick={() => setPlaying(true)}
-              aria-label={`Play ${title || "film"} in fullscreen`}
-            >
-              <span className="feature-video__play" aria-hidden="true" />
-            </button>
+        <div className="feature-video__frame">
+          {videoUrl ? (
+            <>
+              <video
+                ref={videoRef}
+                className="feature-video__video"
+                src={videoUrl}
+                controls={playing}
+                playsInline
+                preload="metadata"
+                poster={posterUrl}
+                onEnded={() => setPlaying(false)}
+              />
+              {playing ? null : (
+                <button
+                  type="button"
+                  className="feature-video__play-btn"
+                  onClick={() => setPlaying(true)}
+                  aria-label={`Play ${title || "film"}`}
+                >
+                  <span className="feature-video__play" aria-hidden="true" />
+                </button>
+              )}
+            </>
           ) : (
             <div className="feature-video__placeholder" aria-hidden="true">
               <span className="feature-video__play feature-video__play--muted" />

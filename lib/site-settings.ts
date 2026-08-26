@@ -12,9 +12,12 @@ export const siteSettings = {
     "https://open.spotify.com/playlist/6h3xl0mu4FGbvMzioRz6A0",
   soundVideoUrl:
     process.env.NEXT_PUBLIC_SOUND_VIDEO_URL?.trim() || "/video/ink-bloom.mp4",
-  featureVideoUrl: process.env.NEXT_PUBLIC_FEATURE_VIDEO_URL?.trim() || "",
+  featureVideoUrl:
+    process.env.NEXT_PUBLIC_FEATURE_VIDEO_URL?.trim() ||
+    "/video/desert-illusions-film.mp4",
   featureVideoPoster:
-    process.env.NEXT_PUBLIC_FEATURE_VIDEO_POSTER?.trim() || "",
+    process.env.NEXT_PUBLIC_FEATURE_VIDEO_POSTER?.trim() ||
+    "/video/desert-illusions-film-poster.jpg",
 };
 
 
