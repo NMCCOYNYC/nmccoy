@@ -9,6 +9,7 @@ type FeatureVideoProps = {
   title?: string;
   body?: string;
   variant?: "light" | "dark";
+  className?: string;
 };
 
 export function FeatureVideo({
@@ -18,6 +19,7 @@ export function FeatureVideo({
   title,
   body,
   variant = "light",
+  className = "",
 }: FeatureVideoProps) {
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -32,7 +34,7 @@ export function FeatureVideo({
 
   return (
     <section
-      className={`feature-video feature-video--${variant}`}
+      className={`feature-video feature-video--${variant}${className ? ` ${className}` : ""}`}
       aria-label={title || "Film"}
     >
       <div className="feature-video__inner">

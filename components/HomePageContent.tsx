@@ -14,6 +14,8 @@ import { FadeIn } from "@/components/FadeIn";
 
 import { RevealParallax } from "@/components/RevealParallax";
 
+import { WorldSection } from "@/components/WorldSection";
+
 import { ScarfCarousel } from "@/components/ScarfCarousel";
 
 export function HomePageContent() {
@@ -80,12 +82,17 @@ export function HomePageContent() {
 
       <FadeIn variant="fade">
         <FeatureVideo
+          className="feature-video--home"
           eyebrow="The Film"
           title="Desert Illusions, in Motion"
           body="An intimate look at the memories, landscapes, and artistic roots behind the collection."
           videoUrl={siteSettings.featureVideoUrl}
           posterUrl={siteSettings.featureVideoPoster}
         />
+      </FadeIn>
+
+      <FadeIn variant="reveal">
+        <WorldSection />
       </FadeIn>
 
       <section className="collection-home" aria-labelledby="coll-intro-title">
