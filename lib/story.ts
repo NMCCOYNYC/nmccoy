@@ -16,6 +16,14 @@ export function getFoundationImages(): StoryImage[] {
   });
 }
 
+export function getFoundationHero(): StoryImage | undefined {
+  return getFoundationImages()[0];
+}
+
+export function getFoundationCarousel(): StoryImage[] {
+  return getFoundationImages().slice(1);
+}
+
 export const founderImage: StoryImage = {
   src: "/about/founder.jpg",
   alt: "Nichole McCoy, founder of NMCCOY",

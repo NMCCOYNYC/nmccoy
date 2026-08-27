@@ -3,9 +3,12 @@ import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
 import { FadeCarousel } from "@/components/FadeCarousel";
-import { RevealParallax } from "@/components/RevealParallax";
 import { CtaSection } from "@/components/StatsBand";
-import { getFoundationImages, founderImage } from "@/lib/story";
+import {
+  getFoundationCarousel,
+  getFoundationHero,
+  founderImage,
+} from "@/lib/story";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -16,7 +19,8 @@ export const metadata = pageMetadata({
 });
 
 export default function AboutPage() {
-  const foundationImages = getFoundationImages();
+  const foundationHero = getFoundationHero();
+  const foundationCarousel = getFoundationCarousel();
 
   return (
     <>
@@ -31,7 +35,7 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      <section className="story-band">
+      <section className="story-band story-band--bleed">
         <FadeIn variant="reveal" className="story-band__text">
           <p className="eyebrow">The Foundation</p>
           <h2 className="story-band__title">
@@ -51,41 +55,50 @@ export default function AboutPage() {
             distinctly human. That belief became the foundation for NMCCOY.
           </p>
         </FadeIn>
-        <RevealParallax className="story-band__img">
+        <div className="story-band__img">
+          {foundationHero ? (
+            <Image
+              src={foundationHero.src}
+              alt={foundationHero.alt}
+              fill
+              className="story-band__img-fill"
+              style={{ objectFit: "cover", objectPosition: "center center" }}
+              sizes="(max-width: 960px) 100vw, 50vw"
+              priority
+            />
+          ) : null}
+        </div>
+      </section>
+
+      <section className="story-band story-band--bleed story-band--reverse">
+        <FadeIn variant="reveal" className="story-band__text">
+          <p className="eyebrow">From Ink to Silk</p>
+          <h2 className="story-band__title">Where It Begins</h2>
+          <p className="story-band__body">
+            Each NMCCOY collection begins in ink. Through a process of painting,
+            layering, and exploration, original artworks emerge before being
+            translated into silk in Italy. Inspired by landscapes, memory, and a
+            sense of place, each piece carries the story of its origin from
+            artwork to collectible object.
+          </p>
+          <p className="story-band__body">
+            The inaugural collection, Desert Illusions, draws inspiration from the
+            American Southwest—the shifting light, distant horizons, and mirages
+            that blur the boundary between memory and reality. Rather than
+            documenting a place exactly as it appears, the collection explores
+            how a place is remembered.
+          </p>
+        </FadeIn>
+        <div className="story-band__img">
           <FadeCarousel
-            images={foundationImages}
+            images={foundationCarousel}
             sizes="(max-width: 960px) 100vw, 50vw"
             ariaLabel="Foundation images"
           />
-        </RevealParallax>
+        </div>
       </section>
 
-      <FadeIn variant="reveal">
-        <section className="editorial-block editorial-block--compact">
-          <div className="editorial-block__inner">
-            <p className="eyebrow">From Ink to Silk</p>
-            <h2 className="editorial-block__title">Where It Begins</h2>
-            <div className="editorial-block__grid">
-              <p>
-                Each NMCCOY collection begins in ink. Through a process of painting,
-                layering, and exploration, original artworks emerge before being
-                translated into silk in Italy. Inspired by landscapes, memory, and a
-                sense of place, each piece carries the story of its origin from
-                artwork to collectible object.
-              </p>
-              <p>
-                The inaugural collection, Desert Illusions, draws inspiration from the
-                American Southwest—the shifting light, distant horizons, and mirages
-                that blur the boundary between memory and reality. Rather than
-                documenting a place exactly as it appears, the collection explores
-                how a place is remembered.
-              </p>
-            </div>
-          </div>
-        </section>
-      </FadeIn>
-
-      <section className="story-band story-band--reverse story-band--founder">
+      <section className="story-band story-band--bleed">
         <FadeIn variant="reveal" className="story-band__text">
           <p className="eyebrow">The Founder</p>
           <h2 className="story-band__title">
@@ -93,7 +106,7 @@ export default function AboutPage() {
             <br />
             Memory &amp; Craft
           </h2>
-          <p className="story-band__body story-band__body--lead">
+          <p className="story-band__body">
             Raised in the Arizona desert and shaped by more than a decade in New
             York, founder Nichole McCoy draws inspiration from the intersection of
             landscape, memory, and craft.
@@ -106,7 +119,7 @@ export default function AboutPage() {
             pieces where art, fashion, and storytelling meet.
           </p>
         </FadeIn>
-        <RevealParallax className="story-band__img" strength={16}>
+        <div className="story-band__img">
           <Image
             src={founderImage.src}
             alt={founderImage.alt}
@@ -115,7 +128,7 @@ export default function AboutPage() {
             style={{ objectFit: "cover", objectPosition: "center top" }}
             sizes="(max-width: 960px) 100vw, 50vw"
           />
-        </RevealParallax>
+        </div>
       </section>
 
       <FadeIn variant="reveal">
