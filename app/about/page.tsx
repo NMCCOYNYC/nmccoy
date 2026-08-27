@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import { GradientFill } from "@/components/GradientFill";
+import { FadeCarousel } from "@/components/FadeCarousel";
 import { RevealParallax } from "@/components/RevealParallax";
 import { CtaSection } from "@/components/StatsBand";
+import { getFoundationImages, founderImage } from "@/lib/story";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -14,6 +16,8 @@ export const metadata = pageMetadata({
 });
 
 export default function AboutPage() {
+  const foundationImages = getFoundationImages();
+
   return (
     <>
       <FadeIn variant="fade">
@@ -48,10 +52,10 @@ export default function AboutPage() {
           </p>
         </FadeIn>
         <RevealParallax className="story-band__img">
-          <GradientFill
-            gradient="linear-gradient(160deg,#D4B896 0%,#8C603A 45%,#38271E 100%)"
-            className="story-band__img-fill"
-            aria-hidden={true}
+          <FadeCarousel
+            images={foundationImages}
+            sizes="(max-width: 960px) 100vw, 50vw"
+            ariaLabel="Foundation images"
           />
         </RevealParallax>
       </section>
@@ -103,10 +107,13 @@ export default function AboutPage() {
           </p>
         </FadeIn>
         <RevealParallax className="story-band__img" strength={16}>
-          <GradientFill
-            gradient="linear-gradient(145deg,#8C603A 0%,#5C4A38 50%,#2A1A10 100%)"
+          <Image
+            src={founderImage.src}
+            alt={founderImage.alt}
+            fill
             className="story-band__img-fill"
-            aria-hidden={true}
+            style={{ objectFit: "cover", objectPosition: "center top" }}
+            sizes="(max-width: 960px) 100vw, 50vw"
           />
         </RevealParallax>
       </section>
