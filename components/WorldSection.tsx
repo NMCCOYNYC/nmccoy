@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { worldCarouselImages, worldStaticImage } from "@/lib/world";
 
-const INTERVAL_MS = 5200;
+const INTERVAL_MS = 2500;
 
 export function WorldSection() {
   const [active, setActive] = useState(0);

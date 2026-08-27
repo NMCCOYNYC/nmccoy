@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import type { StoryImage } from "@/lib/story";
 
-const INTERVAL_MS = 5200;
+const INTERVAL_MS = 2500;
 
 export function FadeCarousel({
   images,
