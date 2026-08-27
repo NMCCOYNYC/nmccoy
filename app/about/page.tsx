@@ -61,7 +61,7 @@ export default function AboutPage() {
       </section>
 
       <FadeIn variant="reveal">
-        <section className="editorial-block">
+        <section className="editorial-block editorial-block--compact">
           <div className="editorial-block__inner">
             <p className="eyebrow">From Ink to Silk</p>
             <h2 className="editorial-block__title">Where It Begins</h2>

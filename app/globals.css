@@ -524,8 +524,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: clamp(1.5rem, 4vw, 3.25rem);
-  padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.75rem, 8vw, 6.5rem);
+  padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.75rem, 8vw, 6.5rem)
+    clamp(1.15rem, 2.5vw, 2rem);
   background: var(--bone);
+}
+.story-band--founder {
+  padding-top: clamp(1.15rem, 2.5vw, 2rem);
+  padding-bottom: clamp(2.5rem, 6vw, 5.5rem);
 }
 .story-band__text {
   display: flex; flex-direction: column; justify-content: center;
@@ -584,6 +589,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .editorial-block {
   padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 4vw, 4rem);
   background: var(--bone);
+}
+.editorial-block--compact {
+  padding-block: clamp(1.35rem, 2.8vw, 2.25rem);
 }
 .editorial-block--dark {
   background: var(--cacao);
@@ -1601,7 +1609,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .story-band {
     grid-template-columns: 1fr;
     gap: 1.75rem;
-    padding: clamp(2.25rem, 7vw, 3.5rem) clamp(1.35rem, 5vw, 2rem);
+    padding: clamp(2.25rem, 7vw, 3.5rem) clamp(1.35rem, 5vw, 2rem)
+      clamp(1rem, 2.5vw, 1.5rem);
+  }
+  .story-band--founder {
+    padding-top: clamp(1rem, 2.5vw, 1.5rem);
+    padding-bottom: clamp(2.25rem, 7vw, 3.5rem);
   }
   .story-band--reverse { direction: ltr; }
   .story-band__img { min-height: 0; aspect-ratio: 4 / 5; order: -1; }
