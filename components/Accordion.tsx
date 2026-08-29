@@ -5,7 +5,7 @@ import { useState } from "react";
 export function Accordion({
   items,
 }: {
-  items: { title: string; content: string }[];
+  items: { title: string; content: React.ReactNode }[];
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

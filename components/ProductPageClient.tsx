@@ -62,14 +62,25 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
               {
                 title: "Care",
                 content:
-                  "Dry clean recommended. Hand wash cold in gentle detergent if needed. Store rolled, not folded.",
+                  "Professional dry clean only. If needed, iron gently on low heat. Store flat or loosely rolled and protect from moisture, direct sunlight, and contact with rough surfaces.",
               },
               {
                 title: "Shipping",
                 content:
                   "Complimentary tracked shipping within the US. International available. See Shipping & Returns for delivery and policy details.",
               },
-              { title: "About the Painting", content: scarf.painting },
+              {
+                title: "About the Painting",
+                content: (
+                  <>
+                    <p>{scarf.painting}</p>
+                    <p className="acc-content__note">
+                      Original artwork hand-painted in ink on cold-press
+                      watercolor paper.
+                    </p>
+                  </>
+                ),
+              },
             ]}
           />
           <p className="product-policy-note">

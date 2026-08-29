@@ -1180,6 +1180,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .acc-icon.open { transform: rotate(45deg); }
 .acc-content { display: none; padding-bottom: 1.5rem; font-size: 13px; color: var(--taupe); line-height: 1.8; }
 .acc-content.open { display: block; }
+.acc-content p { margin: 0; }
+.acc-content p.acc-content__note {
+  margin-top: 1.55rem;
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(56, 39, 30, 0.5);
+}
 
 /* ══ EDITORIAL / INNER PAGES ══ */
 .page-hero-dark { padding: 9rem clamp(1.5rem,4vw,4rem) 5rem; background: var(--cacao); color: var(--bone); }
