@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FooterLogo } from "@/components/Brand";
 import { EmailCapture } from "@/components/EmailCapture";
+import { siteSettings } from "@/lib/site-settings";
 
 export function Footer() {
   return (
@@ -58,6 +59,24 @@ export function Footer() {
       <EmailCapture variant="footer" source="footer" />
       <div className="footer__bottom">
         <span>© 2026 NMCCOY. All rights reserved.</span>
+        <div className="footer__socials">
+          <a
+            href={siteSettings.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer__ig"
+            aria-label="NMCCOY on Instagram"
+          >
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3.6" y="3.6" width="16.8" height="16.8" rx="4.4" stroke="currentColor" strokeWidth="1.2" />
+              <circle cx="12" cy="12" r="4.1" stroke="currentColor" strokeWidth="1.2" />
+              <circle cx="17.15" cy="6.85" r="0.85" fill="currentColor" />
+            </svg>
+          </a>
+          <Link href="/account" className="footer__account">
+            Account
+          </Link>
+        </div>
         <span>New York, USA · Made in Italy</span>
       </div>
     </footer>

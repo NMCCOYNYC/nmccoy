@@ -1060,7 +1060,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .footer__col li { margin-bottom: 0.7rem; font-size: 13px; color: rgba(237,235,233,0.6); }
 .footer__col a { color: inherit; transition: color 0.2s; }
 .footer__col li:hover, .footer__col a:hover { color: var(--clay); }
-.footer__bottom { max-width: var(--max); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(237,235,233,0.08); display: flex; justify-content: space-between; font-family: var(--font-util); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: rgba(237,235,233,0.25); }
+.footer__bottom { max-width: var(--max); margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(237,235,233,0.08); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; font-family: var(--font-util); font-size: 9px; font-weight: 500; letter-spacing: 0.12em; color: rgba(237,235,233,0.25); }
+.footer__socials { display: flex; align-items: center; gap: 1.15rem; }
+.footer__ig { display: inline-flex; color: rgba(237,235,233,0.4); transition: color 0.2s; }
+.footer__ig svg { width: 15px; height: 15px; display: block; }
+.footer__ig:hover { color: var(--bone); }
+.footer__account { color: rgba(237,235,233,0.4); letter-spacing: 0.16em; text-transform: uppercase; transition: color 0.2s; }
+.footer__account:hover { color: var(--bone); }
 
 /* ══ COLLECTION PAGE ══ */
 .coll-hero {
