@@ -8,8 +8,6 @@ import { Footer } from "@/components/Footer";
 
 import { FeatureVideo } from "@/components/FeatureVideo";
 
-import { EmailCapture } from "@/components/EmailCapture";
-
 import { FadeIn } from "@/components/FadeIn";
 
 import { RevealParallax } from "@/components/RevealParallax";
@@ -172,9 +170,6 @@ export function HomePageContent() {
         </FadeIn>
       </section>
 
-      <FadeIn variant="fade">
-        <EmailCapture source="homepage" />
-      </FadeIn>
       <Footer />
     </>
   );

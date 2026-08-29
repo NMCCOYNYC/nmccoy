@@ -12,12 +12,11 @@ export function Footer() {
             <FooterLogo />
           </div>
           <p className="footer__tagline">
-            Art-led luxury objects.
+            Art-led objects.
             <br />
-            Designed in New York,
-            <br />
-            made in Italy.
+            Designed in New York, made in Italy.
           </p>
+          <p className="footer__follow">Follow us</p>
           <a
             href={siteSettings.instagramUrl}
             target="_blank"
