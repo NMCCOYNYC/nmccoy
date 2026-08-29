@@ -1,19 +1,22 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
+import { useDrawer } from "@/components/DrawerProvider";
 
-export function CartIcon() {
+export function CartIcon({ onOpen }: { onOpen?: () => void }) {
   const { count } = useCart();
-  const pathname = usePathname();
-  const active = pathname.startsWith("/cart");
+  const { isOpen, openDrawer } = useDrawer();
 
   return (
-    <Link
-      href="/cart"
-      className={`nav__icon nav__cart${active ? " is-active" : ""}`}
+    <button
+      type="button"
+      className={`nav__icon nav__cart${isOpen("cart") ? " is-active" : ""}`}
       aria-label={count ? `Cart, ${count} ${count === 1 ? "item" : "items"}` : "Cart"}
+      aria-expanded={isOpen("cart")}
+      onClick={() => {
+        onOpen?.();
+        openDrawer("cart");
+      }}
     >
       <svg
         className="nav__cart-icon"
@@ -35,6 +38,6 @@ export function CartIcon() {
         />
       </svg>
       {count > 0 ? <span className="nav__cart-count">{count}</span> : null}
-    </Link>
+    </button>
   );
 }

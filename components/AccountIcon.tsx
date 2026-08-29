@@ -1,19 +1,21 @@
 "use client";
 
 import { useAccount } from "@/components/AccountProvider";
+import { useDrawer } from "@/components/DrawerProvider";
 
 export function AccountIcon({ onOpen }: { onOpen?: () => void }) {
-  const { session, isOpen, openAccount } = useAccount();
+  const { session } = useAccount();
+  const { isOpen, openDrawer } = useDrawer();
 
   return (
     <button
       type="button"
-      className={`nav__icon nav__icon--account${isOpen ? " is-active" : ""}`}
+      className={`nav__icon nav__icon--account${isOpen("account") ? " is-active" : ""}`}
       aria-label={session ? "Account" : "Sign in"}
-      aria-expanded={isOpen}
+      aria-expanded={isOpen("account")}
       onClick={() => {
         onOpen?.();
-        openAccount();
+        openDrawer("account");
       }}
     >
       <svg

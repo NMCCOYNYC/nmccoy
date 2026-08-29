@@ -1,6 +1,6 @@
 export const siteSettings = {
   collectionName: "Desert Illusions",
-  launchDate: "September 13, 2026",
+  launchDate: "September 12, 2026",
   fullPrice: 300,
   editionSize: 40,
   designCount: 6,

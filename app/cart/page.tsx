@@ -1,4 +1,4 @@
-import { CartPageClient } from "@/components/CartPageClient";
+import { DrawerRedirect } from "@/components/DrawerRedirect";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -9,5 +9,5 @@ export const metadata = pageMetadata({
 });
 
 export default function CartPage() {
-  return <CartPageClient />;
+  return <DrawerRedirect id="cart" />;
 }

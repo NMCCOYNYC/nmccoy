@@ -5,9 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AccountDrawer } from "@/components/AccountDrawer";
 import { AccountIcon } from "@/components/AccountIcon";
-import { useAccount } from "@/components/AccountProvider";
+import { CartDrawer } from "@/components/CartDrawer";
 import { CartIcon } from "@/components/CartIcon";
-import { FavoritesIcon } from "@/components/FavoritesIcon";
 import { SearchOverlay } from "@/components/SearchOverlay";
 import { Logo, NavLink } from "@/components/Brand";
 
@@ -23,7 +22,6 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { openAccount } = useAccount();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -40,10 +38,54 @@ export function Nav() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  function closeOverlays() {
+    setMobileOpen(false);
+    setSearchOpen(false);
+  }
+
   return (
     <>
       <nav className={`nav${scrolled ? " scrolled" : ""}`} id="mainNav">
         <div className="nav__side nav__side--left">
+          <button
+            type="button"
+            className="nav__hamburger"
+            aria-label="Open menu"
+            onClick={() => {
+              setSearchOpen(false);
+              setMobileOpen(true);
+            }}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <button
+            type="button"
+            className={`nav__icon nav__search-icon${searchOpen ? " is-active" : ""}`}
+            aria-label="Search"
+            aria-expanded={searchOpen}
+            onClick={() => {
+              setMobileOpen(false);
+              setSearchOpen((open) => !open);
+            }}
+          >
+            <svg
+              className="nav__icon-svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="6.2" stroke="currentColor" strokeWidth="1.2" />
+              <path
+                d="M15.8 15.8 20 20"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
           <ul className="nav__links">
             {pageLinks.map((link) => (
               <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
@@ -77,28 +119,15 @@ export function Nav() {
             >
               Search
             </button>
-            <AccountIcon onOpen={() => setSearchOpen(false)} />
-            <FavoritesIcon />
-            <CartIcon />
+            <AccountIcon onOpen={closeOverlays} />
+            <CartIcon onOpen={closeOverlays} />
           </div>
-          <button
-            type="button"
-            className="nav__hamburger"
-            aria-label="Open menu"
-            onClick={() => {
-              setSearchOpen(false);
-              setMobileOpen(true);
-            }}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
         </div>
       </nav>
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
       <AccountDrawer />
+      <CartDrawer />
 
       <div className={`mobile-nav${mobileOpen ? " open" : ""}`}>
         <button
@@ -115,21 +144,6 @@ export function Nav() {
         ))}
         <Link href="/contact" onClick={() => setMobileOpen(false)}>
           Contact
-        </Link>
-        <Link href="/favorites" onClick={() => setMobileOpen(false)}>
-          Favorites
-        </Link>
-        <button
-          type="button"
-          onClick={() => {
-            setMobileOpen(false);
-            openAccount();
-          }}
-        >
-          Account
-        </button>
-        <Link href="/cart" onClick={() => setMobileOpen(false)}>
-          Cart
         </Link>
       </div>
     </>

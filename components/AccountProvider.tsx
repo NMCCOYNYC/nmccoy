@@ -21,9 +21,6 @@ import {
 
 type AccountContextValue = {
   session: AccountSession | null;
-  isOpen: boolean;
-  openAccount: () => void;
-  closeAccount: () => void;
   signIn: (email: string, password: string) => Promise<void>;
   register: (input: {
     firstName: string;
@@ -38,7 +35,6 @@ const AccountContext = createContext<AccountContextValue | null>(null);
 
 export function AccountProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<AccountSession | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -108,20 +104,10 @@ export function AccountProvider({ children }: { children: React.ReactNode }) {
   );
 
   const signOut = useCallback(() => setSession(null), []);
-  const openAccount = useCallback(() => setIsOpen(true), []);
-  const closeAccount = useCallback(() => setIsOpen(false), []);
 
   const value = useMemo(
-    () => ({
-      session,
-      isOpen,
-      openAccount,
-      closeAccount,
-      signIn,
-      register,
-      signOut,
-    }),
-    [session, isOpen, openAccount, closeAccount, signIn, register, signOut],
+    () => ({ session, signIn, register, signOut }),
+    [session, signIn, register, signOut],
   );
 
   return (

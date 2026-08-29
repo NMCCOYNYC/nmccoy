@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
+import { useDrawer } from "@/components/DrawerProvider";
 
 type AddToCartButtonProps = {
   slug: string;
@@ -22,14 +22,14 @@ export function AddToCartButton({
   disabledLabel,
 }: AddToCartButtonProps) {
   const { addItem } = useCart();
-  const router = useRouter();
+  const { openDrawer } = useDrawer();
   const [added, setAdded] = useState(false);
 
   function handleAdd() {
     if (disabled) return;
     addItem(slug, 1);
     setAdded(true);
-    router.push("/cart");
+    openDrawer("cart");
   }
 
   return (
@@ -47,7 +47,7 @@ export function AddToCartButton({
       onClick={handleAdd}
       disabled={disabled}
     >
-      {disabled ? disabledLabel || label : added ? "Added — viewing cart" : label}
+      {disabled ? disabledLabel || label : added ? "Added" : label}
     </button>
   );
 }
