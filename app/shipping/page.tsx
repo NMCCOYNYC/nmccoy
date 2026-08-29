@@ -19,21 +19,35 @@ export default function ShippingPage() {
 
         <h2>Shipping timeline</h2>
         <p>
-          Orders are packed after purchase. You will receive tracking once your
-          order is on its way.
+          Orders are carefully packed and typically dispatched within 1–3
+          business days. Tracking information will be provided once your order
+          is on its way.
+        </p>
+        <p>
+          During occasional studio closures or travel periods, dispatch times
+          may be extended. Any temporary delays will be clearly noted on the
+          website at the time of purchase.
         </p>
 
         <h2>Domestic (USA)</h2>
         <p>
-          Complimentary tracked shipping via FedEx or UPS. Delivery 3–5 business
-          days from ship date.
+          Complimentary standard tracked shipping is included on all U.S.
+          orders. Estimated delivery timing will be provided at checkout.
+        </p>
+        <p>
+          Expedited shipping options may be available at checkout for an
+          additional fee.
         </p>
 
         <h2>International</h2>
         <p>
-          We ship worldwide. Rates are calculated at checkout. Delivery typically
-          takes 7–14 business days. Duties and taxes are the recipient&apos;s
-          responsibility.
+          We ship internationally to select destinations. Shipping rates and
+          estimated delivery timing are calculated at checkout and vary by
+          destination and customs processing.
+        </p>
+        <p>
+          International duties, taxes, and import fees are not included in the
+          order total and are the responsibility of the recipient.
         </p>
 
         <h2>Returns</h2>
