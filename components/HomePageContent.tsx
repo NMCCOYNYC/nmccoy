@@ -65,7 +65,7 @@ export function HomePageContent() {
         <section className="art-meant" aria-labelledby="art-meant-title">
           <div className="art-meant__inner">
             <h2 id="art-meant-title" className="art-meant__title">
-              Art, Meant to be Worn.
+              Art, Meant<br className="art-meant__break" /> to be Worn.
             </h2>
             <p className="art-meant__body">
               NMCCOY began with the belief that the things we choose to wear
@@ -101,11 +101,13 @@ export function HomePageContent() {
               </p>
               <div className="coll-intro__left">
                 <h2 id="coll-intro-title" className="coll-intro__title">
-                  A few pieces,
-                  <br />
-                  caught in the
-                  <br />
-                  light.
+                  <span className="coll-intro__line">A few pieces, </span>
+                  <span className="coll-intro__line coll-intro__line--rest">
+                    caught in the{" "}
+                  </span>
+                  <span className="coll-intro__line coll-intro__line--rest">
+                    light.
+                  </span>
                 </h2>
               </div>
               <div className="coll-intro__right">
@@ -144,9 +146,7 @@ export function HomePageContent() {
         <FadeIn variant="reveal" className="process-band__text">
           <p className="eyebrow process-band__eyebrow">The Process</p>
           <h2 className="process-band__title">
-            From Painting
-            <br />
-            to Silk.
+            From Painting<br className="process-band__break" /> to Silk.
           </h2>
           <p className="process-band__body">
             Each piece begins as an original painting before being carefully
