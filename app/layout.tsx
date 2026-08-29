@@ -56,6 +56,8 @@ export default async function RootLayout({
               name: "NMCCOY",
               url: siteUrl,
               email: "hello@nmccoynyc.com",
+              logo: `${siteUrl}/logos/nmccoy-wordmark-brown.svg`,
+              image: `${siteUrl}/logos/nmccoy-mark-circle.png`,
               sameAs: ["https://www.instagram.com/nmccoynyc"],
             }),
           }}
