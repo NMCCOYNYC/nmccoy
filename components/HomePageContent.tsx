@@ -48,11 +48,10 @@ export function HomePageContent() {
         <div className="hero__content hero__content--left">
           <p className="hero__kicker">Collection No. 1</p>
           <h1 className="hero__title">Desert Illusions</h1>
-          <p className="hero__sub hero__sub--wide">
+          <p className="hero__sub">
             Inspired by the shifting light of the American Southwest, Desert
             Illusions explores the space between what is seen and what is
-            remembered. Six original artworks translated into limited-edition
-            Italian silk.
+            remembered.
           </p>
           <div className="hero__actions">
             <Link href="/collection" className="btn--underline btn--underline-light">
@@ -69,10 +68,10 @@ export function HomePageContent() {
               Art, Meant to be Worn.
             </h2>
             <p className="art-meant__body">
-              NMCCOY is an art-led house rooted in the belief that the things we
-              choose to keep should feel personal. Each collection begins with
-              original artwork and carries its story from painting to textile,
-              creating pieces designed to be worn, lived with, and kept.
+              NMCCOY began with the belief that the things we choose to wear
+              should feel personal. They can carry a sense of place, memory, and
+              meaning, becoming part of the stories we hold onto and the objects
+              we choose to keep close.
             </p>
           </div>
         </section>
@@ -111,9 +110,8 @@ export function HomePageContent() {
               </div>
               <div className="coll-intro__right">
                 <p className="coll-intro__body">
-                  Six original artworks translated into limited-edition Italian
-                  silk. Produced in small, numbered editions and never
-                  reproduced in the same form again.
+                  Six original artworks, translated into Italian silk and
+                  produced in small, numbered editions.
                 </p>
                 <Link
                   href="/collection"
@@ -150,16 +148,9 @@ export function HomePageContent() {
             <br />
             to Silk.
           </h2>
-          <p className="process-band__italic">
-            Brushstrokes become pattern. Light becomes memory.
-            <br />
-            Silk becomes a canvas meant to move with you.
-          </p>
           <p className="process-band__body">
-            Each NMCCOY piece begins not as a product, but as a moment. Painted
-            by hand, guided by intuition, and shaped by time. What you keep is
-            not replicated—it is translated. From artwork to object. From hand
-            to heirloom.
+            Each piece begins as an original painting before being carefully
+            translated into silk in Italy.
           </p>
           <Link
             href="/process"
