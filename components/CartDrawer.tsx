@@ -164,8 +164,7 @@ export function CartDrawer() {
               <span>${subtotal} USD</span>
             </div>
             <p className="drawer-summary__note">
-              Complimentary tracked shipping in the US. Ships{" "}
-              {siteSettings.launchDate}.
+              Complimentary tracked shipping in the US.
             </p>
             <button
               type="button"

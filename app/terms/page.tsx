@@ -1,4 +1,3 @@
-import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
 import { pageMetadata } from "@/lib/seo";
 
@@ -36,8 +35,8 @@ export default function TermsPage() {
         </p>
         <h2>3. Purchases</h2>
         <p>
-          Full payment is collected at checkout. Scarves ship{" "}
-          {siteSettings.launchDate}. All sales are subject to availability.
+          Full payment is collected at checkout. All sales are subject to
+          availability.
         </p>
         <h2>4. Intellectual property</h2>
         <p>

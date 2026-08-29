@@ -19,7 +19,8 @@ export default function ShippingPage() {
 
         <h2>Shipping timeline</h2>
         <p>
-          All pieces ship <strong>{siteSettings.launchDate}</strong>.
+          Orders are packed after purchase. You will receive tracking once your
+          order is on its way.
         </p>
 
         <h2>Domestic (USA)</h2>

@@ -66,7 +66,8 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
               },
               {
                 title: "Shipping",
-                content: `Ships ${siteSettings.launchDate}. Complimentary tracked shipping within the US. International available. See Shipping & Returns for delivery and policy details.`,
+                content:
+                  "Complimentary tracked shipping within the US. International available. See Shipping & Returns for delivery and policy details.",
               },
               { title: "About the Painting", content: scarf.painting },
             ]}
