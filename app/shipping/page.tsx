@@ -41,13 +41,13 @@ export default function ShippingPage() {
 
         <h2>International</h2>
         <p>
-          We ship internationally to select destinations. Shipping rates and
-          estimated delivery timing are calculated at checkout and vary by
-          destination and customs processing.
+          We ship internationally to select destinations. Shipping rates are
+          calculated at checkout and vary by destination.
         </p>
         <p>
-          International duties, taxes, and import fees are not included in the
-          order total and are the responsibility of the recipient.
+          International orders may be subject to duties, taxes, and import fees
+          imposed by the destination country. These charges are not included in
+          the order total and are the responsibility of the recipient.
         </p>
 
         <h2>Returns</h2>
