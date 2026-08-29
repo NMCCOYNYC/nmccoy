@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getScarfBySlug, scarves } from "@/lib/products";
+import { JsonLd } from "@/components/JsonLd";
 import { ProductPageClient } from "@/components/ProductPageClient";
 import { ProductTracker } from "@/components/ProductTracker";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, productJsonLd } from "@/lib/seo";
 
 export function generateStaticParams() {
   return scarves.map((s) => ({ slug: s.slug }));
@@ -22,9 +23,11 @@ export async function generateMetadata({
   }
 
   return pageMetadata({
-    title: scarf.name,
-    description: scarf.desc1.slice(0, 155),
+    title: `${scarf.name} — Limited-Edition Italian Silk`,
+    description: `${scarf.name} by NMCCOY. ${scarf.desc2} ${scarf.painting}`,
     path: `/scarves/${slug}`,
+    image: scarf.images?.[0],
+    imageAlt: `${scarf.name} silk scarf`,
   });
 }
 
@@ -39,6 +42,14 @@ export default async function ScarfPage({
 
   return (
     <>
+      <JsonLd data={productJsonLd(scarf)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Collection", path: "/collection" },
+          { name: scarf.name, path: `/scarves/${scarf.slug}` },
+        ])}
+      />
       <ProductTracker slug={scarf.slug} name={scarf.name} />
       <ProductPageClient scarf={scarf} />
     </>

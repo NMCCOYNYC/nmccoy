@@ -1,4 +1,12 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Admin",
+  description: "NMCCOY studio admin.",
+  path: "/admin",
+  robots: { index: false, follow: false },
+});
 
 export default function AdminPage() {
   return (

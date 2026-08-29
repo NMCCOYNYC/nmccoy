@@ -1,3 +1,4 @@
+import { isIndexingCrawler } from "@/lib/crawlers";
 import {
   hasEarlyAccess,
   isEarlyAccessConfigured,
@@ -17,4 +18,11 @@ export function hasSiteAccess(cookieValue?: string) {
   }
 
   return hasEarlyAccess(cookieValue);
+}
+
+export function canViewFullSite(
+  cookieValue?: string,
+  userAgent?: string | null,
+) {
+  return hasSiteAccess(cookieValue) || isIndexingCrawler(userAgent);
 }

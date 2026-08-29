@@ -7,7 +7,8 @@ import { ScarfCard } from "@/components/ScarfCard";
 import { SpotifySection } from "@/components/SpotifySection";
 import { CtaSection } from "@/components/StatsBand";
 import { CollectionTracker } from "@/components/AnalyticsHelpers";
-import { pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { collectionJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Desert Illusions Collection",
@@ -21,6 +22,7 @@ export default function CollectionPage() {
 
   return (
     <>
+      <JsonLd data={collectionJsonLd()} />
       <CollectionTracker />
 
       <FeatureVideo

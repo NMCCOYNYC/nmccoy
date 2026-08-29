@@ -19,7 +19,8 @@ export function ComingSoonLanding() {
         <h1 className="coming-soon__headline">Desert Illusions is coming soon.</h1>
 
         <p className="coming-soon__lede">
-          Original artworks translated into limited-edition Italian silk.
+          NMCCOY — original ink paintings from New York, translated into
+          limited-edition Italian silk.
         </p>
 
         <p className="coming-soon__support">

@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Terms & Conditions",
-  description: "NMCCOY terms and conditions for purchases on nmccoy.com.",
+  description: "NMCCOY terms and conditions for purchases on nmccoynyc.com.",
   path: "/terms",
 });
 
@@ -27,7 +27,7 @@ export default function TermsPage() {
         <h2>1. About NMCCOY</h2>
         <p>
           NMCCOY is operated by Nichole McCoy, New York, USA. These Terms govern
-          your use of nmccoy.com and purchases made through it.
+          your use of nmccoynyc.com and purchases made through it.
         </p>
         <h2>2. Limited editions</h2>
         <p>

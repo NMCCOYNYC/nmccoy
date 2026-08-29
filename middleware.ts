@@ -4,6 +4,7 @@ import {
   hasSiteAccess,
   isComingSoonEnabled,
 } from "@/lib/coming-soon";
+import { isIndexingCrawler } from "@/lib/crawlers";
 import {
   EARLY_ACCESS_COOKIE,
   EARLY_ACCESS_PATH,
@@ -39,6 +40,10 @@ export function middleware(request: NextRequest) {
   const cookieValue = request.cookies.get(EARLY_ACCESS_COOKIE)?.value;
 
   if (hasSiteAccess(cookieValue)) {
+    return NextResponse.next();
+  }
+
+  if (isIndexingCrawler(request.headers.get("user-agent"))) {
     return NextResponse.next();
   }
 

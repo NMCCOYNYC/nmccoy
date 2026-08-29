@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Marcellus, Gowun_Batang, Jost } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { CartProvider } from "@/components/CartProvider";
 import { Nav } from "@/components/Nav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { hasSiteAccess, isComingSoonEnabled } from "@/lib/coming-soon";
+import { canViewFullSite } from "@/lib/coming-soon";
 import { EARLY_ACCESS_COOKIE } from "@/lib/preview-access";
-import { defaultMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
+import { defaultMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const marcellus = Marcellus({
@@ -34,11 +35,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://nmccoy.com";
   const cookieStore = await cookies();
-  const showNav =
-    !isComingSoonEnabled() ||
-    hasSiteAccess(cookieStore.get(EARLY_ACCESS_COOKIE)?.value);
+  const requestHeaders = await headers();
+  const showNav = canViewFullSite(
+    cookieStore.get(EARLY_ACCESS_COOKIE)?.value,
+    requestHeaders.get("user-agent"),
+  );
 
   return (
     <html
@@ -47,21 +49,8 @@ export default async function RootLayout({
     >
       <body>
         <GoogleAnalytics />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "NMCCOY",
-              url: siteUrl,
-              email: "hello@nmccoynyc.com",
-              logo: `${siteUrl}/logos/nmccoy-wordmark-brown.svg`,
-              image: `${siteUrl}/logos/nmccoy-mark-circle.png`,
-              sameAs: ["https://www.instagram.com/nmccoynyc"],
-            }),
-          }}
-        />
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <CartProvider>
           {showNav ? <Nav /> : null}
           <main>{children}</main>
