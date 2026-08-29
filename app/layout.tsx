@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Marcellus, Gowun_Batang, Jost } from "next/font/google";
 import { cookies, headers } from "next/headers";
+import { AccountProvider } from "@/components/AccountProvider";
 import { CartProvider } from "@/components/CartProvider";
+import { FavoritesProvider } from "@/components/FavoritesProvider";
 import { Nav } from "@/components/Nav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { canViewFullSite } from "@/lib/coming-soon";
@@ -51,10 +53,14 @@ export default async function RootLayout({
         <GoogleAnalytics />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
-        <CartProvider>
-          {showNav ? <Nav /> : null}
-          <main>{children}</main>
-        </CartProvider>
+        <AccountProvider>
+          <FavoritesProvider>
+            <CartProvider>
+              {showNav ? <Nav /> : null}
+              <main>{children}</main>
+            </CartProvider>
+          </FavoritesProvider>
+        </AccountProvider>
       </body>
     </html>
   );

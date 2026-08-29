@@ -3,24 +3,24 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AccountIcon } from "@/components/AccountIcon";
 import { CartIcon } from "@/components/CartIcon";
+import { FavoritesIcon } from "@/components/FavoritesIcon";
+import { SearchOverlay } from "@/components/SearchOverlay";
 import { Logo, NavLink } from "@/components/Brand";
 
-const leftLinks = [
+const pageLinks = [
   { href: "/collection", label: "Collection" },
   { href: "/process", label: "Process" },
   { href: "/about", label: "Our Story" },
-];
-
-const rightLinks = [
   { href: "/impact", label: "Impact" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -31,6 +31,7 @@ export function Nav() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setSearchOpen(false);
   }, [pathname]);
 
   const isActive = (href: string) =>
@@ -41,7 +42,7 @@ export function Nav() {
       <nav className={`nav${scrolled ? " scrolled" : ""}`} id="mainNav">
         <div className="nav__side nav__side--left">
           <ul className="nav__links">
-            {leftLinks.map((link) => (
+            {pageLinks.map((link) => (
               <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
                 {link.label}
               </NavLink>
@@ -60,19 +61,31 @@ export function Nav() {
           />
         </div>
         <div className="nav__side nav__side--right">
-          <ul className="nav__links">
-            {rightLinks.map((link) => (
-              <NavLink key={link.href} href={link.href} active={isActive(link.href)}>
-                {link.label}
-              </NavLink>
-            ))}
-          </ul>
-          <CartIcon />
+          <div className="nav__tools">
+            <button
+              type="button"
+              className={`nav__search-label${searchOpen ? " is-active" : ""}`}
+              aria-label="Search"
+              aria-expanded={searchOpen}
+              onClick={() => {
+                setMobileOpen(false);
+                setSearchOpen((open) => !open);
+              }}
+            >
+              Search
+            </button>
+            <AccountIcon />
+            <FavoritesIcon />
+            <CartIcon />
+          </div>
           <button
             type="button"
             className="nav__hamburger"
             aria-label="Open menu"
-            onClick={() => setMobileOpen(true)}
+            onClick={() => {
+              setSearchOpen(false);
+              setMobileOpen(true);
+            }}
           >
             <span />
             <span />
@@ -80,6 +93,8 @@ export function Nav() {
           </button>
         </div>
       </nav>
+
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
 
       <div className={`mobile-nav${mobileOpen ? " open" : ""}`}>
         <button
@@ -89,11 +104,20 @@ export function Nav() {
         >
           Close
         </button>
-        {[...leftLinks, ...rightLinks].map((link) => (
+        {pageLinks.map((link) => (
           <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
             {link.label}
           </Link>
         ))}
+        <Link href="/contact" onClick={() => setMobileOpen(false)}>
+          Contact
+        </Link>
+        <Link href="/favorites" onClick={() => setMobileOpen(false)}>
+          Favorites
+        </Link>
+        <Link href="/account" onClick={() => setMobileOpen(false)}>
+          Account
+        </Link>
         <Link href="/cart" onClick={() => setMobileOpen(false)}>
           Cart
         </Link>

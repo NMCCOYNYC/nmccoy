@@ -12,7 +12,7 @@ export function CartIcon() {
   return (
     <Link
       href="/cart"
-      className={`nav__cart${active ? " is-active" : ""}`}
+      className={`nav__icon nav__cart${active ? " is-active" : ""}`}
       aria-label={count ? `Cart, ${count} ${count === 1 ? "item" : "items"}` : "Cart"}
     >
       <svg

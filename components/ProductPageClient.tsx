@@ -10,6 +10,7 @@ import { FadeIn } from "@/components/FadeIn";
 import { ProductGallery } from "@/components/ProductGallery";
 import { Accordion } from "@/components/Accordion";
 import { AddToCartButton } from "@/components/AddToCartButton";
+import { FavoriteButton } from "@/components/FavoriteButton";
 
 export function ProductPageClient({ scarf }: { scarf: Scarf }) {
   const checkoutConfigured = isCheckoutConfigured(scarf);
@@ -44,6 +45,7 @@ export function ProductPageClient({ scarf }: { scarf: Scarf }) {
               disabled={!checkoutConfigured}
               disabledLabel={`Not yet available — $${siteSettings.fullPrice}`}
             />
+            <FavoriteButton slug={scarf.slug} name={scarf.name} variant="text" />
             <Link
               href="/collection"
               className="btn btn--outline"
