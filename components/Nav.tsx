@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AccountDrawer } from "@/components/AccountDrawer";
 import { AccountIcon } from "@/components/AccountIcon";
+import { useAccount } from "@/components/AccountProvider";
 import { CartIcon } from "@/components/CartIcon";
 import { FavoritesIcon } from "@/components/FavoritesIcon";
 import { SearchOverlay } from "@/components/SearchOverlay";
@@ -21,6 +23,7 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { openAccount } = useAccount();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -74,7 +77,7 @@ export function Nav() {
             >
               Search
             </button>
-            <AccountIcon />
+            <AccountIcon onOpen={() => setSearchOpen(false)} />
             <FavoritesIcon />
             <CartIcon />
           </div>
@@ -95,6 +98,7 @@ export function Nav() {
       </nav>
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <AccountDrawer />
 
       <div className={`mobile-nav${mobileOpen ? " open" : ""}`}>
         <button
@@ -115,9 +119,15 @@ export function Nav() {
         <Link href="/favorites" onClick={() => setMobileOpen(false)}>
           Favorites
         </Link>
-        <Link href="/account" onClick={() => setMobileOpen(false)}>
+        <button
+          type="button"
+          onClick={() => {
+            setMobileOpen(false);
+            openAccount();
+          }}
+        >
           Account
-        </Link>
+        </button>
         <Link href="/cart" onClick={() => setMobileOpen(false)}>
           Cart
         </Link>

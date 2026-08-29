@@ -1,19 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useAccount } from "@/components/AccountProvider";
 
-export function AccountIcon() {
-  const { session } = useAccount();
-  const pathname = usePathname();
-  const active = pathname.startsWith("/account");
+export function AccountIcon({ onOpen }: { onOpen?: () => void }) {
+  const { session, isOpen, openAccount } = useAccount();
 
   return (
-    <Link
-      href="/account"
-      className={`nav__icon nav__icon--account${active ? " is-active" : ""}`}
+    <button
+      type="button"
+      className={`nav__icon nav__icon--account${isOpen ? " is-active" : ""}`}
       aria-label={session ? "Account" : "Sign in"}
+      aria-expanded={isOpen}
+      onClick={() => {
+        onOpen?.();
+        openAccount();
+      }}
     >
       <svg
         className="nav__icon-svg"
@@ -30,6 +31,6 @@ export function AccountIcon() {
           strokeLinecap="round"
         />
       </svg>
-    </Link>
+    </button>
   );
 }

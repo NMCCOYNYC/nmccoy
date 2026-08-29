@@ -1,17 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAccount } from "@/components/AccountProvider";
-import { Footer } from "@/components/Footer";
+import { siteSettings } from "@/lib/site-settings";
 
 type Mode = "signin" | "register";
 
-export function AccountPageClient() {
-  const { session, signIn, register, signOut } = useAccount();
+export function AccountDrawer() {
+  const { session, isOpen, closeAccount, signIn, register, signOut } = useAccount();
   const [mode, setMode] = useState<Mode>("signin");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") closeAccount();
+    }
+
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen, closeAccount]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,35 +64,63 @@ export function AccountPageClient() {
     }
   }
 
+  if (!isOpen) return null;
+
   return (
-    <>
-      <section className="account-page">
-        <p className="eyebrow">Account</p>
+    <div className="account-drawer" role="dialog" aria-modal="true" aria-label="Welcome">
+      <button
+        type="button"
+        className="account-drawer__backdrop"
+        onClick={closeAccount}
+        aria-label="Close account"
+      />
+      <aside className="account-drawer__panel">
+        <button type="button" className="account-drawer__close" onClick={closeAccount}>
+          Close
+        </button>
+
         {session ? (
-          <>
-            <h1>Welcome{session.firstName ? `, ${session.firstName}` : ""}</h1>
-            <p className="account-page__lede">
-              You are signed in as {session.email}. Favorites stay saved on this
-              device.
+          <div className="account-drawer__body">
+            <p className="eyebrow">NMCCOY</p>
+            <h2>Welcome{session.firstName ? `, ${session.firstName}` : ""}</h2>
+            <p className="account-drawer__collection">
+              {siteSettings.collectionName} · Collection No. 1
             </p>
-            <div className="account-page__actions">
-              <Link href="/favorites" className="btn btn--dark">
+            <p className="account-drawer__lede">
+              Signed in as {session.email}. Saved pieces and studio notes stay
+              with you here.
+            </p>
+            <div className="account-drawer__actions">
+              <Link
+                href="/favorites"
+                className="btn btn--dark"
+                onClick={closeAccount}
+              >
                 View favorites
               </Link>
-              <Link href="/collection" className="btn btn--outline">
-                Continue shopping
+              <Link
+                href="/collection"
+                className="btn btn--outline"
+                onClick={closeAccount}
+              >
+                Explore the collection
               </Link>
               <button type="button" className="btn--underline" onClick={signOut}>
                 Sign out
               </button>
             </div>
-          </>
+          </div>
         ) : (
-          <>
-            <h1>{mode === "signin" ? "Sign in" : "Create account"}</h1>
-            <p className="account-page__lede">
-              Save favorites and keep your details on this device. Checkout
-              remains through Shopify.
+          <div className="account-drawer__body">
+            <p className="eyebrow">NMCCOY</p>
+            <h2>Welcome</h2>
+            <p className="account-drawer__collection">
+              {siteSettings.collectionName}
+            </p>
+            <p className="account-drawer__lede">
+              Collection No. 1 launches {siteSettings.launchDate}. Six original
+              ink paintings, each in an edition of {siteSettings.editionSize} —
+              designed in New York, made in Italy.
             </p>
             <div className="account-page__tabs">
               <button
@@ -99,7 +144,10 @@ export function AccountPageClient() {
                 Create account
               </button>
             </div>
-            <form className="account-form" onSubmit={(event) => void handleSubmit(event)}>
+            <form
+              className="account-form"
+              onSubmit={(event) => void handleSubmit(event)}
+            >
               {mode === "register" ? (
                 <div className="form-row">
                   <div className="form-field">
@@ -170,10 +218,13 @@ export function AccountPageClient() {
                     : "Create account"}
               </button>
             </form>
-          </>
+            <p className="account-drawer__note">
+              Save favorites and be first to the edition. Complimentary tracked
+              shipping in the US.
+            </p>
+          </div>
         )}
-      </section>
-      <Footer />
-    </>
+      </aside>
+    </div>
   );
 }
