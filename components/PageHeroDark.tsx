@@ -7,19 +7,21 @@ export function PageHeroDark({
   description,
   imageSrc,
   imageAlt,
+  className = "",
   style,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   subhead?: string;
-  description: string;
+  description?: string;
   imageSrc?: string;
   imageAlt?: string;
+  className?: string;
   style?: React.CSSProperties;
 }) {
   return (
     <section
-      className={`page-hero-dark${imageSrc ? " page-hero-dark--image" : ""}`}
+      className={`page-hero-dark${imageSrc ? " page-hero-dark--image" : ""}${className ? ` ${className}` : ""}`}
       style={style}
     >
       {imageSrc ? (
@@ -43,7 +45,7 @@ export function PageHeroDark({
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         {subhead ? <p className="page-hero-dark__subhead">{subhead}</p> : null}
-        <p className="page-hero-dark__body">{description}</p>
+        {description ? <p className="page-hero-dark__body">{description}</p> : null}
       </div>
     </section>
   );

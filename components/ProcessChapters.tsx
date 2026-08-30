@@ -97,6 +97,7 @@ export function ProcessChapters({ steps }: { steps: ProcessStep[] }) {
           key={step.num}
           className="process-chapter"
           data-process-chapter
+          data-step={step.num}
           aria-labelledby={`process-step-${step.num}`}
         >
           <div className="process-chapter__sticky">
