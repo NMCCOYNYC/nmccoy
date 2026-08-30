@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
@@ -14,7 +13,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Our Story",
   description:
-    "The NMCCOY story — collectible silk objects born from original ink paintings, designed in New York and produced in Italy.",
+    "NMCCOY began with a belief that the things we choose to keep should feel personal. The story behind the house, Desert Illusions, and founder Nichole McCoy.",
   path: "/about",
 });
 
@@ -25,7 +24,7 @@ export default function AboutPage() {
   return (
     <>
       <FadeIn variant="fade">
-        <section className="editorial-page-hero">
+        <section className="editorial-page-hero editorial-page-hero--story">
           <p className="eyebrow">Our Story</p>
           <h1>Our Story</h1>
           <p className="editorial-page-hero__lead">
@@ -35,24 +34,21 @@ export default function AboutPage() {
         </section>
       </FadeIn>
 
-      <section className="story-band story-band--bleed">
+      <section className="story-band story-band--bleed story-band--foundation">
         <FadeIn variant="reveal" className="story-band__text">
           <p className="eyebrow">The Foundation</p>
           <h2 className="story-band__title">
-            Connection,
-            <br />
-            Craft &amp; Care
+            <span className="story-band__line">Made to mean</span>
+            <span className="story-band__line">something</span>
           </h2>
           <p className="story-band__body">
-            In an increasingly digital world, we often find ourselves seeking
-            connection in new ways. The objects we hold onto tend to carry greater
-            meaning—not only because of what they are, but because of the
-            perspective, craftsmanship, and care behind them.
+            In an increasingly digital world, the objects we hold onto can carry
+            something more human: the trace of a hand, a place, a memory.
           </p>
           <p className="story-band__body">
-            The subtle nuances that emerge through a hand-painted process are part
-            of what give each artwork its character, creating pieces that feel
-            distinctly human. That belief became the foundation for NMCCOY.
+            NMCCOY was created from a desire to make pieces that hold onto that
+            feeling. Pieces shaped by an artist&apos;s hand and made to become
+            part of the lives of the people who wear them.
           </p>
         </FadeIn>
         <div className="story-band__img">
@@ -70,23 +66,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="story-band story-band--bleed story-band--reverse">
+      <section className="story-band story-band--bleed story-band--reverse story-band--place">
         <FadeIn variant="reveal" className="story-band__text">
           <p className="eyebrow">From Ink to Silk</p>
-          <h2 className="story-band__title">Where It Begins</h2>
+          <h2 className="story-band__title">
+            <span className="story-band__line">A place,</span>
+            <span className="story-band__line">remembered</span>
+          </h2>
           <p className="story-band__body">
-            Each NMCCOY collection begins in ink. Through a process of painting,
-            layering, and exploration, original artworks emerge before being
-            translated into silk in Italy. Inspired by landscapes, memory, and a
-            sense of place, each piece carries the story of its origin from
-            artwork to collectible object.
+            Each collection begins with original artwork, shaped by landscape,
+            memory, and a sense of place before being translated into silk in
+            Italy.
           </p>
           <p className="story-band__body">
-            The inaugural collection, Desert Illusions, draws inspiration from the
-            American Southwest—the shifting light, distant horizons, and mirages
-            that blur the boundary between memory and reality. Rather than
-            documenting a place exactly as it appears, the collection explores
-            how a place is remembered.
+            The first collection, <em>Desert Illusions</em>, looks back to the
+            American Southwest: its shifting light, distant horizons, and
+            landscapes that have a way of staying with you. Rather than capturing
+            the desert exactly as it was, the collection explores the way we
+            remember where we&apos;ve been.
           </p>
         </FadeIn>
         <div className="story-band__img">
@@ -98,25 +95,28 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="story-band story-band--bleed">
+      <section className="story-band story-band--bleed story-band--founder">
         <FadeIn variant="reveal" className="story-band__text">
           <p className="eyebrow">The Founder</p>
           <h2 className="story-band__title">
-            Landscape,
-            <br />
-            Memory &amp; Craft
+            <span className="story-band__line">Landscape,</span>
+            <span className="story-band__line">memory &amp; craft</span>
           </h2>
           <p className="story-band__body">
             Raised in the Arizona desert and shaped by more than a decade in New
-            York, founder Nichole McCoy draws inspiration from the intersection of
-            landscape, memory, and craft.
+            York, founder Nichole McCoy draws from the landscapes, memories, and
+            contrasts that have shaped her own perspective.
           </p>
           <p className="story-band__body">
             After years working in luxury fashion, including time at Hermès, and
             creating bespoke artwork for leading brands, she developed a deep
-            appreciation for storytelling, craftsmanship, and the objects we choose
-            to keep. Through NMCCOY, those influences converge into collectible
-            pieces where art, fashion, and storytelling meet.
+            appreciation for the relationship between art, craftsmanship, and the
+            objects we choose to live with.
+          </p>
+          <p className="story-band__body">
+            NMCCOY brings those worlds together, translating a lifelong practice
+            of painting into pieces that move between art and fashion, while
+            remaining deeply personal.
           </p>
         </FadeIn>
         <div className="story-band__img">
@@ -130,28 +130,6 @@ export default function AboutPage() {
           />
         </div>
       </section>
-
-      <FadeIn variant="reveal">
-        <section className="editorial-block editorial-block--dark">
-          <div className="editorial-block__inner">
-            <p className="eyebrow eyebrow--light">Intention</p>
-            <h2 className="editorial-block__title">Made to Last</h2>
-            <p className="editorial-block__lead">
-              Produced in small, intentional batches, each object is created with a
-              focus on craftsmanship, permanence, and thoughtful production.
-            </p>
-            <p className="editorial-block__body">
-              Limited quantities allow us to preserve the integrity of the artwork
-              behind each design while avoiding unnecessary overproduction. At its
-              heart, NMCCOY is an invitation to slow down, look closer, and
-              reconnect with the stories woven into the things we choose to keep.
-            </p>
-            <Link href="/collection" className="btn--underline btn--underline-light">
-              Enter the Collection
-            </Link>
-          </div>
-        </section>
-      </FadeIn>
 
       <CtaSection eyebrow="Collection No. 1" />
       <Footer />
