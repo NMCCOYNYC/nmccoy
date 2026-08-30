@@ -15,6 +15,7 @@ import { RevealParallax } from "@/components/RevealParallax";
 import { WorldSection } from "@/components/WorldSection";
 
 import { ScarfCarousel } from "@/components/ScarfCarousel";
+import { HeroVideo } from "@/components/HeroVideo";
 
 export function HomePageContent() {
   return (
@@ -24,7 +25,7 @@ export function HomePageContent() {
           src="/home/desert-illusions-hero-desktop.jpg"
           alt="Desert Illusions silk scarf"
           fill
-          className="hero__media hero__media--desktop"
+          className="hero__media hero__media--fallback hero__media--desktop"
           style={{
             objectFit: "cover",
             objectPosition: "var(--hero-object-pos)",
@@ -36,7 +37,7 @@ export function HomePageContent() {
           src="/home/desert-illusions-hero-mobile.jpg"
           alt=""
           fill
-          className="hero__media hero__media--mobile"
+          className="hero__media hero__media--fallback hero__media--mobile"
           style={{
             objectFit: "cover",
             objectPosition: "var(--hero-object-pos)",
@@ -44,6 +45,7 @@ export function HomePageContent() {
           sizes="100vw"
           priority
         />
+        <HeroVideo />
         <div className="hero__overlay" />
         <div className="hero__content hero__content--left">
           <p className="hero__kicker">Collection No. 1</p>
