@@ -1,18 +1,41 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [soundOn, setSoundOn] = useState(false);
 
-  function toggleSound() {
+  useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    const apply = (visible: boolean) => {
+      video.volume = 1;
+      video.muted = !soundOn || !visible;
+    };
+
+    apply(true);
+
+    const hero = video.closest(".hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => apply(entry.isIntersecting),
+      { threshold: 0.2 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [soundOn]);
+
+  function toggleSound() {
+    const video = videoRef.current;
     const next = !soundOn;
-    video.muted = !next;
-    video.volume = 1;
-    void video.play();
+    if (video) {
+      video.volume = 1;
+      video.muted = !next;
+      void video.play();
+    }
     setSoundOn(next);
   }
 
@@ -22,7 +45,7 @@ export function HeroVideo() {
         ref={videoRef}
         className="hero__media hero__media--video"
         autoPlay
-        muted
+        muted={!soundOn}
         loop
         playsInline
         preload="auto"
@@ -33,12 +56,12 @@ export function HeroVideo() {
       </video>
       <button
         type="button"
-        className="hero__sound"
+        className={`hero__sound${soundOn ? " hero__sound--on" : ""}`}
         onClick={toggleSound}
         aria-pressed={soundOn}
-        aria-label={soundOn ? "Mute hero music" : "Play hero music"}
+        aria-label={soundOn ? "Mute music" : "Play music"}
       >
-        {soundOn ? "Sound off" : "Sound on"}
+        {soundOn ? "Mute" : "Sound on"}
       </button>
     </>
   );

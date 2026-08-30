@@ -24,15 +24,27 @@ export function FeatureVideo({
   label,
 }: FeatureVideoProps) {
   const [playing, setPlaying] = useState(false);
+  const [soundOn, setSoundOn] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     if (!playing) return;
     const video = videoRef.current;
     if (!video) return;
-    video.muted = false;
+    video.muted = !soundOn;
+    video.volume = 1;
     void video.play();
-  }, [playing]);
+  }, [playing, soundOn]);
+
+  function toggleSound() {
+    const video = videoRef.current;
+    const next = !soundOn;
+    if (video) {
+      video.volume = 1;
+      video.muted = !next;
+    }
+    setSoundOn(next);
+  }
 
   const showCopy = Boolean(eyebrow || title || body);
 
@@ -65,7 +77,17 @@ export function FeatureVideo({
                 poster={posterUrl}
                 onEnded={() => setPlaying(false)}
               />
-              {playing ? null : (
+              {playing ? (
+                <button
+                  type="button"
+                  className={`feature-video__sound${soundOn ? " feature-video__sound--on" : ""}`}
+                  onClick={toggleSound}
+                  aria-pressed={soundOn}
+                  aria-label={soundOn ? "Mute music" : "Play music"}
+                >
+                  {soundOn ? "Mute" : "Sound on"}
+                </button>
+              ) : (
                 <button
                   type="button"
                   className="feature-video__play-btn"
