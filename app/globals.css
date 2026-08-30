@@ -2119,8 +2119,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 .editorial-page-hero--story .editorial-page-hero__lead {
   font-size: clamp(15px, 1.25vw, 17px);
-  line-height: 1.8;
-  max-width: 21rem;
+  line-height: 1.55;
+  max-width: 28.5rem;
+  text-wrap: balance;
+}
+@media (min-width: 961px) {
+  .editorial-page-hero--story .editorial-page-hero__lead {
+    max-width: 21.7rem;
+  }
+  .editorial-page-hero--story .editorial-page-hero__lead-line {
+    display: block;
+    text-align: center;
+  }
 }
 .story-band--bleed .story-band__line {
   display: block;
@@ -2140,8 +2150,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 .story-band--place .story-band__text,
 .story-band--founder .story-band__text {
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 .story-band--foundation.story-band--bleed .story-band__text,
 .story-band--place.story-band--bleed .story-band__text {
@@ -2151,16 +2161,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   max-width: 27.25rem;
 }
 .story-band--place .story-band__body {
-  max-width: 28.35rem;
-  text-align: left;
-  margin-left: 0;
-  margin-right: 0;
+  max-width: 24rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: pretty;
 }
 .story-band--founder .story-band__body {
-  max-width: 25.75rem;
-  text-align: left;
-  margin-left: 0;
-  margin-right: 0;
+  max-width: 25.5rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: pretty;
 }
 .story-band--bleed .story-band__body + .story-band__body {
   margin-top: 1.15rem;
@@ -2185,7 +2197,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     font-size: clamp(2.85rem, 13vw, 4.15rem);
   }
   .editorial-page-hero--story .editorial-page-hero__lead {
-    max-width: 21.25rem;
+    max-width: 26.5rem;
   }
   .story-band--foundation .story-band__title,
   .story-band--place .story-band__title,
@@ -2194,31 +2206,31 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   }
   .story-band--place .story-band__text,
   .story-band--founder .story-band__text {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
   }
   .story-band--foundation .story-band__body {
     max-width: 27.5rem;
   }
   .story-band--place .story-band__body {
-    max-width: 28.25rem;
+    max-width: 24rem;
   }
   .story-band--founder .story-band__body {
-    max-width: 25.75rem;
+    max-width: 25.5rem;
   }
 }
 @media (max-width: 640px) {
   .editorial-page-hero--story .editorial-page-hero__lead {
-    max-width: 20.75rem;
+    max-width: 22.5rem;
   }
   .story-band--foundation .story-band__body {
     max-width: 21.25rem;
   }
   .story-band--place .story-band__body {
-    max-width: 21.5rem;
+    max-width: 19.25rem;
   }
   .story-band--founder .story-band__body {
-    max-width: 19.1rem;
+    max-width: 19.25rem;
   }
 }
 

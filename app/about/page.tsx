@@ -28,8 +28,12 @@ export default function AboutPage() {
           <p className="eyebrow">Our Story</p>
           <h1>Our Story</h1>
           <p className="editorial-page-hero__lead">
-            NMCCOY began with a simple belief: the things we choose to keep should
-            feel personal.
+            <span className="editorial-page-hero__lead-line">
+              NMCCOY began with a simple belief: the{" "}
+            </span>
+            <span className="editorial-page-hero__lead-line">
+              things we choose to keep should feel personal.
+            </span>
           </p>
         </section>
       </FadeIn>
@@ -43,7 +47,7 @@ export default function AboutPage() {
           </h2>
           <p className="story-band__body">
             In an increasingly digital world, the objects we hold onto can carry
-            something more human: the trace of a hand, a place, a memory.
+            something more human: the trace of a hand, a perspective, a memory.
           </p>
           <p className="story-band__body">
             NMCCOY was created from a desire to make pieces that carry that
