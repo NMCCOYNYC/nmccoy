@@ -46,9 +46,9 @@ export default function AboutPage() {
             something more human: the trace of a hand, a place, a memory.
           </p>
           <p className="story-band__body">
-            NMCCOY was created from a desire to make pieces that hold onto that
-            feeling. Pieces shaped by an artist&apos;s hand and made to become
-            part of the lives of the people who wear them.
+            NMCCOY was created from a desire to make pieces that carry that
+            feeling forward. Pieces shaped by an artist&apos;s hand and made to
+            become part of the lives of those who wear them.
           </p>
         </FadeIn>
         <div className="story-band__img">
