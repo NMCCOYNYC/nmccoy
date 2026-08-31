@@ -779,11 +779,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   text-align: center;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2 / 1;
   min-height: 0;
   padding: 0;
   background: #1c1410;
-  color: var(--cacao);
+  color: var(--bone);
 }
 .page-hero-dark--impact .page-hero-dark__video {
   position: absolute;
@@ -796,7 +796,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .page-hero-dark--impact .page-hero-dark__overlay {
   z-index: 0;
-  background: rgba(237, 235, 233, 0.22);
+  background: linear-gradient(
+    180deg,
+    rgba(30, 18, 12, 0.42) 0%,
+    rgba(30, 18, 12, 0.22) 48%,
+    rgba(30, 18, 12, 0.4) 100%
+  );
 }
 .page-hero-dark--impact .page-hero-dark__content {
   position: relative;
@@ -809,12 +814,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .page-hero-dark--impact h1 {
   margin-bottom: 1.15rem;
-  color: var(--cacao);
+  color: var(--bone);
 }
 .page-hero-dark--impact .page-hero-dark__subhead {
   max-width: none;
   margin: 0 auto;
-  color: var(--cacao);
+  color: rgba(237, 235, 233, 0.88);
   white-space: nowrap;
 }
 .impact-philosophy {
@@ -839,8 +844,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .impact-commitment {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.86fr) minmax(0, 1.14fr);
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   background: var(--bone);
 }
 .impact-commitment__copy {
@@ -848,7 +853,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100svh - var(--nav-height) + 16vh);
+  min-height: 0;
   padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.75rem, 4.5vw, 4rem);
 }
 .impact-commitment__block {
@@ -881,12 +886,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-wrap: pretty;
 }
 .impact-commitment__visual {
-  position: sticky;
-  top: var(--nav-height);
-  height: calc(100svh - var(--nav-height));
-  align-self: start;
+  position: relative;
   overflow: hidden;
   background: var(--cacao);
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: auto;
 }
 .impact-commitment__fill {
   position: absolute;
@@ -2005,7 +2010,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     gap: 2.15rem;
   }
   .page-hero-dark.page-hero-dark--impact {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 1;
     min-height: 20rem;
     height: auto;
     align-items: center;

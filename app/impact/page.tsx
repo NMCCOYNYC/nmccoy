@@ -67,7 +67,7 @@ export default function ImpactPage() {
             fill
             className="impact-commitment__fill"
             style={{ objectFit: "cover", objectPosition: "center 40%" }}
-            sizes="(max-width: 960px) 100vw, 55vw"
+            sizes="(max-width: 960px) 100vw, 50vw"
           />
         </div>
       </section>
