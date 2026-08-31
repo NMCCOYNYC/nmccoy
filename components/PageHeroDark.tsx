@@ -12,7 +12,7 @@ export function PageHeroDark({
   style,
   liftOnScroll = false,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: React.ReactNode;
   subhead?: string;
   description?: string;
@@ -24,7 +24,7 @@ export function PageHeroDark({
 }) {
   const content = (
     <>
-      <p className="eyebrow">{eyebrow}</p>
+      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
       <h1>{title}</h1>
       {subhead ? <p className="page-hero-dark__subhead">{subhead}</p> : null}
       {description ? <p className="page-hero-dark__body">{description}</p> : null}

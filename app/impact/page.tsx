@@ -23,47 +23,42 @@ export default function ImpactPage() {
     <>
       <PageHeroDark
         className="page-hero-dark--impact"
-        eyebrow="Impact"
         title="Impact"
         subhead="Every collection should leave something meaningful behind."
         liftOnScroll
-        style={{
-          background: "linear-gradient(160deg,#74701E 0%,#38271E 100%)",
-        }}
       />
 
       <FadeIn variant="reveal">
         <section className="impact-philosophy">
           <p className="impact-philosophy__text">
             <span className="impact-philosophy__line">
-              Each NMCCOY collection begins with a place, a story,{" "}
+              Each NMCCOY collection begins with a place, a story, and a perspective.{" "}
             </span>
             <span className="impact-philosophy__line">
-              and a perspective. We believe giving back{" "}
+              We believe giving back should extend that connection, supporting{" "}
             </span>
             <span className="impact-philosophy__line">
-              should be part of that story, supporting the{" "}
-            </span>
-            <span className="impact-philosophy__line">
-              communities and landscapes that inspire the work.
+              the communities and landscapes that inspire the work.
             </span>
           </p>
         </section>
       </FadeIn>
 
       <section className="impact-commitment">
-        <FadeIn variant="reveal" className="impact-commitment__copy">
-          <p className="eyebrow">Desert Illusions</p>
-          <h2 className="impact-commitment__title">
-            <span className="impact-commitment__line">Giving Back</span>
-            <span className="impact-commitment__line">to the Southwest</span>
-          </h2>
-          <p className="impact-commitment__body">
-            For Desert Illusions, NMCCOY will donate a portion of proceeds to
-            support arts and culture in the American Southwest, with an inaugural
-            contribution planned for the Heard Museum.
-          </p>
-        </FadeIn>
+        <div className="impact-commitment__copy">
+          <FadeIn variant="reveal" className="impact-commitment__block">
+            <p className="eyebrow">Desert Illusions</p>
+            <h2 className="impact-commitment__title">
+              <span className="impact-commitment__line">Giving Back to</span>
+              <span className="impact-commitment__line">the Southwest</span>
+            </h2>
+            <p className="impact-commitment__body">
+              For Desert Illusions, NMCCOY will donate a portion of proceeds to
+              support arts and culture in the American Southwest, with an inaugural
+              contribution planned for the Heard Museum.
+            </p>
+          </FadeIn>
+        </div>
         <div className="impact-commitment__visual">
           <GradientFill
             gradient="linear-gradient(160deg,#74701E 0%,#8C603A 40%,#38271E 100%)"
@@ -81,16 +76,16 @@ export default function ImpactPage() {
               As NMCCOY evolves, giving will follow the stories{" "}
             </span>
             <span className="impact-future__line">
-              behind each collection, with a focus on{" "}
+              behind each collection, with a focus on arts education,{" "}
             </span>
             <span className="impact-future__line">
-              arts education, cultural preservation, and conservation.
+              cultural preservation, and conservation.
             </span>
           </p>
         </FadeIn>
         <div className="impact-future__index">
           {FUTURE_FOCI.map((item, i) => (
-            <FadeIn key={item.num} variant="rise" delay={0.08 * (i + 1)}>
+            <FadeIn key={item.num} variant="rise" delay={0.12 + i * 0.1}>
               <div className="impact-future__item">
                 <p className="impact-future__num">{item.num}</p>
                 <h3 className="impact-future__label">{item.label}</h3>
@@ -98,6 +93,15 @@ export default function ImpactPage() {
             </FadeIn>
           ))}
         </div>
+      </section>
+
+      <section className="impact-portrait">
+        <FadeIn variant="rise">
+          <figure className="impact-portrait__figure">
+            <div className="impact-portrait__media" />
+            <figcaption className="impact-portrait__caption" />
+          </figure>
+        </FadeIn>
       </section>
 
       <CtaSection
