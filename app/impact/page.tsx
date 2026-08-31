@@ -56,7 +56,10 @@ export default function ImpactPage() {
             <p className="impact-commitment__body">
               For Desert Illusions, NMCCOY will donate a portion of proceeds to
               support arts and culture in the American Southwest, with an inaugural
-              contribution planned for the Heard Museum.
+              contribution planned for the Heard Museum. The museum&apos;s
+              commitment to advancing American Indian art, culture, and creative
+              expression reflects the spirit of the collection and the region that
+              inspired it.
             </p>
           </FadeIn>
         </div>
