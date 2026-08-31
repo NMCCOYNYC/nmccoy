@@ -823,8 +823,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 .impact-philosophy {
-  padding: clamp(5.25rem, 9.5vw, 7.5rem) clamp(1.5rem, 5vw, 4rem)
-    clamp(5.6rem, 10.5vw, 8.25rem);
+  padding: clamp(7.25rem, 13vw, 11rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(7.75rem, 14vw, 11.75rem);
   background: var(--cacao);
 }
 .impact-philosophy__text {
