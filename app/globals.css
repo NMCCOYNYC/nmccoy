@@ -823,8 +823,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 .impact-philosophy {
-  padding: clamp(3.25rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem)
-    clamp(3.5rem, 7vw, 5.5rem);
+  padding: clamp(5.25rem, 9.5vw, 7.5rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(5.6rem, 10.5vw, 8.25rem);
   background: var(--cacao);
 }
 .impact-philosophy__text {
@@ -2010,9 +2010,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     gap: 2.15rem;
   }
   .page-hero-dark.page-hero-dark--impact {
-    aspect-ratio: 2 / 1;
-    min-height: 20rem;
-    height: auto;
+    aspect-ratio: auto;
+    height: calc(100svh - 5rem);
+    min-height: 22rem;
+    max-height: none;
     align-items: center;
     justify-content: center;
     padding: 0;

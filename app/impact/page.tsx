@@ -29,8 +29,8 @@ export default function ImpactPage() {
         liftOnScroll
       />
 
-      <FadeIn variant="reveal">
-        <section className="impact-philosophy">
+      <section className="impact-philosophy">
+        <FadeIn variant="reveal">
           <p className="impact-philosophy__text">
             <span className="impact-philosophy__line">
               Each NMCCOY collection begins with a place, a story, and a perspective.{" "}
@@ -42,8 +42,8 @@ export default function ImpactPage() {
               the communities and landscapes that inspire the work.
             </span>
           </p>
-        </section>
-      </FadeIn>
+        </FadeIn>
+      </section>
 
       <section className="impact-commitment">
         <div className="impact-commitment__copy">
