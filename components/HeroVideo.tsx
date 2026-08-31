@@ -49,10 +49,10 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster="/home/desert-illusions-hero-nologo-poster.jpg"
+        poster="/home/desert-illusions-hero-nologo-poster.jpg?v=2"
         aria-hidden="true"
       >
-        <source src="/home/desert-illusions-hero-nologo.mp4" type="video/mp4" />
+        <source src="/home/desert-illusions-hero-nologo.mp4?v=2" type="video/mp4" />
       </video>
       <button
         type="button"
