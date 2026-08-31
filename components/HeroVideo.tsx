@@ -2,13 +2,25 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const HERO_DESKTOP = "/home/desert-illusions-hero-nologo.mp4?v=4";
+const HERO_MOBILE = "/home/desert-illusions-hero-nologo-720.mp4?v=4";
+
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [soundOn, setSoundOn] = useState(false);
+  const [src, setSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 960px)");
+    const apply = () => setSrc(mq.matches ? HERO_MOBILE : HERO_DESKTOP);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !src) return;
 
     const apply = (visible: boolean) => {
       video.volume = 1;
@@ -16,6 +28,7 @@ export function HeroVideo() {
     };
 
     apply(true);
+    void video.play();
 
     const hero = video.closest(".hero");
     if (!hero) return;
@@ -26,7 +39,7 @@ export function HeroVideo() {
     );
     observer.observe(hero);
     return () => observer.disconnect();
-  }, [soundOn]);
+  }, [soundOn, src]);
 
   function toggleSound() {
     const video = videoRef.current;
@@ -42,6 +55,7 @@ export function HeroVideo() {
   return (
     <>
       <video
+        key={src ?? "poster"}
         ref={videoRef}
         className="hero__media hero__media--video"
         autoPlay
@@ -49,10 +63,10 @@ export function HeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster="/home/desert-illusions-hero-nologo-poster.jpg?v=3"
+        poster="/home/desert-illusions-hero-nologo-poster.jpg?v=4"
         aria-hidden="true"
       >
-        <source src="/home/desert-illusions-hero-nologo.mp4?v=3" type="video/mp4" />
+        {src ? <source src={src} type="video/mp4" /> : null}
       </video>
       <button
         type="button"
