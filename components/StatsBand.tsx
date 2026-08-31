@@ -31,15 +31,17 @@ export function CtaSection({
   title = "Enter the World of Desert Illusions",
   href = "/collection",
   buttonLabel = "View Collection",
+  className = "",
 }: {
   eyebrow?: string;
-  title?: string;
+  title?: React.ReactNode;
   href?: string;
   buttonLabel?: string;
+  className?: string;
 }) {
   return (
     <FadeIn variant="reveal">
-      <div className="cta-section cta-section--editorial">
+      <div className={`cta-section cta-section--editorial${className ? ` ${className}` : ""}`}>
         {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
         <h2>{title}</h2>
         <Link href={href} className="btn btn--outline">

@@ -1,7 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
 import { GradientFill } from "@/components/GradientFill";
-import { RevealParallax } from "@/components/RevealParallax";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
 import { pageMetadata } from "@/lib/seo";
@@ -9,112 +8,104 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Impact",
   description:
-    "NMCCOY gives back to the communities and landscapes that inspire each collection. Learn about our impact with Desert Illusions.",
+    "Each NMCCOY collection begins with a place. Desert Illusions will donate a portion of proceeds to support arts and culture in the American Southwest.",
   path: "/impact",
 });
+
+const FUTURE_FOCI = [
+  { num: "01", label: "Arts Education" },
+  { num: "02", label: "Cultural Preservation" },
+  { num: "03", label: "Conservation" },
+] as const;
 
 export default function ImpactPage() {
   return (
     <>
       <PageHeroDark
+        className="page-hero-dark--impact"
         eyebrow="Impact"
         title="Impact"
-        description="Every collection should leave something meaningful behind."
+        subhead="Every collection should leave something meaningful behind."
+        liftOnScroll
         style={{
           background: "linear-gradient(160deg,#74701E 0%,#38271E 100%)",
         }}
       />
 
-      <FadeIn variant="fade">
-        <section className="editorial-block">
-          <div className="editorial-block__inner editorial-block__inner--narrow">
-            <p className="editorial-block__lead editorial-block__lead--center">
-              Every NMCCOY collection begins with a place, a story, and a
-              perspective. The landscapes, communities, and cultural traditions that
-              inspire the work are an essential part of each collection&apos;s journey.
-            </p>
-          </div>
+      <FadeIn variant="reveal">
+        <section className="impact-philosophy">
+          <p className="impact-philosophy__text">
+            <span className="impact-philosophy__line">
+              Each NMCCOY collection begins with a place, a story, and a perspective.{" "}
+            </span>
+            <span className="impact-philosophy__line">
+              We believe giving back should be part of that story, supporting the
+              communities and landscapes that inspire the work.
+            </span>
+          </p>
         </section>
       </FadeIn>
 
-      <section className="story-band">
-        <FadeIn variant="reveal" className="story-band__text">
+      <section className="impact-commitment">
+        <FadeIn variant="reveal" className="impact-commitment__copy">
           <p className="eyebrow">Desert Illusions</p>
-          <h2 className="story-band__title">
-            Giving Back
-            <br />
-            to the Southwest
+          <h2 className="impact-commitment__title">
+            <span className="impact-commitment__line">Giving Back</span>
+            <span className="impact-commitment__line">to the Southwest</span>
           </h2>
-          <p className="story-band__body">
-            For Desert Illusions, our focus is on supporting initiatives that
-            preserve and celebrate the spirit of the American Southwest through
-            arts education, cultural preservation, and conservation efforts.
-          </p>
-          <p className="story-band__body">
-            This includes organizations dedicated to empowering Native youth through
-            creative expression, preserving Indigenous artistic traditions, and
-            protecting the desert landscapes that continue to inspire generations
-            of artists.
+          <p className="impact-commitment__body">
+            For Desert Illusions, NMCCOY will donate a portion of proceeds to
+            support arts and culture in the American Southwest, with an inaugural
+            contribution planned for the Heard Museum.
           </p>
         </FadeIn>
-        <RevealParallax className="story-band__img">
+        <div className="impact-commitment__visual">
           <GradientFill
             gradient="linear-gradient(160deg,#74701E 0%,#8C603A 40%,#38271E 100%)"
-            className="story-band__img-fill"
+            className="impact-commitment__fill"
             aria-hidden={true}
           />
-        </RevealParallax>
+        </div>
       </section>
 
-      <FadeIn variant="reveal">
-        <section className="impact-pillars">
-          <div className="impact-pillars__inner">
-            <div className="impact-pillar">
-              <p className="impact-pillar__label">01</p>
-              <h3 className="impact-pillar__title">Arts Education</h3>
-              <p className="impact-pillar__body">
-                Supporting creative programs that empower young artists and keep
-                cultural expression alive across the Southwest.
-              </p>
-            </div>
-            <div className="impact-pillar">
-              <p className="impact-pillar__label">02</p>
-              <h3 className="impact-pillar__title">Cultural Preservation</h3>
-              <p className="impact-pillar__body">
-                Honoring Indigenous artistic traditions and the communities whose
-                stories and craft continue to shape the region.
-              </p>
-            </div>
-            <div className="impact-pillar">
-              <p className="impact-pillar__label">03</p>
-              <h3 className="impact-pillar__title">Conservation</h3>
-              <p className="impact-pillar__body">
-                Protecting the desert landscapes that inspire each collection and
-                the ecosystems that sustain them.
-              </p>
-            </div>
-          </div>
-        </section>
-      </FadeIn>
+      <section className="impact-future">
+        <FadeIn variant="reveal" className="impact-future__intro">
+          <p className="eyebrow">From Collection to Collection</p>
+          <p className="impact-future__statement">
+            <span className="impact-future__line">
+              As NMCCOY evolves, giving will follow the stories{" "}
+            </span>
+            <span className="impact-future__line">
+              behind each collection, with a focus on{" "}
+            </span>
+            <span className="impact-future__line">
+              arts education, cultural preservation, and conservation.
+            </span>
+          </p>
+        </FadeIn>
+        <div className="impact-future__index">
+          {FUTURE_FOCI.map((item, i) => (
+            <FadeIn key={item.num} variant="rise" delay={0.08 * (i + 1)}>
+              <div className="impact-future__item">
+                <p className="impact-future__num">{item.num}</p>
+                <h3 className="impact-future__label">{item.label}</h3>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </section>
 
-      <FadeIn variant="fade">
-        <section className="editorial-block editorial-block--quote">
-          <div className="editorial-block__inner editorial-block__inner--narrow">
-            <p className="editorial-pullquote">
-              As NMCCOY grows, a portion of proceeds from each collection will
-              support organizations connected to the places and communities that
-              helped shape its story.
-            </p>
-            <p className="editorial-block__body editorial-block__body--center">
-              While the organizations we support may evolve from collection to
-              collection, our intention remains the same: to give back to the
-              people, places, and stories that inspire the work.
-            </p>
-          </div>
-        </section>
-      </FadeIn>
-
-      <CtaSection eyebrow="Collection No. 1" />
+      <CtaSection
+        className="cta-section--quiet"
+        eyebrow="Collection No. 1"
+        title={
+          <>
+            Enter the World of
+            <br />
+            Desert Illusions
+          </>
+        }
+      />
       <Footer />
     </>
   );

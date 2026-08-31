@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroScrollLift } from "@/components/HeroScrollLift";
 
 export function PageHeroDark({
   eyebrow,
@@ -9,6 +10,7 @@ export function PageHeroDark({
   imageAlt,
   className = "",
   style,
+  liftOnScroll = false,
 }: {
   eyebrow: string;
   title: React.ReactNode;
@@ -18,7 +20,17 @@ export function PageHeroDark({
   imageAlt?: string;
   className?: string;
   style?: React.CSSProperties;
+  liftOnScroll?: boolean;
 }) {
+  const content = (
+    <>
+      <p className="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      {subhead ? <p className="page-hero-dark__subhead">{subhead}</p> : null}
+      {description ? <p className="page-hero-dark__body">{description}</p> : null}
+    </>
+  );
+
   return (
     <section
       className={`page-hero-dark${imageSrc ? " page-hero-dark--image" : ""}${className ? ` ${className}` : ""}`}
@@ -42,10 +54,7 @@ export function PageHeroDark({
         </>
       ) : null}
       <div className="page-hero-dark__content">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1>{title}</h1>
-        {subhead ? <p className="page-hero-dark__subhead">{subhead}</p> : null}
-        {description ? <p className="page-hero-dark__body">{description}</p> : null}
+        {liftOnScroll ? <HeroScrollLift>{content}</HeroScrollLift> : content}
       </div>
     </section>
   );
