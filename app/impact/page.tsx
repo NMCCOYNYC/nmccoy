@@ -105,8 +105,25 @@ export default function ImpactPage() {
       <section className="impact-portrait">
         <FadeIn variant="rise">
           <figure className="impact-portrait__figure">
-            <div className="impact-portrait__media" />
-            <figcaption className="impact-portrait__caption" />
+            <div className="impact-portrait__media">
+              <Image
+                src="/impact/hubbell-weavers.jpg"
+                alt="Diné weavers at a loom at Hubbell Trading Post National Historic Site, Arizona"
+                fill
+                className="impact-portrait__fill"
+                style={{ objectFit: "cover", objectPosition: "center center" }}
+                sizes="(max-width: 960px) 80vw, 54vw"
+              />
+            </div>
+            <figcaption className="impact-portrait__caption">
+              <span className="impact-portrait__credit">
+                Diné weavers at Hubbell Trading Post National Historic Site,
+                Arizona
+              </span>
+              <span className="impact-portrait__source">
+                National Park Service
+              </span>
+            </figcaption>
           </figure>
         </FadeIn>
       </section>
