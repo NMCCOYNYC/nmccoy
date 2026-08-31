@@ -867,7 +867,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   height: calc(100svh - var(--nav-height));
   align-self: start;
   overflow: hidden;
-  background: linear-gradient(160deg, #74701e 0%, #8c603a 40%, #38271e 100%);
+  background: var(--cacao);
 }
 .impact-commitment__fill {
   position: absolute;
@@ -1968,8 +1968,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     position: relative;
     top: auto;
     height: auto;
-    min-height: min(68svh, 34rem);
-    aspect-ratio: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
     width: 100%;
   }
   .impact-future {

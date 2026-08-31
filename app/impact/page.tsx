@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import { GradientFill } from "@/components/GradientFill";
 import { CtaSection } from "@/components/StatsBand";
 import { PageHeroDark } from "@/components/PageHeroDark";
 import { pageMetadata } from "@/lib/seo";
@@ -60,10 +60,13 @@ export default function ImpactPage() {
           </FadeIn>
         </div>
         <div className="impact-commitment__visual">
-          <GradientFill
-            gradient="linear-gradient(160deg,#74701E 0%,#8C603A 40%,#38271E 100%)"
+          <Image
+            src="/impact/giving-back-southwest.jpg"
+            alt="Red rock formations in the American Southwest at golden hour"
+            fill
             className="impact-commitment__fill"
-            aria-hidden={true}
+            style={{ objectFit: "cover", objectPosition: "center 40%" }}
+            sizes="(max-width: 960px) 100vw, 55vw"
           />
         </div>
       </section>
