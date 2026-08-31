@@ -787,17 +787,29 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: rgba(237, 235, 233, 0.68);
 }
 .impact-philosophy {
-  padding: clamp(5rem, 11vw, 8.5rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(5.5rem, 12vw, 9.5rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(6.75rem, 14vw, 11rem);
   background: var(--bone);
 }
 .impact-philosophy__text {
-  max-width: 36.5rem;
+  max-width: 42rem;
   margin: 0 auto;
   text-align: center;
-  font-size: clamp(15px, 1.25vw, 17px);
-  line-height: 1.85;
-  color: var(--taupe);
+  font-family: var(--font-display);
+  font-size: clamp(1.18rem, 1.85vw, 1.58rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: var(--cacao);
   text-wrap: pretty;
+}
+.impact-philosophy__text::after {
+  content: "";
+  display: block;
+  width: 2.15rem;
+  height: 1px;
+  margin: 2.5rem auto 0;
+  background: rgba(56, 39, 30, 0.22);
 }
 .impact-philosophy__line {
   display: block;
@@ -1887,9 +1899,11 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   }
   .editorial-block__grid { grid-template-columns: 1fr; }
   .impact-philosophy {
-    padding: clamp(3.75rem, 10vw, 5.5rem) clamp(1.5rem, 5vw, 2.25rem);
+    padding: clamp(4.25rem, 12vw, 6.25rem) clamp(1.5rem, 5vw, 2.25rem)
+      clamp(4.75rem, 13vw, 6.75rem);
   }
-  .impact-philosophy__text { max-width: 22.5rem; }
+  .impact-philosophy__text { max-width: 21.5rem; }
+  .impact-philosophy__text::after { margin-top: 2rem; }
   .impact-philosophy__line { display: inline; }
   .impact-commitment {
     grid-template-columns: 1fr;
@@ -2261,7 +2275,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 @media (max-width: 640px) {
   .art-meant__break { display: inline; }
   .art-meant__body { max-width: 20.5rem; }
-  .impact-philosophy__text { max-width: 19.5rem; }
+  .impact-philosophy__text { max-width: 18.75rem; }
   .impact-commitment__body { max-width: 19.75rem; }
   .page-hero-dark--impact .page-hero-dark__subhead { max-width: 16.5rem; }
 }

@@ -36,10 +36,15 @@ export default function ImpactPage() {
         <section className="impact-philosophy">
           <p className="impact-philosophy__text">
             <span className="impact-philosophy__line">
-              Each NMCCOY collection begins with a place, a story, and a perspective.{" "}
+              Each NMCCOY collection begins with a place, a story,{" "}
             </span>
             <span className="impact-philosophy__line">
-              We believe giving back should be part of that story, supporting the
+              and a perspective. We believe giving back{" "}
+            </span>
+            <span className="impact-philosophy__line">
+              should be part of that story, supporting the{" "}
+            </span>
+            <span className="impact-philosophy__line">
               communities and landscapes that inspire the work.
             </span>
           </p>
