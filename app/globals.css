@@ -770,38 +770,57 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-scroll-lift {
   will-change: transform, opacity;
 }
-.page-hero-dark--impact {
+.page-hero-dark.page-hero-dark--impact {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--cacao);
-  color: var(--bone);
-  min-height: min(58svh, 36rem);
-  padding: calc(var(--nav-height) + clamp(3.25rem, 6vw, 5rem))
-    clamp(1.5rem, 4vw, 4rem) clamp(3.5rem, 6.5vw, 5.25rem);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  padding: 0;
+  background: #1c1410;
+  color: var(--cacao);
+}
+.page-hero-dark--impact .page-hero-dark__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+}
+.page-hero-dark--impact .page-hero-dark__overlay {
+  z-index: 0;
+  background: rgba(237, 235, 233, 0.22);
 }
 .page-hero-dark--impact .page-hero-dark__content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: calc(var(--nav-height) + 1.25rem) clamp(1.5rem, 4vw, 4rem) 2rem;
 }
 .page-hero-dark--impact h1 {
   margin-bottom: 1.15rem;
-  color: var(--bone);
+  color: var(--cacao);
 }
 .page-hero-dark--impact .page-hero-dark__subhead {
   max-width: none;
   margin: 0 auto;
-  color: var(--bone);
+  color: var(--cacao);
   white-space: nowrap;
 }
 .impact-philosophy {
-  padding: clamp(4.25rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4rem)
-    clamp(4.75rem, 9vw, 7rem);
-  background: var(--bone);
+  padding: clamp(3.25rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem)
+    clamp(3.5rem, 7vw, 5.5rem);
+  background: var(--cacao);
 }
 .impact-philosophy__text {
   max-width: 54rem;
@@ -812,7 +831,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-weight: 400;
   line-height: 1.52;
   letter-spacing: -0.012em;
-  color: var(--cacao);
+  color: var(--bone);
   text-wrap: pretty;
 }
 .impact-philosophy__line {
@@ -1985,10 +2004,23 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     grid-template-columns: 1fr;
     gap: 2.15rem;
   }
-  .page-hero-dark--impact {
-    min-height: min(48svh, 26rem);
-    padding: calc(var(--nav-height) + 2.75rem) clamp(1.5rem, 5vw, 2.25rem)
-      3.25rem;
+  .page-hero-dark.page-hero-dark--impact {
+    aspect-ratio: 16 / 9;
+    min-height: 20rem;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .page-hero-dark--impact .page-hero-dark__content {
+    padding: calc(var(--nav-height) + 0.75rem) clamp(1.25rem, 5vw, 2rem) 1.5rem;
+  }
+  .page-hero-dark--impact .page-hero-dark__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .impact-portrait {
     padding: clamp(3.75rem, 10vw, 5.5rem) clamp(1.5rem, 5vw, 2.25rem)

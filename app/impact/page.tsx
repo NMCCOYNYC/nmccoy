@@ -25,6 +25,7 @@ export default function ImpactPage() {
         className="page-hero-dark--impact"
         title="Impact"
         subhead="Every collection should leave something meaningful behind."
+        videoSrc="/impact/arizona-roads.mp4"
         liftOnScroll
       />
 

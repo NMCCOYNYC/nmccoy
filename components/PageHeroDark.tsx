@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroLoopVideo } from "@/components/HeroLoopVideo";
 import { HeroScrollLift } from "@/components/HeroScrollLift";
 
 export function PageHeroDark({
@@ -8,6 +9,7 @@ export function PageHeroDark({
   description,
   imageSrc,
   imageAlt,
+  videoSrc,
   className = "",
   style,
   liftOnScroll = false,
@@ -18,6 +20,7 @@ export function PageHeroDark({
   description?: string;
   imageSrc?: string;
   imageAlt?: string;
+  videoSrc?: string;
   className?: string;
   style?: React.CSSProperties;
   liftOnScroll?: boolean;
@@ -33,10 +36,18 @@ export function PageHeroDark({
 
   return (
     <section
-      className={`page-hero-dark${imageSrc ? " page-hero-dark--image" : ""}${className ? ` ${className}` : ""}`}
+      className={`page-hero-dark${imageSrc ? " page-hero-dark--image" : ""}${videoSrc ? " page-hero-dark--video" : ""}${className ? ` ${className}` : ""}`}
       style={style}
     >
-      {imageSrc ? (
+      {videoSrc ? (
+        <>
+          <HeroLoopVideo
+            src={videoSrc}
+            className="page-hero-dark__media page-hero-dark__video"
+          />
+          <div className="page-hero-dark__overlay" aria-hidden="true" />
+        </>
+      ) : imageSrc ? (
         <>
           <Image
             src={imageSrc}
