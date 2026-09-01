@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
 import { HeroLoopVideo } from "@/components/HeroLoopVideo";
 import { ScarfCard } from "@/components/ScarfCard";
+import { getProductGallerySlides } from "@/lib/scarf-gallery";
 import { SpotifySection } from "@/components/SpotifySection";
 import { CtaSection } from "@/components/StatsBand";
 import { CollectionTracker } from "@/components/AnalyticsHelpers";
@@ -51,7 +52,12 @@ export default function CollectionPage() {
 
       <div className="scarves-grid">
         {scarves.map((scarf, i) => (
-          <ScarfCard key={scarf.slug} scarf={scarf} delay={delays[i]} />
+          <ScarfCard
+            key={scarf.slug}
+            scarf={scarf}
+            delay={delays[i]}
+            slides={getProductGallerySlides(scarf)}
+          />
         ))}
       </div>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Scarf } from "@/lib/products";
-import { getScarfImages } from "@/lib/products";
+import type { ProductGallerySlide } from "@/lib/scarf-gallery";
 import { isCheckoutConfigured } from "@/lib/shopify/checkout";
 import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
@@ -11,17 +11,26 @@ import { ProductGallery } from "@/components/ProductGallery";
 import { Accordion } from "@/components/Accordion";
 import { AddToCartButton } from "@/components/AddToCartButton";
 
-export function ProductPageClient({ scarf }: { scarf: Scarf }) {
+export function ProductPageClient({
+  scarf,
+  slides,
+}: {
+  scarf: Scarf;
+  slides: ProductGallerySlide[];
+}) {
   const checkoutConfigured = isCheckoutConfigured(scarf);
+  const isCarousel = slides.length > 1;
 
   return (
     <>
       <div className="product-wrap">
-        <div className="product-gallery">
+        <div
+          className={`product-gallery${isCarousel ? " product-gallery--banner" : ""}`}
+        >
           <ProductGallery
             gradient={scarf.gradient}
             scarfName={scarf.name}
-            images={getScarfImages(scarf)}
+            slides={slides}
           />
         </div>
         <FadeIn variant="reveal" className="product-info">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getScarfBySlug, scarves } from "@/lib/products";
+import { getProductGallerySlides } from "@/lib/scarf-gallery";
 import { JsonLd } from "@/components/JsonLd";
 import { ProductPageClient } from "@/components/ProductPageClient";
 import { ProductTracker } from "@/components/ProductTracker";
@@ -51,7 +52,10 @@ export default async function ScarfPage({
         ])}
       />
       <ProductTracker slug={scarf.slug} name={scarf.name} />
-      <ProductPageClient scarf={scarf} />
+      <ProductPageClient
+        scarf={scarf}
+        slides={getProductGallerySlides(scarf)}
+      />
     </>
   );
 }

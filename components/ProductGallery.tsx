@@ -1,154 +1,182 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getScarfThumbGradients } from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
+import type { ProductGallerySlide } from "@/lib/scarf-gallery";
 
 export function ProductGallery({
   gradient,
   scarfName,
-  images = [],
+  slides = [],
 }: {
   gradient: string;
   scarfName: string;
-  images?: string[];
+  slides?: ProductGallerySlide[];
 }) {
   const [active, setActive] = useState(0);
-  const [ratio, setRatio] = useState<string | undefined>(undefined);
-  const [zoomed, setZoomed] = useState(false);
-  const [origin, setOrigin] = useState("50% 50%");
-  const hasImages = images.length > 0;
+  const stripRef = useRef<HTMLDivElement>(null);
+  const slideRefs = useRef<(HTMLElement | null)[]>([]);
+  const placeholders = getScarfThumbGradients(gradient);
+  const hasHero = Boolean(slides[0]?.src);
+  const isCarousel = slides.length > 1;
 
-  const ZOOM = 2.4;
-
-  const updateOrigin = (
-    clientX: number,
-    clientY: number,
-    rect: DOMRect
-  ) => {
-    const x = ((clientX - rect.left) / rect.width) * 100;
-    const y = ((clientY - rect.top) / rect.height) * 100;
-    setOrigin(
-      `${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`
-    );
-  };
-
-  const selectImage = (i: number) => {
+  const selectImage = useCallback((i: number) => {
     setActive(i);
-    setZoomed(false);
-  };
+    const root = stripRef.current;
+    const target = slideRefs.current[i];
+    if (!root || !target) return;
+    root.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
+  }, []);
 
-  if (hasImages) {
-    const current = images[Math.min(active, images.length - 1)];
+  useEffect(() => {
+    if (!isCarousel) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      e.preventDefault();
+      const next =
+        e.key === "ArrowRight"
+          ? Math.min(active + 1, slides.length - 1)
+          : Math.max(active - 1, 0);
+      selectImage(next);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active, isCarousel, selectImage, slides.length]);
+
+  useEffect(() => {
+    const root = stripRef.current;
+    if (!root || !isCarousel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const index = Number((visible.target as HTMLElement).dataset.index);
+        if (!Number.isNaN(index)) setActive(index);
+      },
+      { root, threshold: [0.45, 0.6, 0.8] }
+    );
+
+    slideRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [isCarousel, slides.length]);
+
+  if (!hasHero) {
     return (
       <>
-        <div
-          className={`product-main${zoomed ? " is-zoomed" : ""}`}
-          style={ratio ? { aspectRatio: ratio } : undefined}
-          onClick={(e) => {
-            if (!zoomed) {
-              updateOrigin(
-                e.clientX,
-                e.clientY,
-                e.currentTarget.getBoundingClientRect()
-              );
-            }
-            setZoomed((z) => !z);
-          }}
-          onMouseMove={(e) => {
-            if (zoomed) {
-              updateOrigin(
-                e.clientX,
-                e.clientY,
-                e.currentTarget.getBoundingClientRect()
-              );
-            }
-          }}
-          onMouseLeave={() => setZoomed(false)}
-          onTouchMove={(e) => {
-            if (zoomed && e.touches[0]) {
-              updateOrigin(
-                e.touches[0].clientX,
-                e.touches[0].clientY,
-                e.currentTarget.getBoundingClientRect()
-              );
-            }
-          }}
-        >
-          <Image
-            src={current}
-            alt={`${scarfName} silk scarf — view ${active + 1}`}
-            fill
+        <div className="product-main">
+          <GradientFill
+            gradient={placeholders[active]}
             className="product-main-fill"
-            style={{
-              objectFit: "cover",
-              transform: zoomed ? `scale(${ZOOM})` : "scale(1)",
-              transformOrigin: origin,
-              transition: "transform 0.25s ease",
-            }}
-            sizes="(max-width: 900px) 100vw, 50vw"
-            priority
-            onLoad={(e) => {
-              const img = e.currentTarget;
-              if (img.naturalWidth && img.naturalHeight) {
-                setRatio(`${img.naturalWidth} / ${img.naturalHeight}`);
-              }
-            }}
+            style={{ position: "absolute", inset: 0 }}
+            aria-label={`${scarfName} silk scarf — view ${active + 1}`}
           />
         </div>
-        {images.length > 1 ? (
-          <div className="product-thumbs">
-            {images.map((src, i) => (
-              <div
-                key={src}
-                className={`product-thumb${i === active ? " active" : ""}`}
-                onClick={() => selectImage(i)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && selectImage(i)}
-                aria-label={`View image ${i + 1}`}
-              >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="120px"
-                />
-              </div>
-            ))}
-          </div>
-        ) : null}
+        <div className="product-thumbs">
+          {placeholders.map((g, i) => (
+            <div
+              key={i}
+              className={`product-thumb${i === active ? " active" : ""}`}
+              style={{ background: g }}
+              onClick={() => setActive(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && setActive(i)}
+              aria-label={`View image ${i + 1}`}
+            />
+          ))}
+        </div>
       </>
     );
   }
 
-  const thumbs = getScarfThumbGradients(gradient);
-  return (
-    <>
+  if (!isCarousel) {
+    const src = slides[0]?.src;
+    return (
       <div className="product-main">
-        <GradientFill
-          gradient={thumbs[active]}
-          className="product-main-fill"
-          style={{ position: "absolute", inset: 0 }}
-          aria-label={`${scarfName} silk scarf — view ${active + 1}`}
-        />
-      </div>
-      <div className="product-thumbs">
-        {thumbs.map((g, i) => (
-          <div
-            key={i}
-            className={`product-thumb${i === active ? " active" : ""}`}
-            style={{ background: g }}
-            onClick={() => setActive(i)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && setActive(i)}
-            aria-label={`View image ${i + 1}`}
+        {src ? (
+          <Image
+            src={src}
+            alt={`${scarfName} silk scarf`}
+            fill
+            className="product-main-fill"
+            style={{ objectFit: "cover" }}
+            sizes="100vw"
+            priority
           />
-        ))}
+        ) : null}
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="product-strip" ref={stripRef}>
+      {slides.map((slide, i) => (
+        <figure
+          key={`${slide.src ?? "placeholder"}-${i}`}
+          ref={(el) => {
+            slideRefs.current[i] = el;
+          }}
+          data-index={i}
+          className={`product-strip__slide ${i === 0 ? "product-strip__slide--square" : "product-strip__slide--portrait"}`}
+        >
+          {slide.src ? (
+            <Image
+              src={slide.src}
+              alt={`${scarfName} silk scarf — view ${i + 1} of ${slides.length}`}
+              fill
+              draggable={false}
+              className="product-strip__img"
+              style={{ objectFit: "cover" }}
+              sizes={i === 0 ? "50vw" : "40vw"}
+              priority={i === 0}
+            />
+          ) : (
+            <GradientFill
+              gradient={placeholders[i] ?? placeholders[0]}
+              className="product-strip__img"
+              style={{ position: "absolute", inset: 0 }}
+              aria-label={`${scarfName} silk scarf — styled view ${i}`}
+            />
+          )}
+          {i === 0 ? (
+            <div className="product-strip__thumbs">
+              {slides.map((thumb, t) => (
+                <button
+                  key={`${thumb.src ?? "placeholder"}-thumb-${t}`}
+                  type="button"
+                  className={`product-strip__thumb${t === active ? " is-active" : ""}`}
+                  onClick={() => selectImage(t)}
+                  aria-label={`View image ${t + 1}`}
+                  aria-current={t === active ? "true" : undefined}
+                >
+                  {thumb.src ? (
+                    <Image
+                      src={thumb.src}
+                      alt=""
+                      fill
+                      draggable={false}
+                      style={{ objectFit: "cover" }}
+                      sizes="48px"
+                    />
+                  ) : (
+                    <GradientFill
+                      gradient={placeholders[t] ?? placeholders[0]}
+                      style={{ position: "absolute", inset: 0 }}
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </figure>
+      ))}
+    </div>
   );
 }
