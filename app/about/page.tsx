@@ -109,7 +109,7 @@ export default function AboutPage() {
           <p className="story-band__body">
             Raised in the Arizona desert and shaped by more than a decade in New
             York, founder Nichole McCoy draws from the landscapes, memories, and
-            contrasts that have shaped her own perspective.
+            contrasts that continue to inform her perspective.
           </p>
           <p className="story-band__body">
             After years working in luxury fashion, including time at Hermès, and
