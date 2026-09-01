@@ -2275,6 +2275,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   width: 100%;
   margin: 0;
   cursor: default;
+  aspect-ratio: auto;
+  height: calc(100svh - var(--nav-height) - 11rem);
+  min-height: 16rem;
 }
 .feature-video--collection .feature-video__video {
   object-fit: cover;
