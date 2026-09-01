@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Scarf } from "@/lib/products";
-import { getPrimaryImage } from "@/lib/products";
+import {
+  PRODUCT_PHOTO_QUALITY,
+  PRODUCT_PHOTO_SIZES,
+  getPrimaryImage,
+} from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
 
 function slidesPerView(width: number) {
@@ -127,6 +131,7 @@ export function ScarfCarousel({
               <Link
                 key={scarf.slug}
                 href={`/scarves/${scarf.slug}`}
+                prefetch
                 className="carousel-slide"
                 style={{ minWidth: `calc(${slideW}% - 1px)` }}
                 draggable={false}
@@ -145,7 +150,8 @@ export function ScarfCarousel({
                       fill
                       className="carousel-slide__img-fill"
                       style={{ objectFit: "cover" }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+                      sizes={PRODUCT_PHOTO_SIZES}
+                      quality={PRODUCT_PHOTO_QUALITY}
                     />
                   ) : (
                     <GradientFill

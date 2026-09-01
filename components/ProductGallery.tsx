@@ -1,9 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { getScarfThumbGradients } from "@/lib/products";
+import {
+  PRODUCT_PHOTO_QUALITY,
+  PRODUCT_PHOTO_SIZES,
+  getScarfThumbGradients,
+} from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
+import {
+  ProductLightbox,
+  type ProductLightboxSlide,
+} from "@/components/ProductLightbox";
 import type { ProductGallerySlide } from "@/lib/scarf-gallery";
 
 export function ProductGallery({
@@ -16,11 +24,33 @@ export function ProductGallery({
   slides?: ProductGallerySlide[];
 }) {
   const [active, setActive] = useState(0);
+  const [lightbox, setLightbox] = useState<{
+    index: number;
+    origin: HTMLElement;
+  } | null>(null);
   const stripRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLElement | null)[]>([]);
+  const lightboxOpenRef = useRef(false);
   const placeholders = getScarfThumbGradients(gradient);
   const hasHero = Boolean(slides[0]?.src);
   const isCarousel = slides.length > 1;
+
+  const zoomable = useMemo(
+    () =>
+      slides.flatMap((slide, galleryIndex) =>
+        slide.src ? [{ src: slide.src, galleryIndex }] : []
+      ),
+    [slides]
+  );
+  const zoomSlides: ProductLightboxSlide[] = zoomable.map(({ src, galleryIndex }) => ({
+    src,
+    alt:
+      slides.length > 1
+        ? `${scarfName} silk scarf — view ${galleryIndex + 1} of ${slides.length}`
+        : `${scarfName} silk scarf`,
+  }));
+
+  lightboxOpenRef.current = lightbox !== null;
 
   const selectImage = useCallback((i: number) => {
     setActive(i);
@@ -30,9 +60,44 @@ export function ProductGallery({
     root.scrollTo({ left: target.offsetLeft, behavior: "smooth" });
   }, []);
 
+  const openLightbox = useCallback(
+    (slideIndex: number, origin: HTMLElement) => {
+      const zoomIndex = zoomable.findIndex((item) => item.galleryIndex === slideIndex);
+      if (zoomIndex < 0) return;
+      setLightbox({ index: zoomIndex, origin });
+    },
+    [zoomable]
+  );
+
+  const zoomPointer = useRef<{ x: number; y: number; index: number } | null>(null);
+
+  function onZoomPointerDown(e: React.PointerEvent<HTMLElement>, slideIndex: number) {
+    if ((e.target as HTMLElement).closest("button:not(.product-strip__zoom)")) {
+      zoomPointer.current = null;
+      return;
+    }
+    zoomPointer.current = { x: e.clientX, y: e.clientY, index: slideIndex };
+  }
+
+  function onZoomClick(e: React.MouseEvent<HTMLElement>, slideIndex: number) {
+    const start = zoomPointer.current;
+    zoomPointer.current = null;
+    if ((e.target as HTMLElement).closest("button:not(.product-strip__zoom)")) return;
+    if (
+      start &&
+      (start.index !== slideIndex ||
+        Math.abs(e.clientX - start.x) > 10 ||
+        Math.abs(e.clientY - start.y) > 10)
+    ) {
+      return;
+    }
+    openLightbox(slideIndex, e.currentTarget);
+  }
+
   useEffect(() => {
     if (!isCarousel) return;
     const onKey = (e: KeyboardEvent) => {
+      if (lightboxOpenRef.current) return;
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
       e.preventDefault();
       const next =
@@ -67,6 +132,22 @@ export function ProductGallery({
     return () => observer.disconnect();
   }, [isCarousel, slides.length]);
 
+  const lightboxNode = lightbox ? (
+    <ProductLightbox
+      slides={zoomSlides}
+      index={lightbox.index}
+      origin={lightbox.origin}
+      onClose={() => setLightbox(null)}
+      onIndexChange={(next) => {
+        setLightbox((current) =>
+          current ? { ...current, index: next } : current
+        );
+        const slideIndex = zoomable[next]?.galleryIndex;
+        if (slideIndex !== undefined) selectImage(slideIndex);
+      }}
+    />
+  ) : null;
+
   if (!hasHero) {
     return (
       <>
@@ -98,20 +179,38 @@ export function ProductGallery({
 
   if (!isCarousel) {
     const src = slides[0]?.src;
+    const alt = `${scarfName} silk scarf`;
     return (
-      <div className="product-main">
-        {src ? (
-          <Image
-            src={src}
-            alt={`${scarfName} silk scarf`}
-            fill
-            className="product-main-fill"
-            style={{ objectFit: "cover" }}
-            sizes="100vw"
-            priority
-          />
-        ) : null}
-      </div>
+      <>
+        <div
+          className="product-main"
+          onPointerDown={(e) => onZoomPointerDown(e, 0)}
+          onClick={(e) => onZoomClick(e, 0)}
+        >
+          {src ? (
+            <>
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                className="product-main-fill"
+                style={{ objectFit: "cover" }}
+                sizes={PRODUCT_PHOTO_SIZES}
+                quality={PRODUCT_PHOTO_QUALITY}
+                priority
+              />
+              <button
+                type="button"
+                className="product-strip__zoom"
+                aria-label={`View ${alt} larger`}
+                onPointerDown={(e) => onZoomPointerDown(e, 0)}
+                onClick={(e) => onZoomClick(e, 0)}
+              />
+            </>
+          ) : null}
+        </div>
+        {lightboxNode}
+      </>
     );
   }
 
@@ -127,18 +226,36 @@ export function ProductGallery({
               }}
               data-index={i}
               className={`product-strip__slide ${i === 0 ? "product-strip__slide--square" : "product-strip__slide--portrait"}`}
+              onPointerDown={(e) => onZoomPointerDown(e, i)}
+              onClick={(e) => onZoomClick(e, i)}
             >
               {slide.src ? (
-                <Image
-                  src={slide.src}
-                  alt={`${scarfName} silk scarf — view ${i + 1} of ${slides.length}`}
-                  fill
-                  draggable={false}
-                  className="product-strip__img"
-                  style={{ objectFit: "cover" }}
-                  sizes={i === 0 ? "(max-width: 960px) 100vw, 50vw" : "(max-width: 960px) 80vw, 40vw"}
-                  priority={i === 0}
-                />
+                <>
+                  <Image
+                    src={slide.src}
+                    alt={`${scarfName} silk scarf — view ${i + 1} of ${slides.length}`}
+                    fill
+                    draggable={false}
+                    className="product-strip__img"
+                    style={{ objectFit: "cover" }}
+                    sizes={PRODUCT_PHOTO_SIZES}
+                    quality={PRODUCT_PHOTO_QUALITY}
+                    priority={i === 0}
+                  />
+                  <button
+                    type="button"
+                    className="product-strip__zoom"
+                    aria-label={`View ${scarfName} silk scarf — view ${i + 1} of ${slides.length} larger`}
+                    onPointerDown={(e) => {
+                      e.stopPropagation();
+                      onZoomPointerDown(e, i);
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onZoomClick(e, i);
+                    }}
+                  />
+                </>
               ) : (
                 <GradientFill
                   gradient={placeholders[i] ?? placeholders[0]}
@@ -213,6 +330,7 @@ export function ProductGallery({
           />
         ))}
       </div>
+      {lightboxNode}
     </>
   );
 }

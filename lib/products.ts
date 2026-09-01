@@ -85,7 +85,7 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#F0C87A 0%,#C4843A 40%,#8C603A 100%)",
     desc1:
-      "A celebration of unity, hope, and shared journeys. Two birds move together toward the sun, carrying a single bloom between them as a symbol of trust, connection, and renewal. Inspired by the belief that even after life's most difficult seasons, the sun will rise again, Sundance is a reminder of the beauty found in moving forward together.",
+      "A celebration of unity, hope, and shared journeys. Two birds move together toward the sun, carrying a single bloom between them as a symbol of trust, connection, and renewal.\n\nInspired by the belief that even after life's most difficult seasons, the sun will rise again, Sundance is a reminder of the beauty found in moving forward together.",
     desc2:
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
@@ -122,6 +122,10 @@ export function getScarfImages(scarf: Scarf) {
 export function getPrimaryImage(scarf: Scarf) {
   return getScarfImages(scarf)[0];
 }
+
+/** Shared so collection cards and PDPs request the same optimized file. */
+export const PRODUCT_PHOTO_SIZES = "(max-width: 960px) 100vw, 50vw";
+export const PRODUCT_PHOTO_QUALITY = 75;
 
 export function getScarfThumbGradients(gradient: string) {
   return [

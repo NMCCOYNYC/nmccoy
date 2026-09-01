@@ -5,17 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { Scarf } from "@/lib/products";
-import { getPrimaryImage, getScarfThumbGradients } from "@/lib/products";
+import {
+  PRODUCT_PHOTO_QUALITY,
+  PRODUCT_PHOTO_SIZES,
+  getPrimaryImage,
+  getScarfThumbGradients,
+} from "@/lib/products";
 import type { ProductGallerySlide } from "@/lib/scarf-gallery";
 import { GradientFill } from "@/components/GradientFill";
 import { FadeIn } from "@/components/FadeIn";
 
-function canHover() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(hover: hover) and (pointer: fine)").matches
-  );
-}
+const AXIS_DIST = 12;
+const AXIS_RATIO = 1.35;
 
 export function ScarfCard({
   scarf,
@@ -31,18 +32,32 @@ export function ScarfCard({
   const gallery = slides.length > 1;
   const placeholders = getScarfThumbGradients(scarf.gradient);
   const [active, setActive] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  const startScroll = useRef(0);
+  const activeRef = useRef(0);
+  const ignoreClick = useRef(false);
+  const dragXRef = useRef(0);
+  const gesture = useRef<{
+    x: number;
+    y: number;
+    axis: "none" | "h" | "v";
+  } | null>(null);
+
+  const productHref = `/scarves/${scarf.slug}`;
+  activeRef.current = active;
+
+  useEffect(() => {
+    router.prefetch(productHref);
+  }, [productHref, router]);
 
   const selectImage = useCallback(
     (i: number) => {
       if (!slides.length) return;
-      const next = (i + slides.length) % slides.length;
+      const next = Math.max(0, Math.min(slides.length - 1, i));
       setActive(next);
-      const track = trackRef.current;
-      if (track) {
-        track.scrollTo({ left: next * track.clientWidth, behavior: "smooth" });
-      }
+      setDragX(0);
+      setDragging(false);
     },
     [slides.length]
   );
@@ -55,60 +70,129 @@ export function ScarfCard({
     const track = trackRef.current;
     if (!track || !gallery) return;
 
-    const onScroll = () => {
-      const i = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
-      setActive(Math.max(0, Math.min(slides.length - 1, i)));
+    const onStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      gesture.current = { x: t.clientX, y: t.clientY, axis: "none" };
     };
 
-    track.addEventListener("scroll", onScroll, { passive: true });
-    return () => track.removeEventListener("scroll", onScroll);
-  }, [gallery, slides.length]);
+    const onMove = (e: TouchEvent) => {
+      const start = gesture.current;
+      const t = e.touches[0];
+      if (!start || !t) return;
+      const dx = t.clientX - start.x;
+      const dy = t.clientY - start.y;
+
+      if (start.axis === "none") {
+        if (Math.hypot(dx, dy) < AXIS_DIST) return;
+        start.axis =
+          Math.abs(dx) > Math.abs(dy) * AXIS_RATIO && Math.abs(dx) > AXIS_DIST
+            ? "h"
+            : "v";
+        if (start.axis !== "h") return;
+      }
+
+      if (start.axis === "v") return;
+
+      e.preventDefault();
+      ignoreClick.current = true;
+      setDragging(true);
+      const atStart = activeRef.current === 0 && dx > 0;
+      const atEnd = activeRef.current === slides.length - 1 && dx < 0;
+      const nextX = atStart || atEnd ? dx * 0.35 : dx;
+      dragXRef.current = nextX;
+      setDragX(nextX);
+    };
+
+    const onEnd = () => {
+      const start = gesture.current;
+      gesture.current = null;
+      if (!start || start.axis !== "h") {
+        setDragging(false);
+        setDragX(0);
+        return;
+      }
+      const width = track.clientWidth || 1;
+      const threshold = Math.max(40, width * 0.18);
+      const current = activeRef.current;
+      if (dragXRef.current < -threshold) selectImage(current + 1);
+      else if (dragXRef.current > threshold) selectImage(current - 1);
+      else {
+        setDragX(0);
+        setDragging(false);
+      }
+    };
+
+    track.addEventListener("touchstart", onStart, { passive: true });
+    track.addEventListener("touchmove", onMove, { passive: false, capture: true });
+    track.addEventListener("touchend", onEnd);
+    track.addEventListener("touchcancel", onEnd);
+    return () => {
+      track.removeEventListener("touchstart", onStart);
+      track.removeEventListener("touchmove", onMove, true);
+      track.removeEventListener("touchend", onEnd);
+      track.removeEventListener("touchcancel", onEnd);
+    };
+  }, [gallery, selectImage, slides.length]);
+
+  dragXRef.current = dragX;
+
+  function onMediaClick(e: React.MouseEvent) {
+    if (ignoreClick.current) {
+      e.preventDefault();
+      ignoreClick.current = false;
+    }
+  }
+
+  const slideImage = (slide: ProductGallerySlide, i: number) =>
+    slide.src ? (
+      <Image
+        src={slide.src}
+        alt={
+          i === 0
+            ? `${scarf.name} silk scarf`
+            : `${scarf.name} silk scarf — view ${i + 1}`
+        }
+        fill
+        draggable={false}
+        className="sc-card__img-fill"
+        style={{ objectFit: "cover" }}
+        sizes={PRODUCT_PHOTO_SIZES}
+        quality={PRODUCT_PHOTO_QUALITY}
+        priority={i === 0}
+      />
+    ) : (
+      <GradientFill
+        gradient={placeholders[i] ?? scarf.gradient}
+        className="sc-card__img-fill"
+      />
+    );
 
   const media = gallery ? (
     <>
-      <div
-        ref={trackRef}
-        className="sc-card__track"
-        onPointerDown={() => {
-          startScroll.current = trackRef.current?.scrollLeft ?? 0;
-        }}
-        onClick={(e) => {
-          const scrolled = Math.abs(
-            (trackRef.current?.scrollLeft ?? 0) - startScroll.current
-          );
-          if (scrolled > 8) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-          }
-          router.push(`/scarves/${scarf.slug}`);
-        }}
-      >
-        {slides.map((slide, i) => (
-          <div key={`${slide.src ?? "placeholder"}-${i}`} className="sc-card__slide">
-            {slide.src ? (
-              <Image
-                src={slide.src}
-                alt={
-                  i === 0
-                    ? `${scarf.name} silk scarf`
-                    : `${scarf.name} silk scarf — view ${i + 1}`
-                }
-                fill
-                draggable={false}
-                className="sc-card__img-fill"
-                style={{ objectFit: "cover" }}
-                sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-                priority={i === 0}
-              />
-            ) : (
-              <GradientFill
-                gradient={placeholders[i] ?? scarf.gradient}
-                className="sc-card__img-fill"
-              />
-            )}
-          </div>
-        ))}
+      <div ref={trackRef} className="sc-card__track">
+        <div
+          className="sc-card__rail"
+          style={{
+            transform: `translate3d(calc(${-active * 100}% + ${dragX}px), 0, 0)`,
+            transition: dragging
+              ? "none"
+              : "transform 0.38s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+        >
+          {slides.map((slide, i) => (
+            <Link
+              key={`${slide.src ?? "placeholder"}-${i}`}
+              href={productHref}
+              prefetch
+              className="sc-card__slide"
+              aria-label={`${scarf.name} silk scarf`}
+              onClick={onMediaClick}
+            >
+              {slideImage(slide, i)}
+            </Link>
+          ))}
+        </div>
       </div>
       <button
         type="button"
@@ -140,16 +224,22 @@ export function ScarfCard({
       </button>
     </>
   ) : image ? (
-    <Image
-      src={image}
-      alt={`${scarf.name} silk scarf`}
-      fill
-      className="sc-card__img-fill"
-      style={{ objectFit: "cover" }}
-      sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
-    />
+    <Link href={productHref} prefetch className="sc-card__media-link">
+      <Image
+        src={image}
+        alt={`${scarf.name} silk scarf`}
+        fill
+        className="sc-card__img-fill"
+        style={{ objectFit: "cover" }}
+        sizes={PRODUCT_PHOTO_SIZES}
+        quality={PRODUCT_PHOTO_QUALITY}
+        priority
+      />
+    </Link>
   ) : (
-    <GradientFill gradient={scarf.gradient} className="sc-card__img-fill" />
+    <Link href={productHref} prefetch className="sc-card__media-link">
+      <GradientFill gradient={scarf.gradient} className="sc-card__img-fill" />
+    </Link>
   );
 
   const body = (
@@ -164,29 +254,26 @@ export function ScarfCard({
     <FadeIn delay={delay}>
       <article
         className={`sc-card${gallery ? " sc-card--gallery" : ""}`}
-        onMouseEnter={() => {
-          if (gallery && canHover()) selectImage(active === 0 ? 1 : active);
-        }}
-        onMouseLeave={() => {
-          if (gallery && canHover()) selectImage(0);
-        }}
+        onMouseEnter={() => router.prefetch(productHref)}
       >
-        <div className="sc-card__img">{media}</div>
-        {gallery ? (
-          <div className="gallery-dots" role="tablist" aria-label={`${scarf.name} images`}>
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`gallery-dot${i === active ? " is-active" : ""}`}
-                aria-label={`View image ${i + 1}`}
-                aria-current={i === active ? "true" : undefined}
-                onClick={() => selectImage(i)}
-              />
-            ))}
-          </div>
-        ) : null}
-        <Link href={`/scarves/${scarf.slug}`} className="sc-card__body">
+        <div className="sc-card__img">
+          {media}
+          {gallery ? (
+            <div className="gallery-dots" role="tablist" aria-label={`${scarf.name} images`}>
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={`gallery-dot${i === active ? " is-active" : ""}`}
+                  aria-label={`View image ${i + 1}`}
+                  aria-current={i === active ? "true" : undefined}
+                  onClick={() => selectImage(i)}
+                />
+              ))}
+            </div>
+          ) : null}
+        </div>
+        <Link href={productHref} prefetch className="sc-card__body">
           {body}
         </Link>
       </article>

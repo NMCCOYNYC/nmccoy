@@ -37,7 +37,6 @@ export function AddToCartButton({
       type="button"
       className={className}
       style={{
-        width: "100%",
         textAlign: "center",
         padding: "1.1rem",
         opacity: disabled ? 0.6 : 1,
