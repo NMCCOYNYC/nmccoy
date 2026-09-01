@@ -2,7 +2,7 @@ import { scarves } from "@/lib/products";
 import { siteSettings } from "@/lib/site-settings";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import { FeatureVideo } from "@/components/FeatureVideo";
+import { HeroLoopVideo } from "@/components/HeroLoopVideo";
 import { ScarfCard } from "@/components/ScarfCard";
 import { SpotifySection } from "@/components/SpotifySection";
 import { CtaSection } from "@/components/StatsBand";
@@ -25,10 +25,19 @@ export default function CollectionPage() {
       <JsonLd data={collectionJsonLd()} />
       <CollectionTracker />
 
-      <FeatureVideo
-        className="feature-video--collection"
-        label="Desert Illusions"
-      />
+      <section
+        className="feature-video feature-video--light feature-video--collection"
+        aria-label="Desert Illusions"
+      >
+        <div className="feature-video__inner">
+          <div className="feature-video__frame">
+            <HeroLoopVideo
+              src="/collection/collection-hero.mp4"
+              className="feature-video__video"
+            />
+          </div>
+        </div>
+      </section>
 
       <FadeIn variant="reveal" className="coll-hero">
         <p className="eyebrow">Collection No. 1</p>
