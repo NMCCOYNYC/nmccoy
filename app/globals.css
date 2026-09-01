@@ -960,6 +960,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.2;
   margin: 0;
 }
+.impact-future__body {
+  max-width: 17rem;
+  margin: 1rem auto 0;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  color: rgba(237, 235, 233, 0.58);
+  text-align: center;
+}
 .impact-portrait {
   background: var(--bone);
   padding: clamp(5.75rem, 12vw, 9.5rem) clamp(1.5rem, 4vw, 4rem) 4.5rem;

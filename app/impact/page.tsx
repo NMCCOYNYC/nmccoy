@@ -13,9 +13,21 @@ export const metadata = pageMetadata({
 });
 
 const FUTURE_FOCI = [
-  { num: "01", label: "Arts Education" },
-  { num: "02", label: "Cultural Preservation" },
-  { num: "03", label: "Conservation" },
+  {
+    num: "01",
+    label: "Artist Collaboration",
+    body: "Inviting artists and makers to bring new perspectives into the world of NMCCOY.",
+  },
+  {
+    num: "02",
+    label: "Cultural Preservation",
+    body: "Supporting the art, traditions, and institutions connected to the places that inspire us.",
+  },
+  {
+    num: "03",
+    label: "Conservation",
+    body: "Giving back to the landscapes and environments behind each collection.",
+  },
 ] as const;
 
 export default function ImpactPage() {
@@ -83,10 +95,10 @@ export default function ImpactPage() {
               As NMCCOY evolves, giving will follow the stories{" "}
             </span>
             <span className="impact-future__line">
-              behind each collection, with a focus on arts education,{" "}
+              behind each collection, with a focus on artist{" "}
             </span>
             <span className="impact-future__line">
-              cultural preservation, and conservation.
+              collaboration, cultural preservation, and conservation.
             </span>
           </p>
         </FadeIn>
@@ -96,6 +108,7 @@ export default function ImpactPage() {
               <div className="impact-future__item">
                 <p className="impact-future__num">{item.num}</p>
                 <h3 className="impact-future__label">{item.label}</h3>
+                <p className="impact-future__body">{item.body}</p>
               </div>
             </FadeIn>
           ))}
