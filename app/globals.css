@@ -2403,11 +2403,12 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   margin-bottom: 1.35rem;
 }
 .page-hero-dark--process .page-hero-dark__subhead {
-  font-size: clamp(14px, 1.2vw, 16px);
-  line-height: 1.8;
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height: 1.5;
   color: rgba(237, 235, 233, 0.68);
-  max-width: 20.35rem;
+  max-width: none;
   margin-bottom: 0;
+  white-space: nowrap;
 }
 .feature-video--process .feature-video__copy {
   padding: clamp(3.25rem, 6vh, 5rem) 1.5rem clamp(2rem, 4vh, 3rem);
@@ -2432,7 +2433,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     font-size: clamp(2.65rem, 11vw, 3.85rem);
   }
   .page-hero-dark--process .page-hero-dark__subhead {
-    max-width: 18.5rem;
+    max-width: 22rem;
+    font-size: clamp(13px, 3.2vw, 15px);
+    white-space: normal;
   }
   .feature-video--process .feature-video__title {
     font-size: clamp(1.65rem, 6.4vw, 2.7rem);
@@ -2447,7 +2450,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 @media (max-width: 640px) {
   .page-hero-dark--process .page-hero-dark__subhead {
-    max-width: 18.75rem;
+    max-width: 20.5rem;
+    font-size: clamp(13px, 3.4vw, 14px);
+    white-space: normal;
   }
   .feature-video--process .feature-video__body {
     max-width: 21.5rem;

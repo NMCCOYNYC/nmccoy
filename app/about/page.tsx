@@ -25,7 +25,7 @@ export default function AboutPage() {
     <>
       <FadeIn variant="fade">
         <section className="editorial-page-hero editorial-page-hero--story">
-          <p className="eyebrow">Our Story</p>
+          <p className="eyebrow">The Art of Collecting</p>
           <h1>Our Story</h1>
           <p className="editorial-page-hero__lead">
             <span className="editorial-page-hero__lead-line">
