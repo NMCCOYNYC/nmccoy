@@ -1396,14 +1396,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .sc-card { background: var(--white); cursor: pointer; transition: transform 0.35s; }
 .sc-card:hover { transform: translateY(-4px); }
 .sc-card--gallery:hover { transform: none; }
-.sc-card__img { aspect-ratio: 1/1; overflow: hidden; position: relative; background: var(--bone); }
+.sc-card__img { aspect-ratio: 1/1; overflow: hidden; overflow: clip; position: relative; background: var(--bone); }
 .sc-card__track {
   display: block;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  overflow: clip;
   touch-action: pan-y;
-  overscroll-behavior: none;
   -webkit-user-select: none;
   user-select: none;
 }

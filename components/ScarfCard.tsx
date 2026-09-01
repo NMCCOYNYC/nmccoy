@@ -94,7 +94,6 @@ export function ScarfCard({
 
       if (start.axis === "v") return;
 
-      e.preventDefault();
       ignoreClick.current = true;
       setDragging(true);
       const atStart = activeRef.current === 0 && dx > 0;
@@ -124,12 +123,12 @@ export function ScarfCard({
     };
 
     track.addEventListener("touchstart", onStart, { passive: true });
-    track.addEventListener("touchmove", onMove, { passive: false, capture: true });
-    track.addEventListener("touchend", onEnd);
-    track.addEventListener("touchcancel", onEnd);
+    track.addEventListener("touchmove", onMove, { passive: true });
+    track.addEventListener("touchend", onEnd, { passive: true });
+    track.addEventListener("touchcancel", onEnd, { passive: true });
     return () => {
       track.removeEventListener("touchstart", onStart);
-      track.removeEventListener("touchmove", onMove, true);
+      track.removeEventListener("touchmove", onMove);
       track.removeEventListener("touchend", onEnd);
       track.removeEventListener("touchcancel", onEnd);
     };
