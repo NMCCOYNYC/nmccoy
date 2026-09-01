@@ -7,6 +7,7 @@ import { AccountDrawer } from "@/components/AccountDrawer";
 import { AccountIcon } from "@/components/AccountIcon";
 import { CartDrawer } from "@/components/CartDrawer";
 import { CartIcon } from "@/components/CartIcon";
+import { useDrawer } from "@/components/DrawerProvider";
 import { SearchOverlay } from "@/components/SearchOverlay";
 import { Logo, NavLink } from "@/components/Brand";
 
@@ -19,16 +20,36 @@ const pageLinks = [
 
 export function Nav() {
   const pathname = usePathname();
+  const { openId } = useDrawer();
   const [scrolled, setScrolled] = useState(false);
+  const [overHero, setOverHero] = useState(pathname === "/");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const isHome = pathname === "/";
+  const overlayOpen = Boolean(searchOpen || mobileOpen || openId);
+  const overHeroNav = isHome && overHero && !overlayOpen;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    function update() {
+      const y = window.scrollY;
+      setScrolled(y > 4);
+
+      if (pathname !== "/") {
+        setOverHero(false);
+        return;
+      }
+
+      setOverHero(y < 4);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -45,7 +66,10 @@ export function Nav() {
 
   return (
     <>
-      <nav className={`nav${scrolled ? " scrolled" : ""}`} id="mainNav">
+      <nav
+        className={`nav${scrolled ? " scrolled" : ""}${overHeroNav ? " nav--over-hero" : ""}`}
+        id="mainNav"
+      >
         <div className="nav__side nav__side--left">
           <button
             type="button"
@@ -96,6 +120,7 @@ export function Nav() {
         </div>
         <div className="nav__logo">
           <Logo
+            light={overHeroNav}
             onClick={(e) => {
               setMobileOpen(false);
               if (pathname === "/") {
