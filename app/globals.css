@@ -2273,17 +2273,17 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 .feature-video--collection .feature-video__frame {
   width: 100%;
-  max-width: calc((100svh - var(--nav-height) - 11rem) * 16 / 9);
-  height: auto;
-  aspect-ratio: 16 / 9;
-  margin: 0 auto;
+  margin: 0;
   cursor: default;
-  background: var(--bone);
+  aspect-ratio: auto;
+  height: min(
+    calc(100vw * 9 / 16),
+    calc(100svh - var(--nav-height) - 8rem)
+  );
 }
 .feature-video--collection .feature-video__video {
   object-fit: cover;
   object-position: center center;
-  background: var(--bone);
 }
 .feature-video--collection .feature-video__placeholder {
   background: transparent;
