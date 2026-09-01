@@ -31,7 +31,7 @@ export default function CollectionPage() {
       />
 
       <FadeIn variant="reveal" className="coll-hero">
-        <p className="eyebrow">Collection No. 1 — New York</p>
+        <p className="eyebrow">Collection No. 1</p>
         <h1>Desert Illusions</h1>
         <p>
           Six original ink paintings translated into Italian silk. Produced in
