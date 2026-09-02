@@ -1,23 +1,42 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function HeroLoopVideo({
   src,
   className = "",
+  lazy = false,
 }: {
   src: string;
   className?: string;
+  lazy?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(!lazy);
+
+  useEffect(() => {
+    if (!lazy) return;
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setLoad(true);
+        observer.disconnect();
+      },
+      { rootMargin: "240px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [lazy]);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    if (!video || !load) return;
     video.muted = true;
     video.volume = 0;
     void video.play().catch(() => {});
-  }, [src]);
+  }, [src, load]);
 
   return (
     <video
@@ -27,10 +46,10 @@ export function HeroLoopVideo({
       muted
       loop
       playsInline
-      preload="auto"
+      preload={lazy ? "none" : "metadata"}
       aria-hidden="true"
     >
-      <source src={src} type="video/mp4" />
+      {load ? <source src={src} type="video/mp4" /> : null}
     </video>
   );
 }

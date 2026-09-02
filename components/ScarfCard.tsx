@@ -6,8 +6,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { Scarf } from "@/lib/products";
 import {
+  COLLECTION_PHOTO_SIZES,
   PRODUCT_PHOTO_QUALITY,
-  PRODUCT_PHOTO_SIZES,
   getPrimaryImage,
   getScarfThumbGradients,
 } from "@/lib/products";
@@ -22,10 +22,12 @@ export function ScarfCard({
   scarf,
   delay,
   slides = [],
+  priority = false,
 }: {
   scarf: Scarf;
   delay?: number;
   slides?: ProductGallerySlide[];
+  priority?: boolean;
 }) {
   const router = useRouter();
   const image = getPrimaryImage(scarf);
@@ -46,10 +48,6 @@ export function ScarfCard({
 
   const productHref = `/scarves/${scarf.slug}`;
   activeRef.current = active;
-
-  useEffect(() => {
-    router.prefetch(productHref);
-  }, [productHref, router]);
 
   const selectImage = useCallback(
     (i: number) => {
@@ -156,9 +154,9 @@ export function ScarfCard({
         draggable={false}
         className="sc-card__img-fill"
         style={{ objectFit: "cover" }}
-        sizes={PRODUCT_PHOTO_SIZES}
+        sizes={COLLECTION_PHOTO_SIZES}
         quality={PRODUCT_PHOTO_QUALITY}
-        priority={i === 0}
+        priority={priority && i === 0}
       />
     ) : (
       <GradientFill
@@ -230,9 +228,9 @@ export function ScarfCard({
         fill
         className="sc-card__img-fill"
         style={{ objectFit: "cover" }}
-        sizes={PRODUCT_PHOTO_SIZES}
+        sizes={COLLECTION_PHOTO_SIZES}
         quality={PRODUCT_PHOTO_QUALITY}
-        priority
+        priority={priority}
       />
     </Link>
   ) : (

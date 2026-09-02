@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Scarf } from "@/lib/products";
 import {
+  COLLECTION_PHOTO_SIZES,
   PRODUCT_PHOTO_QUALITY,
-  PRODUCT_PHOTO_SIZES,
   getPrimaryImage,
 } from "@/lib/products";
 import { GradientFill } from "@/components/GradientFill";
@@ -150,7 +150,7 @@ export function ScarfCarousel({
                       fill
                       className="carousel-slide__img-fill"
                       style={{ objectFit: "cover" }}
-                      sizes={PRODUCT_PHOTO_SIZES}
+                      sizes={COLLECTION_PHOTO_SIZES}
                       quality={PRODUCT_PHOTO_QUALITY}
                     />
                   ) : (

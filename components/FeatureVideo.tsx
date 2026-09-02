@@ -73,7 +73,7 @@ export function FeatureVideo({
                 src={videoUrl}
                 controls={playing}
                 playsInline
-                preload="metadata"
+                preload={playing ? "auto" : "none"}
                 poster={posterUrl}
                 onEnded={() => setPlaying(false)}
               />

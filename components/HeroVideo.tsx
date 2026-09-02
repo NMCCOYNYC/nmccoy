@@ -62,7 +62,7 @@ export function HeroVideo() {
         muted={!soundOn}
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/home/desert-illusions-hero-nologo-poster.jpg?v=4"
         aria-hidden="true"
       >

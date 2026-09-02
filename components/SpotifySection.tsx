@@ -1,5 +1,6 @@
 import { siteSettings } from "@/lib/site-settings";
 import { TrackedLink } from "@/components/AnalyticsHelpers";
+import { HeroLoopVideo } from "@/components/HeroLoopVideo";
 
 export function SpotifySection() {
   const playlistUrl = siteSettings.spotifyPlaylistUrl;
@@ -10,16 +11,11 @@ export function SpotifySection() {
       <div className="spotify-section__media" aria-hidden="true">
         <div className="spotify-section__fallback" />
         {videoUrl ? (
-          <video
+          <HeroLoopVideo
+            src={videoUrl}
             className="spotify-section__video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          >
-            <source src={videoUrl} type="video/mp4" />
-          </video>
+            lazy
+          />
         ) : null}
         <div className="spotify-section__overlay" />
       </div>

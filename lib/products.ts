@@ -123,8 +123,11 @@ export function getPrimaryImage(scarf: Scarf) {
   return getScarfImages(scarf)[0];
 }
 
-/** Shared so collection cards and PDPs request the same optimized file. */
+/** PDP banner: one column on mobile, half the desktop product grid. */
 export const PRODUCT_PHOTO_SIZES = "(max-width: 960px) 100vw, 50vw";
+/** Collection grid and homepage carousel: 1 / 2 / 3 columns. */
+export const COLLECTION_PHOTO_SIZES =
+  "(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw";
 export const PRODUCT_PHOTO_QUALITY = 75;
 
 export function getScarfThumbGradients(gradient: string) {

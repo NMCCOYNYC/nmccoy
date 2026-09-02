@@ -16,18 +16,22 @@ const marcellus = Marcellus({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-display",
+  display: "swap",
 });
 
 const gowunBatang = Gowun_Batang({
-  weight: ["400", "700"],
+  weight: "400",
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
 });
 
 const jost = Jost({
-  weight: ["300", "400", "500"],
+  weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-util",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = defaultMetadata;

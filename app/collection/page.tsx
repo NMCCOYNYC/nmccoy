@@ -57,6 +57,7 @@ export default function CollectionPage() {
             scarf={scarf}
             delay={delays[i]}
             slides={getProductGallerySlides(scarf)}
+            priority={i < 3}
           />
         ))}
       </div>

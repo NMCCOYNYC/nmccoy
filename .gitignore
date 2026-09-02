@@ -20,6 +20,9 @@
 .git-local/
 .gh-local/
 
+# camera source files — site uses the encoded .mp4 versions
+*.MOV
+
 # misc
 .DS_Store
 *.pem
