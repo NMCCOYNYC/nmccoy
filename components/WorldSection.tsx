@@ -3,24 +3,31 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { worldCarouselImages, worldStaticImage } from "@/lib/world";
+import type { WorldImage } from "@/lib/world";
 
 const INTERVAL_MS = 2500;
 
-export function WorldSection() {
+export function WorldSection({
+  staticImage,
+  carouselImages,
+}: {
+  staticImage: WorldImage;
+  carouselImages: WorldImage[];
+}) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const slideCount = carouselImages.length;
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || paused) return;
+    if (reduced || paused || slideCount < 2) return;
 
     const id = window.setInterval(() => {
-      setActive((i) => (i + 1) % worldCarouselImages.length);
+      setActive((i) => (i + 1) % slideCount);
     }, INTERVAL_MS);
 
     return () => window.clearInterval(id);
-  }, [paused]);
+  }, [paused, slideCount]);
 
   useEffect(() => {
     const onVisibility = () => {
@@ -39,11 +46,10 @@ export function WorldSection() {
       <div className="world-section__split">
         <figure className="world-frame">
           <Image
-            src={worldStaticImage.src}
-            alt={worldStaticImage.alt}
+            src={staticImage.src}
+            alt={staticImage.alt}
             fill
             className="world-frame__img world-frame__img--static"
-            style={{ objectFit: "cover", objectPosition: "center top" }}
             sizes="(max-width: 960px) 92vw, 40vw"
           />
         </figure>
@@ -53,7 +59,7 @@ export function WorldSection() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {worldCarouselImages.map((image, index) => (
+          {carouselImages.map((image, index) => (
             <div
               key={image.src}
               className={`world-carousel__slide${index === active ? " is-active" : ""}`}
@@ -64,25 +70,26 @@ export function WorldSection() {
                 alt={index === active ? image.alt : ""}
                 fill
                 className="world-frame__img"
-                style={{ objectFit: "cover", objectPosition: "center center" }}
                 sizes="(max-width: 960px) 92vw, 40vw"
               />
             </div>
           ))}
 
-          <div className="world-dots" role="tablist" aria-label="Campaign images">
-            {worldCarouselImages.map((image, index) => (
-              <button
-                key={image.src}
-                type="button"
-                role="tab"
-                aria-selected={index === active}
-                aria-label={`Show ${image.alt}`}
-                className={`world-dot${index === active ? " is-active" : ""}`}
-                onClick={() => setActive(index)}
-              />
-            ))}
-          </div>
+          {slideCount > 1 ? (
+            <div className="world-dots" role="tablist" aria-label="Campaign images">
+              {carouselImages.map((image, index) => (
+                <button
+                  key={image.src}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === active}
+                  aria-label={`Show ${image.alt}`}
+                  className={`world-dot${index === active ? " is-active" : ""}`}
+                  onClick={() => setActive(index)}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

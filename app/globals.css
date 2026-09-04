@@ -2923,7 +2923,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 }
 .world-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background: #1c1410;
   margin: 0;
@@ -2931,9 +2931,6 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .world-frame__img {
   object-fit: cover;
   object-position: center center;
-}
-.world-frame__img--static {
-  object-position: center top;
 }
 .world-carousel {
   isolation: isolate;

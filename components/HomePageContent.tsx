@@ -13,11 +13,14 @@ import { FadeIn } from "@/components/FadeIn";
 import { RevealParallax } from "@/components/RevealParallax";
 
 import { WorldSection } from "@/components/WorldSection";
+import { getWorldImages } from "@/lib/world";
 
 import { ScarfCarousel } from "@/components/ScarfCarousel";
 import { HeroVideo } from "@/components/HeroVideo";
 
 export function HomePageContent() {
+  const world = getWorldImages();
+
   return (
     <>
       <section className="hero hero--editorial">
@@ -91,7 +94,10 @@ export function HomePageContent() {
       </FadeIn>
 
       <FadeIn variant="reveal">
-        <WorldSection />
+        <WorldSection
+          staticImage={world.staticImage}
+          carouselImages={world.carouselImages}
+        />
       </FadeIn>
 
       <section className="collection-home" aria-labelledby="coll-intro-title">
