@@ -1279,14 +1279,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--cacao);
 }
 .early-access--gate .early-access__inner {
-  max-width: min(56rem, 94vw);
+  max-width: min(66rem, 96vw);
   text-align: center;
   padding: 8rem clamp(1.5rem,4vw,4rem) 5rem;
 }
 .early-access--gate .eyebrow {
   margin-bottom: 1.25rem;
 }
-.early-access--gate h1 {
+.early-access.early-access--gate h1 {
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 9vw, 3.25rem);
   font-weight: 400;
@@ -1307,8 +1307,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-top: 2.5rem;
 }
 @media (min-width: 960px) {
-  .early-access--gate h1 {
-    font-size: clamp(5.5rem, 7vw, 6.5rem);
+  .early-access.early-access--gate h1 {
+    font-size: clamp(5.25rem, 6.9vw, 6.5rem);
     line-height: 0.95;
     white-space: nowrap;
   }
