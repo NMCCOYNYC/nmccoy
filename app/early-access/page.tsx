@@ -17,9 +17,10 @@ function EarlyAccessGate({ invalid }: { invalid?: boolean }) {
         <FadeIn className="early-access__inner">
           <p className="eyebrow">Private Preview</p>
           <h1>By invitation</h1>
-          <p>
-            Enter the password from your invitation to view Collection No. 1
-            before the public launch.
+          <p className="early-access__gate-copy">
+            A first look at Desert Illusions, shared with friends and family
+            before its public release. Enter the password from your invitation
+            to preview Collection No. 1.
           </p>
           <form className="early-access__form" action="/early-access" method="get">
             <label htmlFor="early-access-key" className="sr-only">

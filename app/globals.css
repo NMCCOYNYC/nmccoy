@@ -1274,26 +1274,44 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--bone);
 }
 .early-access--gate {
-  min-height: 60vh;
+  min-height: 100svh;
   background: var(--bone);
   color: var(--cacao);
 }
 .early-access--gate .early-access__inner {
-  max-width: 32rem;
+  max-width: min(56rem, 94vw);
   text-align: center;
   padding: 8rem clamp(1.5rem,4vw,4rem) 5rem;
 }
+.early-access--gate .eyebrow {
+  margin-bottom: 1.25rem;
+}
 .early-access--gate h1 {
   font-family: var(--font-display);
-  font-size: clamp(2rem,5vw,3.5rem);
+  font-size: clamp(2.25rem, 9vw, 3.25rem);
   font-weight: 400;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  line-height: 1;
+  letter-spacing: -0.012em;
+  margin-bottom: 1.5rem;
 }
-.early-access--gate p {
+.early-access--gate .early-access__gate-copy {
+  max-width: 42.5rem;
+  margin: 0 auto;
   color: var(--taupe);
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.15vw, 16px);
   line-height: 1.85;
+}
+.early-access--gate .early-access__form {
+  margin-top: 2.5rem;
+}
+@media (min-width: 960px) {
+  .early-access--gate h1 {
+    font-size: clamp(5.5rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    white-space: nowrap;
+  }
 }
 .early-access__form {
   display: flex;
