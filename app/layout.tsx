@@ -7,7 +7,11 @@ import { DrawerProvider } from "@/components/DrawerProvider";
 import { Nav } from "@/components/Nav";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { canViewFullSite } from "@/lib/coming-soon";
-import { EARLY_ACCESS_COOKIE } from "@/lib/preview-access";
+import {
+  EARLY_ACCESS_COOKIE,
+  EARLY_ACCESS_PATH,
+  PATHNAME_HEADER,
+} from "@/lib/preview-access";
 import { JsonLd } from "@/components/JsonLd";
 import { defaultMetadata, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -43,10 +47,14 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const requestHeaders = await headers();
-  const showNav = canViewFullSite(
-    cookieStore.get(EARLY_ACCESS_COOKIE)?.value,
-    requestHeaders.get("user-agent"),
-  );
+  const onEarlyAccess =
+    requestHeaders.get(PATHNAME_HEADER) === EARLY_ACCESS_PATH;
+  const showNav =
+    !onEarlyAccess &&
+    canViewFullSite(
+      cookieStore.get(EARLY_ACCESS_COOKIE)?.value,
+      requestHeaders.get("user-agent"),
+    );
 
   return (
     <html

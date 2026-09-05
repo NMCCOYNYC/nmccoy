@@ -1,5 +1,6 @@
 export const EARLY_ACCESS_COOKIE = "nmccoy_early_access";
 export const EARLY_ACCESS_PATH = "/early-access";
+export const PATHNAME_HEADER = "x-nmccoy-path";
 
 export function isEarlyAccessConfigured() {
   return Boolean(process.env.EARLY_ACCESS_SECRET?.trim());
@@ -19,5 +20,5 @@ export function isValidEarlyAccessKey(key: string | null | undefined) {
     return false;
   }
 
-  return key === secret;
+  return key.trim() === secret;
 }

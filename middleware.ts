@@ -8,6 +8,7 @@ import { isIndexingCrawler } from "@/lib/crawlers";
 import {
   EARLY_ACCESS_COOKIE,
   EARLY_ACCESS_PATH,
+  PATHNAME_HEADER,
   isValidEarlyAccessKey,
 } from "@/lib/preview-access";
 
@@ -21,6 +22,12 @@ function setAccessCookie(response: NextResponse) {
   });
 }
 
+function next(request: NextRequest) {
+  const headers = new Headers(request.headers);
+  headers.set(PATHNAME_HEADER, request.nextUrl.pathname);
+  return NextResponse.next({ request: { headers } });
+}
+
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
   const key = searchParams.get("key");
@@ -32,17 +39,17 @@ export function middleware(request: NextRequest) {
   }
 
   if (!isComingSoonEnabled()) {
-    return NextResponse.next();
+    return next(request);
   }
 
   const cookieValue = request.cookies.get(EARLY_ACCESS_COOKIE)?.value;
 
   if (hasSiteAccess(cookieValue)) {
-    return NextResponse.next();
+    return next(request);
   }
 
   if (isIndexingCrawler(request.headers.get("user-agent"))) {
-    return NextResponse.next();
+    return next(request);
   }
 
   if (
@@ -50,15 +57,15 @@ export function middleware(request: NextRequest) {
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml"
   ) {
-    return NextResponse.next();
+    return next(request);
   }
 
   if (pathname === EARLY_ACCESS_PATH) {
-    return NextResponse.next();
+    return next(request);
   }
 
   if (pathname === "/") {
-    return NextResponse.next();
+    return next(request);
   }
 
   return NextResponse.redirect(new URL("/", request.url));

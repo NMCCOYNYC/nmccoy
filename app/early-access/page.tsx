@@ -1,12 +1,6 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import {
-  EARLY_ACCESS_COOKIE,
-  hasEarlyAccess,
-  isEarlyAccessConfigured,
-} from "@/lib/preview-access";
+import { isEarlyAccessConfigured } from "@/lib/preview-access";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -50,7 +44,6 @@ function EarlyAccessGate({ invalid }: { invalid?: boolean }) {
           </form>
         </FadeIn>
       </section>
-      <Footer />
     </>
   );
 }
@@ -60,13 +53,10 @@ export default async function EarlyAccessPage({
 }: {
   searchParams: Promise<{ key?: string }>;
 }) {
-  const cookieStore = await cookies();
-  const params = await searchParams;
-  const allowed = hasEarlyAccess(cookieStore.get(EARLY_ACCESS_COOKIE)?.value);
-
-  if (isEarlyAccessConfigured() && !allowed) {
-    return <EarlyAccessGate invalid={Boolean(params.key)} />;
+  if (!isEarlyAccessConfigured()) {
+    redirect("/");
   }
 
-  redirect("/");
+  const params = await searchParams;
+  return <EarlyAccessGate invalid={Boolean(params.key)} />;
 }
