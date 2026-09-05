@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 type FeatureVideoProps = {
   videoUrl?: string;
@@ -47,6 +47,7 @@ export function FeatureVideo({
   }
 
   const showCopy = Boolean(eyebrow || title || body);
+  const homeMotion = className.includes("feature-video--home");
 
   return (
     <section
@@ -55,16 +56,56 @@ export function FeatureVideo({
     >
       <div className="feature-video__inner">
         {showCopy ? (
-          <div className="feature-video__copy">
+          <div
+            className="feature-video__copy"
+            {...(homeMotion ? { "data-hm": "stagger" } : {})}
+          >
             {eyebrow ? (
-              <p className="eyebrow feature-video__eyebrow">{eyebrow}</p>
+              <p
+                className="eyebrow feature-video__eyebrow"
+                {...(homeMotion ? { "data-hm": "text" } : {})}
+              >
+                {eyebrow}
+              </p>
             ) : null}
-            {title ? <h2 className="feature-video__title">{title}</h2> : null}
-            {body ? <p className="feature-video__body">{body}</p> : null}
+            {title ? (
+              <h2
+                className="feature-video__title"
+                {...(homeMotion
+                  ? {
+                      "data-hm": "text",
+                      style: { "--hm-delay": "90ms" } as CSSProperties,
+                    }
+                  : {})}
+              >
+                {title}
+              </h2>
+            ) : null}
+            {body ? (
+              <p
+                className="feature-video__body"
+                {...(homeMotion
+                  ? {
+                      "data-hm": "text",
+                      style: { "--hm-delay": "180ms" } as CSSProperties,
+                    }
+                  : {})}
+              >
+                {body}
+              </p>
+            ) : null}
           </div>
         ) : null}
 
-        <div className="feature-video__frame">
+        <div
+          className="feature-video__frame"
+          {...(homeMotion
+            ? {
+                "data-hm": "clip",
+                style: { "--hm-delay": "120ms" } as CSSProperties,
+              }
+            : {})}
+        >
           {videoUrl ? (
             <>
               <video

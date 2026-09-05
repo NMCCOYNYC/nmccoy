@@ -114,6 +114,7 @@ export function ScarfCarousel({
       <div
         className="carousel-wrap"
         ref={wrapRef}
+        {...(variant === "home" ? { "data-hm": "group" } : {})}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -133,6 +134,7 @@ export function ScarfCarousel({
                 href={`/scarves/${scarf.slug}`}
                 prefetch
                 className="carousel-slide"
+                {...(variant === "home" ? { "data-hm-child": "tile" } : {})}
                 style={{ minWidth: `calc(${slideW}% - 1px)` }}
                 draggable={false}
                 onClick={(e) => {

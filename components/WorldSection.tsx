@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
 
 import type { WorldImage } from "@/lib/world";
 
-const INTERVAL_MS = 2500;
+const INTERVAL_MS = 3200;
 
 export function WorldSection({
   staticImage,
@@ -15,49 +15,42 @@ export function WorldSection({
   carouselImages: WorldImage[];
 }) {
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const slideCount = carouselImages.length;
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || paused || slideCount < 2) return;
+    if (slideCount < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const id = window.setInterval(() => {
+      if (document.hidden) return;
       setActive((i) => (i + 1) % slideCount);
     }, INTERVAL_MS);
 
     return () => window.clearInterval(id);
-  }, [paused, slideCount]);
-
-  useEffect(() => {
-    const onVisibility = () => {
-      setPaused(document.hidden);
-    };
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
-  }, []);
+  }, [slideCount]);
 
   return (
     <section className="world-section" aria-labelledby="world-title">
-      <h2 id="world-title" className="world-section__title">
+      <h2 id="world-title" className="world-section__title" data-hm="text">
         The World
       </h2>
 
       <div className="world-section__split">
-        <figure className="world-frame">
+        <figure className="world-frame" data-hm="clip">
           <Image
             src={staticImage.src}
             alt={staticImage.alt}
             fill
             className="world-frame__img world-frame__img--static"
+            data-hm-depth=""
             sizes="(max-width: 960px) 92vw, 40vw"
           />
         </figure>
 
         <div
           className="world-frame world-carousel"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          data-hm="photo"
+          style={{ "--hm-delay": "120ms" } as CSSProperties}
         >
           {carouselImages.map((image, index) => (
             <div
@@ -71,6 +64,8 @@ export function WorldSection({
                 fill
                 className="world-frame__img"
                 sizes="(max-width: 960px) 92vw, 40vw"
+                priority={index === 0}
+                loading="eager"
               />
             </div>
           ))}
