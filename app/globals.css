@@ -1288,7 +1288,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .early-access.early-access--gate h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 9vw, 3.25rem);
+  font-size: clamp(1.8rem, 7.2vw, 2.6rem);
   font-weight: 400;
   text-transform: uppercase;
   line-height: 1;
@@ -1308,7 +1308,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 @media (min-width: 960px) {
   .early-access.early-access--gate h1 {
-    font-size: clamp(5.25rem, 6.9vw, 6.5rem);
+    font-size: clamp(4.2rem, 5.5vw, 5.2rem);
     line-height: 0.95;
     white-space: nowrap;
   }
