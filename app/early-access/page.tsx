@@ -18,8 +18,9 @@ function EarlyAccessGate({ invalid }: { invalid?: boolean }) {
           <p className="eyebrow">Private Preview</p>
           <h1>By invitation</h1>
           <p className="early-access__gate-copy">
-            A first look at Desert Illusions before its public release. Enter
-            the password from your invitation to preview Collection No. 1.
+            A first look at Desert Illusions before its public release.
+            <br />
+            Enter the password from your invitation to preview Collection No. 1.
           </p>
           <form className="early-access__form" action="/early-access" method="get">
             <label htmlFor="early-access-key" className="sr-only">
