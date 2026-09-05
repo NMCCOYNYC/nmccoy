@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import { GradientFill } from "@/components/GradientFill";
 import {
   EARLY_ACCESS_COOKIE,
   hasEarlyAccess,
@@ -69,42 +68,5 @@ export default async function EarlyAccessPage({
     return <EarlyAccessGate invalid={Boolean(params.key)} />;
   }
 
-  return (
-    <>
-      <section className="early-access">
-        <GradientFill
-          gradient="linear-gradient(165deg,#2A1A10 0%,#5C4A38 45%,#8C603A 70%,#38271E 100%)"
-          className="early-access__media"
-          aria-hidden={true}
-        />
-        <div className="early-access__overlay" />
-        <FadeIn className="early-access__inner">
-          <p className="eyebrow early-access__eyebrow">Private Preview</p>
-          <h1>Early Access</h1>
-          <p className="early-access__lede">
-            You&apos;re among the first to experience Collection No. 1 — an
-            intimate look at Desert Illusions before the public launch.
-          </p>
-          <p className="early-access__body">
-            Browse the collection, explore each piece, and purchase at your
-            leisure. This link is unlisted and meant to be shared quietly with
-            friends, family, and early supporters.
-          </p>
-          <div className="early-access__actions">
-            <Link href="/collection" className="btn btn--ghost">
-              Enter the Collection
-            </Link>
-            <Link
-              href="/about"
-              className="btn--underline btn--underline-light early-access__secondary"
-            >
-              Our Story
-            </Link>
-          </div>
-        </FadeIn>
-      </section>
-
-      <Footer />
-    </>
-  );
+  redirect("/");
 }

@@ -26,9 +26,7 @@ export function middleware(request: NextRequest) {
   const key = searchParams.get("key");
 
   if (isValidEarlyAccessKey(key)) {
-    const cleanUrl = request.nextUrl.clone();
-    cleanUrl.searchParams.delete("key");
-    const response = NextResponse.redirect(cleanUrl);
+    const response = NextResponse.redirect(new URL("/", request.url));
     setAccessCookie(response);
     return response;
   }
