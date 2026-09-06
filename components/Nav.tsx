@@ -167,9 +167,6 @@ export function Nav() {
             {link.label}
           </Link>
         ))}
-        <Link href="/contact" onClick={() => setMobileOpen(false)}>
-          Contact
-        </Link>
       </div>
     </>
   );
