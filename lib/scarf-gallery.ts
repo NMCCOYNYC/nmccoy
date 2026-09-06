@@ -25,7 +25,7 @@ export type ProductGallerySlide = {
   src: string | null;
 };
 
-/** Hero plus three 4:5 supporting slots. Missing files stay null for gradient placeholders. */
+/** Hero plus three 2:3 supporting slots. Missing files stay null for gradient placeholders. */
 export function getProductGallerySlides(scarf: Scarf): ProductGallerySlide[] {
   return [
     { src: getScarfImages(scarf)[0] ?? null },
