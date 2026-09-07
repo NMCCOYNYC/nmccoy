@@ -12,11 +12,14 @@ function publicUrlIfExists(relPath: string): string | null {
 }
 
 function findSupportingImage(slug: string, n: string): string | null {
-  for (const ext of EXTS) {
-    const found =
-      publicUrlIfExists(`products/${slug}/${n}${ext}`) ||
-      publicUrlIfExists(`products/${slug}-${n}${ext}`);
-    if (found) return found;
+  const names = n.startsWith("0") ? [n, n.replace(/^0+/, "")] : [n];
+  for (const name of names) {
+    for (const ext of EXTS) {
+      const found =
+        publicUrlIfExists(`products/${slug}/${name}${ext}`) ||
+        publicUrlIfExists(`products/${slug}-${name}${ext}`);
+      if (found) return found;
+    }
   }
   return null;
 }
