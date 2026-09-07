@@ -12,6 +12,8 @@ export const worldCarouselImages: WorldImage[] = [
   { src: "/home/world/01.jpg", alt: "Desert Illusions campaign" },
   { src: "/home/world/02.jpg", alt: "Desert Illusions campaign" },
   { src: "/home/world/03.jpg", alt: "Desert Illusions campaign" },
+  { src: "/home/world/04.jpg", alt: "Desert Illusions campaign" },
+  { src: "/home/world/05.jpg", alt: "Desert Illusions campaign" },
 ];
 
 export function getWorldImages() {
