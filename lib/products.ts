@@ -26,7 +26,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Wild Mirage explores memory, instinct, and the spaces between what was seen and what was felt.",
-    images: ["/products/wild-mirage.jpg"],
+    images: ["/products/wild-mirage.jpg", "/products/wild-mirage/02.jpg"],
     shopifyVariantId: "51256273141927",
   },
   {
@@ -42,7 +42,11 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Hazy Mesa reflects beauty that emerges through patience, adaptation, and time.",
-    images: ["/products/hazy-mesa.jpg"],
+    images: [
+      "/products/hazy-mesa.jpg",
+      "/products/hazy-mesa/02.jpg",
+      "/products/hazy-mesa/03.jpg",
+    ],
     shopifyVariantId: "51256260624551",
   },
   {
@@ -58,7 +62,7 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Dusty Bloom honors the strength required to flourish despite adversity.",
-    images: ["/products/dusty-bloom.jpg"],
+    images: ["/products/dusty-bloom.jpg", "/products/dusty-bloom/02.jpg"],
     shopifyVariantId: "51256261804199",
   },
   {

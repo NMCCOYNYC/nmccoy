@@ -30,8 +30,11 @@ export type ProductGallerySlide = {
 
 /** Hero plus three 2:3 supporting slots. Missing files stay null for gradient placeholders. */
 export function getProductGallerySlides(scarf: Scarf): ProductGallerySlide[] {
+  const listed = getScarfImages(scarf);
   return [
-    { src: getScarfImages(scarf)[0] ?? null },
-    ...SUPPORTING.map((n) => ({ src: findSupportingImage(scarf.slug, n) })),
+    { src: listed[0] ?? null },
+    ...SUPPORTING.map((n, i) => ({
+      src: listed[i + 1] ?? findSupportingImage(scarf.slug, n),
+    })),
   ];
 }

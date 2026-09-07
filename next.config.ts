@@ -2,9 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Static photos and film stay on the CDN, not inside the serverless bundle.
+  // Keep film out of the serverless bundle so product photos can still be found.
   outputFileTracingExcludes: {
-    "*": ["public/**"],
+    "*": ["**/*.mp4"],
   },
   images: {
     formats: ["image/avif", "image/webp"],
