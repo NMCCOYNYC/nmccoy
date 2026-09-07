@@ -53,8 +53,9 @@ export function ProcessChapters({ steps }: { steps: ProcessStep[] }) {
 
         const range = el.offsetHeight - vh;
         const progress = range > 0 ? clamp(-rect.top / range) : 1;
-        const title = 1 - mapRange(progress, 0.32, 0.52);
-        const detail = mapRange(progress, 0.38, 0.58);
+        const mobile = window.matchMedia("(max-width: 960px)").matches;
+        const title = 1 - mapRange(progress, mobile ? 0.1 : 0.32, mobile ? 0.3 : 0.52);
+        const detail = mapRange(progress, mobile ? 0.12 : 0.38, mobile ? 0.34 : 0.58);
 
         el.style.setProperty("--title", title.toFixed(3));
         el.style.setProperty("--detail", detail.toFixed(3));
