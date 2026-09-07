@@ -26,7 +26,7 @@ export function HomeMotion({ children }: { children: React.ReactNode }) {
           io.unobserve(entry.target);
         }
       },
-      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.04, rootMargin: "0px 0px 18% 0px" }
     );
 
     function reveal(el: HTMLElement) {
@@ -47,7 +47,7 @@ export function HomeMotion({ children }: { children: React.ReactNode }) {
     const vh = window.innerHeight;
     items.forEach((el) => {
       const rect = el.getBoundingClientRect();
-      if (rect.top < vh * 0.9 && rect.bottom > vh * 0.08) {
+      if (rect.top < vh * 0.96 && rect.bottom > 0) {
         reveal(el);
       } else {
         io.observe(el);
@@ -70,7 +70,9 @@ export function HomeMotion({ children }: { children: React.ReactNode }) {
         const progress = Math.min(1, Math.max(0, -rect.top / travel));
         const scale = compact.matches ? 1 + progress * 0.012 : 1 + progress * 0.032;
         const y = compact.matches ? progress * 0.8 : progress * 2.4;
-        hero.querySelectorAll<HTMLElement>(".hero__media").forEach((media) => {
+        hero
+          .querySelectorAll<HTMLElement>(".hero__media, .page-hero-dark__media")
+          .forEach((media) => {
           media.style.transform = `translate3d(0, ${y.toFixed(2)}%, 0) scale(${scale.toFixed(4)})`;
         });
       }

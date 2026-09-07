@@ -32,9 +32,14 @@ export function RevealParallax({
           el.classList.add("visible");
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.04, rootMargin: "0px 0px 14% 0px" }
     );
-    observer.observe(el);
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.96 && rect.bottom > 0) {
+      el.classList.add("visible");
+    } else {
+      observer.observe(el);
+    }
 
     const onScroll = () => {
       const rect = el.getBoundingClientRect();
