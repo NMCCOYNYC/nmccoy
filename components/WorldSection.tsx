@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 
 import type { WorldImage } from "@/lib/world";
@@ -15,19 +15,58 @@ export function WorldSection({
   carouselImages: WorldImage[];
 }) {
   const [active, setActive] = useState(0);
+  const [timerNonce, setTimerNonce] = useState(0);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
   const slideCount = carouselImages.length;
+
+  function goTo(index: number) {
+    setActive(index);
+    setTimerNonce((n) => n + 1);
+  }
 
   useEffect(() => {
     if (slideCount < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const id = window.setInterval(() => {
-      if (document.hidden) return;
-      setActive((i) => (i + 1) % slideCount);
-    }, INTERVAL_MS);
+    const frame = frameRef.current;
+    if (!frame) return;
 
-    return () => window.clearInterval(id);
-  }, [slideCount]);
+    let id: number | null = null;
+    const start = () => {
+      if (id != null) return;
+      id = window.setInterval(() => {
+        if (document.hidden) return;
+        setActive((i) => (i + 1) % slideCount);
+      }, INTERVAL_MS);
+    };
+    const stop = () => {
+      if (id == null) return;
+      window.clearInterval(id);
+      id = null;
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          if (!startedRef.current) {
+            startedRef.current = true;
+            setActive(0);
+          }
+          start();
+        } else {
+          stop();
+        }
+      },
+      { threshold: 0.35 },
+    );
+    observer.observe(frame);
+
+    return () => {
+      observer.disconnect();
+      stop();
+    };
+  }, [slideCount, timerNonce]);
 
   return (
     <section className="world-section" aria-labelledby="world-title">
@@ -48,6 +87,7 @@ export function WorldSection({
         </figure>
 
         <div
+          ref={frameRef}
           className="world-frame world-carousel"
           data-hm="photo"
           style={{ "--hm-delay": "120ms" } as CSSProperties}
@@ -80,7 +120,7 @@ export function WorldSection({
                   aria-selected={index === active}
                   aria-label={`Show ${image.alt}`}
                   className={`world-dot${index === active ? " is-active" : ""}`}
-                  onClick={() => setActive(index)}
+                  onClick={() => goTo(index)}
                 />
               ))}
             </div>
