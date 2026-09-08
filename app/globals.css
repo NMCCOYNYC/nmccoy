@@ -2882,19 +2882,28 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .email-capture--footer .email-form { flex-direction: column; align-items: stretch; }
   .email-capture--footer .email-form button { width: 100%; }
   .process-chapter { height: 140vh; }
-  .process-chapter__index { top: 5.1rem; }
+  .process-chapter__index { top: calc(var(--nav-height) + 0.7rem); }
   .process-chapter__kicker { display: none; }
+  .process-chapter__bleed {
+    opacity: 0.28;
+  }
+  .process-chapter[data-state="detail"] .process-chapter__bleed {
+    opacity: 0;
+  }
+  .process-chapter__bleed-text {
+    font-size: clamp(2.2rem, 11vw, 3.6rem);
+  }
   .process-chapter__detail {
     grid-template-columns: 1fr;
-    align-content: start;
-    align-items: start;
+    align-content: center;
+    align-items: center;
     justify-items: center;
     text-align: center;
-    gap: 1.15rem;
-    padding: 5.6rem 1.35rem 1.5rem;
+    gap: 1.45rem;
+    padding: calc(var(--nav-height) + 3.75rem) 1.5rem 2.75rem;
   }
   .process-chapter__copy {
-    max-width: 22.5rem;
+    max-width: 20.5rem;
     justify-self: center;
   }
   .process-chapter__title {
@@ -2906,7 +2915,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
     line-height: 1.7;
   }
   .process-chapter__photo {
-    width: min(22rem, 86vw);
+    width: min(22.5rem, 84vw);
     height: auto;
     aspect-ratio: 3 / 2;
     justify-self: center;
@@ -3262,10 +3271,10 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   .feature-video--process .feature-video__body {
     max-width: 22.5rem;
   }
-  .process-chapter[data-step="01"] .process-chapter__body { max-width: 28.5rem; }
-  .process-chapter[data-step="02"] .process-chapter__body { max-width: 24.5rem; }
-  .process-chapter[data-step="03"] .process-chapter__body { max-width: 26.5rem; }
-  .process-chapter[data-step="04"] .process-chapter__body { max-width: 22.75rem; }
+  .process-chapter[data-step="01"] .process-chapter__body,
+  .process-chapter[data-step="02"] .process-chapter__body,
+  .process-chapter[data-step="03"] .process-chapter__body,
+  .process-chapter[data-step="04"] .process-chapter__body { max-width: 20.5rem; }
 }
 @media (max-width: 640px) {
   .page-hero-dark--process .page-hero-dark__subhead {
