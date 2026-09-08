@@ -7,6 +7,8 @@ export const metadata = pageMetadata({
   title: "Private Preview",
   description: "Private early access to NMCCOY Collection No. 1.",
   path: "/early-access",
+  image: "/og-early-access.jpg",
+  imageAlt: "Desert Illusions",
   robots: { index: false, follow: false },
 });
 
