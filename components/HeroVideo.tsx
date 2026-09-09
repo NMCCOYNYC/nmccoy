@@ -3,16 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 
 const HERO_DESKTOP = "/home/desert-illusions-hero-nologo.mp4?v=4";
-const HERO_MOBILE = "/home/desert-illusions-hero-nologo-720.mp4?v=4";
+const HERO_MOBILE = "/home/desert-illusions-hero-mobile.mp4?v=5";
+const POSTER_DESKTOP = "/home/desert-illusions-hero-nologo-poster.jpg?v=4";
+const POSTER_MOBILE = "/home/desert-illusions-hero-mobile-poster.jpg?v=5";
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [soundOn, setSoundOn] = useState(false);
   const [src, setSrc] = useState<string | null>(null);
+  const [poster, setPoster] = useState(POSTER_DESKTOP);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 960px)");
-    const apply = () => setSrc(mq.matches ? HERO_MOBILE : HERO_DESKTOP);
+    const apply = () => {
+      const mobile = mq.matches;
+      setSrc(mobile ? HERO_MOBILE : HERO_DESKTOP);
+      setPoster(mobile ? POSTER_MOBILE : POSTER_DESKTOP);
+    };
     apply();
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
@@ -63,7 +70,7 @@ export function HeroVideo() {
         loop
         playsInline
         preload="metadata"
-        poster="/home/desert-illusions-hero-nologo-poster.jpg?v=4"
+        poster={poster}
         aria-hidden="true"
       >
         {src ? <source src={src} type="video/mp4" /> : null}
