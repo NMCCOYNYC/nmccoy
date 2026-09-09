@@ -42,7 +42,7 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#B5A090 0%,#796D61 40%,#38271E 100%)",
     desc1:
-      "A study in resilience and perspective. Inspired by the enduring presence of the agave, Hazy Mesa reflects the beauty that emerges through patience, adaptation, and time. Layered forms unfold gradually, revealing new details with every glance—much like the landscapes and experiences that shape us over a lifetime.",
+      "A study in resilience and perspective. Inspired by the enduring presence of the agave, Hazy Mesa reflects the beauty that emerges through patience, adaptation, and time. Layered forms unfold gradually, revealing new details with every glance, much like the landscapes and experiences that shape us over a lifetime.",
     desc2:
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:

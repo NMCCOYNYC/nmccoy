@@ -45,7 +45,7 @@ export default function CollectionPage() {
         <h1>Desert Illusions</h1>
         <p>
           Six original ink paintings translated into Italian silk. Produced in
-          limited editions of {siteSettings.editionSize} per design — collectible
+          limited editions of {siteSettings.editionSize} per design. Collectible
           objects shaped by art, memory, and craft.
         </p>
       </FadeIn>
