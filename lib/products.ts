@@ -30,6 +30,7 @@ export const scarves: Scarf[] = [
       "/products/wild-mirage.jpg",
       "/products/wild-mirage/02.jpg",
       "/products/wild-mirage/03.jpg",
+      "/products/wild-mirage/04.jpg",
     ],
     shopifyVariantId: "51256273141927",
   },
@@ -71,6 +72,7 @@ export const scarves: Scarf[] = [
       "/products/dusty-bloom.jpg",
       "/products/dusty-bloom/02.jpg",
       "/products/dusty-bloom/03.jpg",
+      "/products/dusty-bloom/04.jpg",
     ],
     shopifyVariantId: "51256261804199",
   },
@@ -87,7 +89,12 @@ export const scarves: Scarf[] = [
       "Original ink painting translated into 100% Italian silk twill. Limited edition.",
     painting:
       "Carried Light honors the artistry and cultural traditions of the Arizona landscapes that shaped the founder.",
-    images: ["/products/carried-light.jpg"],
+    images: [
+      "/products/carried-light.jpg",
+      "/products/carried-light/02.jpg",
+      "/products/carried-light/03.jpg",
+      "/products/carried-light/04.jpg",
+    ],
     shopifyVariantId: "51256253546663",
   },
   {
@@ -103,7 +110,12 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Sundance celebrates unity, hope, and the beauty found in moving forward together.",
-    images: ["/products/sundance.jpg"],
+    images: [
+      "/products/sundance.jpg",
+      "/products/sundance/02.jpg",
+      "/products/sundance/03.jpg",
+      "/products/sundance/04.jpg",
+    ],
     shopifyVariantId: "51256277008551",
   },
   {
@@ -119,7 +131,12 @@ export const scarves: Scarf[] = [
       "Original ink painting translated to 100% Italian silk twill. Limited edition.",
     painting:
       "Indigo Dream explores harmony between the seen and unseen, where imagination feels as tangible as memory.",
-    images: ["/products/indigo-dream.jpg"],
+    images: [
+      "/products/indigo-dream.jpg",
+      "/products/indigo-dream/02.jpg",
+      "/products/indigo-dream/03.jpg",
+      "/products/indigo-dream/04.jpg",
+    ],
     shopifyVariantId: "51256263508135",
   },
 ];
