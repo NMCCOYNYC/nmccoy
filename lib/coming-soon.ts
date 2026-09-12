@@ -5,7 +5,7 @@ import {
 } from "@/lib/preview-access";
 
 export function isComingSoonEnabled() {
-  return process.env.COMING_SOON === "true";
+  return false;
 }
 
 export function hasSiteAccess(cookieValue?: string) {
