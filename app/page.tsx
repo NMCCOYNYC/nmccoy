@@ -12,8 +12,8 @@ const fullHomeMetadata = pageMetadata({
   description:
     "NMCCOY Desert Illusions — original ink paintings translated into limited-edition Italian silk collectible objects. Designed in New York, inspired by the American Southwest.",
   path: "/",
-  image: "/home/desert-illusions-hero-desktop.jpg",
-  imageAlt: "Desert Illusions silk scarf",
+  image: "/og-early-access.jpg",
+  imageAlt: "Desert Illusions",
   absolute: true,
 });
 

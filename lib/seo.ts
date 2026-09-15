@@ -7,7 +7,7 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.nmccoynyc.com"
 ).replace(/\/$/, "");
 
-export const DEFAULT_OG_IMAGE = "/home/desert-illusions-hero-desktop.jpg";
+export const DEFAULT_OG_IMAGE = "/og-early-access.jpg";
 
 const defaultDescription =
   "NMCCOY is an art-led fashion house in New York. Original ink paintings are translated into limited-edition Italian silk collectible objects. Explore Desert Illusions.";
@@ -45,8 +45,8 @@ export const defaultMetadata: Metadata = {
       {
         url: DEFAULT_OG_IMAGE,
         alt: "NMCCOY Desert Illusions silk",
-        width: 2880,
-        height: 1620,
+        width: 1200,
+        height: 630,
       },
     ],
   },
