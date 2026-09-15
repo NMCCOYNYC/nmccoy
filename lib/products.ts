@@ -84,7 +84,7 @@ export const scarves: Scarf[] = [
     gradient:
       "linear-gradient(160deg,#E8D5A3 0%,#C4A055 40%,#74701E 100%)",
     desc1:
-      "Rooted in the landscapes of Arizona where the founder grew up, Carried Light was painted in admiration of the artistry, craftsmanship, and cultural traditions of Native American communities whose influence continues to shape this land. A warmth and presence carried forward through time. Offered with care, and with an ongoing commitment to the communities that inspired it.",
+      "Rooted in the landscapes of Arizona where the founder grew up, Carried Light was painted in admiration of the artistry, craftsmanship, and cultural traditions of Native American communities whose influence continues to shape this land. A warmth and presence carried forward through time.\n\nA portion of proceeds from Carried Light is donated to the Heard Museum in Phoenix, Arizona, supporting its work in advancing American Indian art and artists.",
     desc2:
       "Original ink painting translated into 100% Italian silk twill. Limited edition.",
     painting:
